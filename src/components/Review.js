@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './Review.css';
-import GoogleSignInModal from './GoogleSignInModal'; 
-import SuccessModal from './SuccessModal'; // Import the new SuccessModal component
+import GoogleSignInModal from './GoogleSignInModal';
+import SuccessModal from './SuccessModal';
 import myicon from '../components/og.png';
+
 const ReviewModal = ({ showModal, onClose }) => {
   const [rating, setRating] = useState(0);
   const [review, setReview] = useState('');
@@ -60,15 +61,13 @@ const ReviewModal = ({ showModal, onClose }) => {
             placeholder="Share details of your own experience at this place"
           />
           <div className="actions1">
-          <label className="add-photo-button">
-           <img className="gg" src={myicon}></img>Add photos and videos
-              
+            <label className="add-photo-button">
+              <img className="gg" src={myicon} alt="Add" />Add photos and videos
               <input type="file" accept="image/*,video/*" multiple onChange={handlePhotoUpload} />
             </label>
           </div>
           <div className="actions">
-            
-            <button className="cancel-button" onClick={handleSubmit}>Cancel</button>
+            <button className="cancel-button" onClick={onClose}>Cancel</button>
             <button className="submit-button" onClick={handleSubmit}>Post</button>
           </div>
           <div className="uploaded-photos">
