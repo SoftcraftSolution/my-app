@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import ReviewModal from './components/Review';
-import { BrowserRouter as Router, Routes, Route ,useParams} from 'react-router-dom';
-
+import { BrowserRouter as Router, Routes, Route, useParams } from 'react-router-dom';
+import ReviewModal from './components/Review'; // Adjust the import path as needed
+import StoreReview from './components/StoreReview'; // Adjust the import path as needed
+import ReviewUI from './components/Review';
+import ReviewSubmittedPage from './components/Less';
 
 function BlogPost() {
   let { id } = useParams();
-  console.log(id)
-
-
+  console.log(id);
 }
 
 function App() {
@@ -15,16 +15,13 @@ function App() {
 
   return (
     <Router>
-     
-        {/* Define your routes here */}
-       
-        <Routes>
-        <Route path="/page/:id" element={<BlogPost />} />
-      </Routes>
+      <Routes>
+        <Route path="/page/:id" element={<StoreReview />} />
+        <Route path="/review" element={<ReviewUI/>} />
+        <Route path="/review-submitted" element={<ReviewSubmittedPage/>} />
         {/* Add more routes as needed */}
+      </Routes>
 
-
-      <ReviewModal showModal={showModal} onClose={() => setShowModal(false)} />
     </Router>
   );
 }
