@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import ReviewModal from './components/Review';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route ,useParams} from 'react-router-dom';
+
+
+function BlogPost() {
+  let { id } = useParams();
+  console.log(id)
+
+
+}
 
 function App() {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <Router>
-      <Routes>
+     
         {/* Define your routes here */}
-        <Route path="/"  />
-        {/* Add more routes as needed */}
+       
+        <Routes>
+        <Route path="/page/:id" element={<BlogPost />} />
       </Routes>
+        {/* Add more routes as needed */}
+
 
       <ReviewModal showModal={showModal} onClose={() => setShowModal(false)} />
     </Router>
