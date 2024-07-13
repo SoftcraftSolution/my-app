@@ -1,18 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './StoreReview.css';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
+import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 
 import logo from './scanStarLogo.jpeg';
-function BlogPost() {
-    let { id } = useParams();
-    console.log(id);
-    sessionStorage.setItem("id",id);
-  }
+// function BlogPost() {
+//     let { id } = useParams();
+//     console.log(id);
+//     sessionStorage.setItem("id",id);
+//   }
 
 const StoreReview = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+    const id = searchParams.get('id');
+    sessionStorage.setItem("id",id);
+    console.log('ID from query parameter:', id);
   const navigate = useNavigate();
   const [name, setName] = useState('');
   const [storeDetails, setStoreDetails] = useState(null); // State to hold fetched data
@@ -43,7 +50,7 @@ const StoreReview = () => {
     setName('');
     navigate('/review');
   };
- BlogPost()
+//  BlogPost()
   return (
     <div className="store-review-container">
       <header className="store-header">
