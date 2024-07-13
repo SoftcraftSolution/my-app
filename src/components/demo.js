@@ -23,10 +23,10 @@ const Demo = () => {
   return (
     <StyledContainer>
       <Typography variant="h4" gutterBottom>
-       Demo
+       Not Found
       </Typography>
       <Typography variant="body1">
-        Demo
+        Try using id in params
       </Typography>
     </StyledContainer>
   );

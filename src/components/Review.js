@@ -122,7 +122,8 @@ const ReviewUI = () => {
     const formData = new FormData();
     formData.append('rating', rating);
     formData.append('comment', comment);
-    formData.append('image',images)
+    formData.append('image',images);
+    formData.append('qrCodeId',sessionStorage.getItem("id"));
 
 
     try {
@@ -150,15 +151,18 @@ const ReviewUI = () => {
       console.error('Error posting review:', error);
     }
   };
+const name=sessionStorage.getItem("name");
 
+
+// console.log(firstLatterName);
   return (
     <StyledContainer>
       <Box display="flex" alignItems="flex-start" justifyContent="flex-start" textAlign="left" my={1}>
         <ProfileAvatar>
-          R {/* Replace with the initial or icon for the profile photo */}
+          {sessionStorage.getItem("name")[0].toUpperCase()}
         </ProfileAvatar>
         <Box>
-          <Typography variant="body2" fontWeight="bold" marginRight={13} fontFamily="sans-serif" fontSize={21}>Rahul Kannoujia</Typography>
+          <Typography variant="body2" fontWeight="bold" marginRight={13} fontFamily="sans-serif" fontSize={21}>{name}</Typography>
           <Typography variant="caption" fontSize={13}>Posting publicly across Google</Typography>
         </Box>
       </Box>

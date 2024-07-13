@@ -6,12 +6,12 @@ import ReviewUI from './components/Review';
 import ReviewSubmittedPage from './components/Less';
 import Demo from './components/demo';
 
-function BlogPost() {
-  let { id } = useParams();
-  console.log(id);
-}
+// import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
+
+
 
 function App() {
+  
 
   const [showModal, setShowModal] = useState(false);
 
@@ -21,6 +21,8 @@ function App() {
       <Route path="/" element={<StoreReview />} />
         <Route path="/review" element={<ReviewUI/>} />
         <Route path="/review-submitted" element={<ReviewSubmittedPage/>} />
+        <Route path="/not-found" element={<Demo/>} />
+
         {/* Add more routes as needed */}
       </Routes>
 

@@ -1,113 +1,128 @@
 .store-review-container {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    text-align: center;
-    font-family: Arial, sans-serif;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.store-header {
+  background-color: white;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+  transition: background-color 0.3s ease;
+}
+
+.store-logo {
+  max-width: 100px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.store-header h1 {
+  font-size: 1.5em;
+  margin: 0;
+  color: #e60000;
+  transition: color 0.3s ease;
+}
+
+.review-steps {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-bottom: 1px solid #ccc;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.step-icon {
+  font-size: 2em;
+  margin-right: 10px;
+}
+
+.step .store-name {
+  word-wrap: break-word;
+  width: 100%;
+  text-align: left;
+}
+
+.write-review-button {
+  background-color: #104594;
+  border: none;
+  padding: 15px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  margin: 20px 0;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  color: white;
+}
+
+.write-review-button:hover {
+  background-color: #ffb300;
+  transform: scale(1.05);
+}
+
+.store-footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  background-color: white;
+}
+
+.footer-button {
+  background-color: transparent;
+  border: none;
+  color: #007aff;
+  font-size: 1em;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-button:hover {
+  color: #0047b3;
+}
+
+.name-input {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #007aff;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .store-review-container {
+    padding: 10px;
   }
-  
-  .store-header {
-    background-color: white;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
-    transition: background-color 0.3s ease;
-  }
-  
-  .store-logo {
-    max-width: 100px;
-    margin-bottom: 10px;
-    transition: transform 0.3s ease;
-  }
-  
+
   .store-header h1 {
-    font-size: 1.5em;
-    margin: 0;
-    color: #e60000;
-    transition: color 0.3s ease;
-  }
-  
-  .store-header h2 {
     font-size: 1.2em;
-    margin: 10px 0;
-    transition: margin 0.3s ease;
   }
-  
-  .store-header p {
-    margin: 10px 0;
-    color: #666;
-    line-height: 1.5;
-  }
-  
-  .review-steps {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-bottom: 1px solid #ccc;
-    height: 18vh;
-  }
-  
-  .step {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    transition: transform 0.3s ease;
-  }
-  
-  .step-icon {
-    font-size: 2em;
-    margin-right: 10px;
-  }
-  
+
   .write-review-button {
-    background-color: #104594;
-    border: none;
-    padding: 15px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    width: 100%;
-    margin: 20px 0;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    color: white;
-  }
-  
-  .write-review-button:hover {
-    background-color: #ffb300;
-    transform: scale(1.05);
-  }
-  
-  .store-footer {
-    display: flex;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: white;
-  }
-  
-  .footer-button {
-    background-color: transparent;
-    border: none;
-    color: #007aff;
-    font-size: 1em;
-    cursor: pointer;
-    transition: color 0.3s ease;
-  }
-  
-  .footer-button:hover {
-    color: #0047b3;
-  }
-  
-  .name-input {
-    width: 100%;
     padding: 12px;
-    margin: 8px 0;
-    box-sizing: border-box;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     font-size: 1em;
-    transition: border-color 0.3s ease;
   }
-  
-  .name-input:focus {
-    outline: none;
-    border-color: #007aff; /* Example focus color */
+
+  .step .store-name {
+    font-size: 0.9em;
   }
-  
+}
+.displaystore{
+  margin-left: 65px;
+}
