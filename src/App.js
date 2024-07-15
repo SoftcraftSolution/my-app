@@ -5,6 +5,7 @@ import StoreReview from './components/StoreReview'; // Adjust the import path as
 import ReviewUI from './components/Review';
 import ReviewSubmittedPage from './components/Less';
 import Demo from './components/demo';
+import ThankYouPage from './components/Less';
 
 // import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
 
@@ -20,7 +21,7 @@ function App() {
       <Routes>
       <Route path="/" element={<StoreReview />} />
         <Route path="/review" element={<ReviewUI/>} />
-        <Route path="/review-submitted" element={<ReviewSubmittedPage/>} />
+        <Route path="/review-submitted" element={<ThankYouPage/>} />
         <Route path="/not-found" element={<Demo/>} />
 
         {/* Add more routes as needed */}

@@ -84,10 +84,14 @@ const ReviewUI = () => {
   const [images, setImages] = useState([]); // State for selected images
   const [imagePreviews, setImagePreviews] = useState([]); // State for image previews
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false); // St
   const navigate = useNavigate(); // Access the navigate function from react-router-dom
 
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
+    if (newValue > 0) {
+      setShowErrorMessage(false); // Hide error message if a rating is selected
+    }
   };
 
   const handleCommentChange = (event) => {
@@ -113,7 +117,13 @@ const ReviewUI = () => {
   };
 
   const handleSubmit = async () => {
+    
+    if (rating === 0) {
+      setShowErrorMessage(true); // Show error message if no rating is selected
+      return;
+    }
     // Example submission logic, adjust as needed
+    
     if (rating >= 3) {
       window.location.href = 'https://www.google.com/search?gs_ssp=eJzj4tVP1zc0rDQxzCrKMMkyYLRSNagwTko1T7RMNk8CAjMjgxQrgwpTQxNLAwtLizTjFKNEo8Q0L-Hi_LSS5KLEtBKF4vyc0pLM_LxiADiqF3A&q=softcraft+solutions&oq=soft&gs_lcrp=EgZjaHJvbWUqFQgDEC4YJxivARjHARiABBiKBRiOBTIGCAAQRRg8MgYIARBFGDwyBggCEEUYPDIVCAMQLhgnGK8BGMcBGIAEGIoFGI4FMgYIBBBFGDkyDQgFEAAYgwEYsQMYgAQyEwgGEC4YgwEYxwEYsQMY0QMYgAQyBggHEEUYPNIBCDI0ODFqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x3be7a9c7bbbb620d:0x51490898f3d2a2af,3,,,,&wptab=si:ACC90nwjPmqJHrCEt6ewASzksVFQDX8zco_7MgBaIawvaF4-7lzfQ5f3eSADC5iZ-gbsqeOt28b6hstUu5vuZMKn1C4KLa83977NPr6BBCQqLyA0h7_tvBblmq-PQ0SQWOVA2J9mTJ7meLejRGhlcK-lwOMDm2Nflw%3D%3D';
       return;
@@ -183,6 +193,9 @@ const name=sessionStorage.getItem("name");
             },
           }}
         />
+          {showErrorMessage && (
+          <Typography sx={{ color: 'red', marginTop: '8px' }}>Please provide a star rating.</Typography>
+        )}
       </Box>
       <TextField
         id="comment"

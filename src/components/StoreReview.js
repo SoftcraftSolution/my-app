@@ -29,7 +29,7 @@ const StoreReview = () => {
     try {
       const response = await axios.get(`https://ambulance-booking-backend.vercel.app/user/get-data-by-id?id=${storedValue}`);
       console.log(response.data);
-      sessionStorage.setItem("name", response.data.data.businessName);
+      sessionStorage.setItem("storeName", response.data.data.businessName);
       sessionStorage.setItem("address", response.data.data.address);
       console.log("object stored successfully");
       setStoreDetails(response.data);
@@ -50,7 +50,7 @@ const StoreReview = () => {
     navigate('/review');
   };
 
-  const storedName = sessionStorage.getItem("name");
+  const storedName = sessionStorage.getItem("storeName");
   const storedAddress = sessionStorage.getItem("address");
 
   if (sessionStorage.getItem("id") === "null") {
