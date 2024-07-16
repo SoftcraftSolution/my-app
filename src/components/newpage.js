@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import './StoreReview.css';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios'; // Import Axios
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -51,45 +50,47 @@ function NewPage() {
       navigate('/review');
     };
   
-   
-  
     if (sessionStorage.getItem("id") === "null") {
       return <Demo />;
     }
-    const str=sessionStorage.getItem("storeName");
-  return (
-    <div className="NewPage">
-      <div className="container">
-        <header>
-          <img src="/scanStarLogo.jpeg" alt="ScanStar Logo" className="logo" />
-        </header>
-        <main>
-          <h1>
-            <img src="/star.png" alt="Icon" className="icon" /> {/* Icon here */}
-            Review {str.charAt(0).toUpperCase() + str.slice(1)}
-          </h1>
-          <ol className="instructions">
-            <li>1. Enter Your Full Name: Start by entering your full name to continue.</li>
-            <li>2. Rate and Comment: Give a rating of up to 5 stars & add your comment.</li>
-          </ol>
-          <div className="image-container">
-            <img src="/bg.png" alt="Review" className="review-image" />
+
+    const storeName = sessionStorage.getItem("storeName");
+    const str = storeName ? storeName.charAt(0).toUpperCase() + storeName.slice(1) : 'Loading';
+
+    return (
+        <div className="NewPage">
+          <div className="container">
+            <header>
+              <img src={logo} alt="ScanStar Logo" className="logo" />
+            </header>
+            <main>
+              <h1>
+                <img src="/star.png" alt="Icon" className="icon" /> {/* Icon here */}
+                Review {str}
+              </h1>
+              <ol className="instructions">
+                <li>1. Enter Your Full Name: Start by entering your full name to continue.</li>
+                <li>2. Rate and Comment: Give a rating of up to 5 stars & add your comment.</li>
+              </ol>
+              <div className="image-container">
+                <img src="/bg.png" alt="Review" className="review-image" />
+              </div>
+              <form className="review-form" onSubmit={handleSubmitReview}>
+                <label className='name' htmlFor="fullName">Full Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter Name"
+                  value={name}
+                  onChange={handleNameChange}
+                  className="name-input"
+                  required
+                />
+                <button type="submit">Continue →</button>
+              </form>
+            </main>
           </div>
-          <form className="review-form" onSubmit={handleSubmitReview}>
-            <label className='name' htmlFor="fullName">Full Name</label>
-            <input
-          type="text"
-          placeholder="Enter Name"
-          value={name}
-          onChange={handleNameChange}
-          className="name-input"
-          required
-        /> <button type="submit">Continue →</button>
-          </form>
-        </main>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default NewPage;
