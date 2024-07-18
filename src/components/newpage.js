@@ -17,12 +17,10 @@ function NewPage() {
     const [storeDetails, setStoreDetails] = useState(null); // State to hold fetched data
   
     useEffect(() => {
-      if (id && id !== "null") {
-        sessionStorage.setItem("id", id);
+     
         fetchData(id);
-      } else {
-        sessionStorage.setItem("id", "null");
-      }
+         sessionStorage.setItem("id", id);
+      
     }, [id]);
   
     const fetchData = async (storedValue) => {
@@ -31,6 +29,7 @@ function NewPage() {
         console.log(response.data);
         sessionStorage.setItem("storeName", response.data.data.businessName);
         sessionStorage.setItem("address", response.data.data.address);
+        sessionStorage.setItem("pageURL", response.data.data.pageUrl);
         console.log("object stored successfully");
         setStoreDetails(response.data);
       } catch (error) {
@@ -43,6 +42,7 @@ function NewPage() {
     };
   
     const handleSubmitReview = (e) => {
+      console.log(e);
       e.preventDefault();
       console.log(`Review submitted by ${name}`);
       sessionStorage.setItem("name", name);
