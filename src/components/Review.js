@@ -139,10 +139,11 @@ const ReviewUI = () => {
         console.error("pageurl is null or undefined");
       }
     }
-
+    const name=sessionStorage.getItem("name");
     const formData = new FormData();
     formData.append('rating', rating);
     formData.append('comment', comment);
+    formData.append('name', name);
     images.forEach((image, index) => {
       formData.append(`image_${index}`, image);
     });
