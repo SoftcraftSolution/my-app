@@ -29,7 +29,7 @@ function NewPage() {
         console.log(response.data);
         sessionStorage.setItem("storeName", response.data.data.businessName);
         sessionStorage.setItem("address", response.data.data.address);
-        sessionStorage.setItem("pageURL", response.data.data.pageUrl);
+        sessionStorage.setItem("placeId", response.data.data.placeId);
         console.log("object stored successfully");
         setStoreDetails(response.data);
       } catch (error) {

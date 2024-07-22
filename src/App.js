@@ -7,6 +7,9 @@ import ReviewSubmittedPage from './components/Less';
 import Demo from './components/demo';
 import ThankYouPage from './components/Less';
 import NewPages from './components/newpage';
+import ReviewForm from './components/gaurav';
+import NewPage from './components/newpage';
+
 
 // import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
 
@@ -20,7 +23,7 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/" element={<NewPages/>} />
+      <Route path="/" element={<NewPage/>} />
         <Route path="/review" element={<ReviewUI/>} />
         <Route path="/review-submitted" element={<ThankYouPage/>} />
         <Route path="/not-found" element={<Demo/>} />

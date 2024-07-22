@@ -89,9 +89,9 @@ const ReviewUI = () => {
 
   // Retrieve pageURL from sessionStorage
   const [pageurl, setPageurl] = useState('');
-
+  const url = sessionStorage.getItem('placeId');
   useEffect(() => {
-    const url = sessionStorage.getItem('pageURL');
+   
     setPageurl(url || ''); // Fallback to empty string if not found
   }, []);
 
@@ -131,9 +131,9 @@ const ReviewUI = () => {
     }
 
     if (rating > 3) {
-      if (pageurl) {
-        console.log(pageurl);
-        window.location.href = pageurl;
+      if (url) {
+        console.log(url);
+        window.location.href = `https://search.google.com/local/writereview?placeid=${url}`;
         return;
       } else {
         console.error("pageurl is null or undefined");
