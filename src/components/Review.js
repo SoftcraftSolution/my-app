@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Rating, TextField, Container, Avatar, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import ClearIcon from '@mui/icons-material/Clear';
-import axios from 'axios'; // Import Axios
-import { useNavigate } from 'react-router-dom'; // Import useNavigate hook from react-router-dom
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const StyledContainer = styled(Container)({
   maxWidth: '100%',
@@ -84,10 +84,22 @@ const ReviewUI = () => {
   const [images, setImages] = useState([]); // State for selected images
   const [imagePreviews, setImagePreviews] = useState([]); // State for image previews
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [showErrorMessage, setShowErrorMessage] = useState(false); // State for error message
   const navigate = useNavigate(); // Access the navigate function from react-router-dom
+
+  // Retrieve pageURL from sessionStorage
+  const [pageurl, setPageurl] = useState('');
+  const url = sessionStorage.getItem('placeId');
+  useEffect(() => {
+   
+    setPageurl(url || ''); // Fallback to empty string if not found
+  }, []);
 
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
+    if (newValue > 0) {
+      setShowErrorMessage(false); // Hide error message if a rating is selected
+    }
   };
 
   const handleCommentChange = (event) => {
@@ -113,17 +125,29 @@ const ReviewUI = () => {
   };
 
   const handleSubmit = async () => {
-    // Example submission logic, adjust as needed
-    if (rating >= 3) {
-      window.location.href = 'https://www.google.com/search?gs_ssp=eJzj4tVP1zc0rDQxzCrKMMkyYLRSNagwTko1T7RMNk8CAjMjgxQrgwpTQxNLAwtLizTjFKNEo8Q0L-Hi_LSS5KLEtBKF4vyc0pLM_LxiADiqF3A&q=softcraft+solutions&oq=soft&gs_lcrp=EgZjaHJvbWUqFQgDEC4YJxivARjHARiABBiKBRiOBTIGCAAQRRg8MgYIARBFGDwyBggCEEUYPDIVCAMQLhgnGK8BGMcBGIAEGIoFGI4FMgYIBBBFGDkyDQgFEAAYgwEYsQMYgAQyEwgGEC4YgwEYxwEYsQMY0QMYgAQyBggHEEUYPNIBCDI0ODFqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x3be7a9c7bbbb620d:0x51490898f3d2a2af,3,,,,&wptab=si:ACC90nwjPmqJHrCEt6ewASzksVFQDX8zco_7MgBaIawvaF4-7lzfQ5f3eSADC5iZ-gbsqeOt28b6hstUu5vuZMKn1C4KLa83977NPr6BBCQqLyA0h7_tvBblmq-PQ0SQWOVA2J9mTJ7meLejRGhlcK-lwOMDm2Nflw%3D%3D';
+    if (rating === 0) {
+      setShowErrorMessage(true); // Show error message if no rating is selected
       return;
     }
 
+    if (rating > 3) {
+      if (url) {
+        console.log(url);
+        window.location.href = `https://search.google.com/local/writereview?placeid=${url}`;
+        return;
+      } else {
+        console.error("pageurl is null or undefined");
+      }
+    }
+    const name=sessionStorage.getItem("name");
     const formData = new FormData();
     formData.append('rating', rating);
     formData.append('comment', comment);
-    formData.append('image',images)
-
+    formData.append('name', name);
+    images.forEach((image, index) => {
+      formData.append(`image_${index}`, image);
+    });
+    formData.append('qrCodeId', sessionStorage.getItem('id'));
 
     try {
       const response = await axios.post('https://ambulance-booking-backend.vercel.app/user/review', formData, {
@@ -131,11 +155,11 @@ const ReviewUI = () => {
           'Content-Type': 'multipart/form-data',
         },
       });
-      
-      console.log("after hit the api");
+
+      console.log('after hit the api');
       console.log(response.data);
 
-      if (response.data.message !== "Review created successfully") {
+      if (response.data.message !== 'Review created successfully') {
         throw new Error('Failed to post review');
       }
 
@@ -151,14 +175,16 @@ const ReviewUI = () => {
     }
   };
 
+  const name = sessionStorage.getItem('name');
+
   return (
     <StyledContainer>
       <Box display="flex" alignItems="flex-start" justifyContent="flex-start" textAlign="left" my={1}>
         <ProfileAvatar>
-          R {/* Replace with the initial or icon for the profile photo */}
+          {name ? name[0].toUpperCase() : 'U'}
         </ProfileAvatar>
         <Box>
-          <Typography variant="body2" fontWeight="bold" marginRight={13} fontFamily="sans-serif" fontSize={21}>Rahul Kannoujia</Typography>
+          <Typography variant="body2" fontWeight="bold" marginRight={13} fontFamily="sans-serif" fontSize={21}>{name}</Typography>
           <Typography variant="caption" fontSize={13}>Posting publicly across Google</Typography>
         </Box>
       </Box>
@@ -168,7 +194,7 @@ const ReviewUI = () => {
           name="rating"
           value={rating}
           onChange={handleRatingChange}
-          iconSize={35} // Increase the size of the star icons to 50px
+          iconSize={35}
           sx={{
             '& .MuiRating-iconFilled': { fontSize: '35px' },
             '& .MuiRating-iconHover': { fontSize: '35px' },
@@ -179,6 +205,9 @@ const ReviewUI = () => {
             },
           }}
         />
+        {showErrorMessage && (
+          <Typography sx={{ color: 'red', marginTop: '8px' }}>Please provide a star rating.</Typography>
+        )}
       </Box>
       <TextField
         id="comment"

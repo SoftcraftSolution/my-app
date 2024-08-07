@@ -1,0 +1,43 @@
+
+.thank-you-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f0f8ff; 
+  position: relative;
+  overflow: hidden;
+}
+
+.thank-you-content {
+  text-align: center;
+  position: relative; 
+  z-index: 1; 
+}
+
+.thank-you-page h1 {
+  font-size: 3em;
+  color: #333;
+}
+
+.thank-you-page p {
+  font-size: 1.5em;
+  color: #666;
+  margin: 10px 0;
+}
+
+.home-button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  color: white;
+  background-color: #007bff; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+  background-color: #0056b3; 
+}
