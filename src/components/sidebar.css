@@ -1,0 +1,80 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    height: 100%;
+  }
+  
+  .sidebar-container {
+    
+  }
+  
+  .profile-section {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .profile-section h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu li {
+    margin-bottom: 10px;
+  }
+  
+  .menu li a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    color: #333;
+    transition: background-color 0.3s;
+  }
+  
+  .menu li a:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .menu li a i {
+    margin-right: 10px;
+    font-size: 1.2em;
+  }
+  
+  .icon-home::before {
+    content: "\1F3E0"; /* House Emoji */
+  }
+  
+  .icon-reward::before {
+    content: "\1F3C6"; /* Trophy Emoji */
+  }
+  
+  .icon-favorites::before {
+    content: "\2665"; /* Heart Emoji */
+  }
+  
+  .icon-contact::before {
+    content: "\1F4E7"; /* Envelope Emoji */
+  }
+  
+  .icon-privacy::before {
+    content: "\1F512"; /* Lock Emoji */
+  }
+  

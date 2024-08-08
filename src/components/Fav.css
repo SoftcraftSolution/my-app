@@ -1,0 +1,134 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    height: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+  }
+  
+  .favorites-container {
+    position: relative;
+    height: 100vh;
+    overflow-y: auto; /* Allow vertical scrolling */ 
+    
+  }
+  
+  .sidebar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 250px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    transform: translateX(-250px); /* Initially hide the sidebar */
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+  
+  .sidebar-container.open {
+    transform: translateX(0); /* Slide the sidebar into view */
+  }
+  
+  .menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1100;
+    cursor: pointer;
+  }
+  
+  .menu-icon img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .favorites-content {
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    margin-left: 0;
+  }
+  
+  .favorites-content.shifted {
+    margin-left: 250px; /* Shift content when sidebar is open */
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  p {
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  .favorites-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .favorite-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 100%; /* Full width on mobile */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .favorite-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .favorite-details {
+    padding: 15px;
+  }
+  
+  .favorite-details h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #333;
+  }
+  
+  .favorite-details p {
+    margin: 0;
+    color: #777;
+  }
+  
+  .favorite-heart {
+    text-align: center;
+    padding: 10px;
+    background-color: #ffebee;
+    color: #e57373;
+    font-size: 1.5em;
+  }
+  
+  @media (max-width: 768px) {
+    .favorites-content.shifted {
+      margin-left: 0; /* Avoid content shifting on smaller screens */
+    }
+  
+    .favorite-item {
+      width: 100%; /* Full width for list items on smaller screens */
+    }
+  
+    .sidebar-container {
+      width: 100%; /* Full width for sidebar on mobile */
+      transform: translateX(-100%);
+    }
+  
+    .sidebar-container.open {
+      transform: translateX(0); /* Slide in the sidebar */
+    }
+  }
+  

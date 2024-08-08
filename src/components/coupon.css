@@ -42,7 +42,10 @@ body {
     width: 50px;
   }
   
-  
+  .coupon-body h2 {
+    color: #e4002b;
+    margin: 10px 0;
+  }
   
   .coupon-body p {
     font-size: 1em;
