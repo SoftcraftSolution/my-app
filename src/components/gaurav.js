@@ -1,7 +1,7 @@
 // src/components/ReviewForm.js
 import React from 'react';
 import './gaurav.css';
-
+import icon from './bg3.png';
 const ReviewForm = () => {
   return (
     <div className="review-form-container">
@@ -15,17 +15,17 @@ const ReviewForm = () => {
           behind bus depot, Anand Nagar, Vasai West
         </address>
         <div className="rating">
-          <span>⭐⭐⭐⭐⭐</span>
+          <span><img src={icon} /></span>
         </div>
         <ol className="instructions">
-          <li>Enter Your Full Name: Start by entering your full name to continue.</li>
-          <li>Rate and Comment: Give a rating of up to 5 stars & add your comment.</li>
+          <li>Write Your Review: Share your experience and give us a 5-star rating</li>
+          <li>Claim Your Reward: Receive a special coupon as a thank you for your positive feedback.</li>
         </ol>
       </div>
       <form className="form">
-        <label htmlFor="full-name">Full Name</label>
-        <input type="text" id="full-name" placeholder="Enter your name" />
-        <button type="submit">Continue →</button>
+        
+       
+        <button type="submit">Continue with Google</button>
       </form>
     </div>
   );
