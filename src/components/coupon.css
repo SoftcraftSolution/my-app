@@ -1,0 +1,77 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8f8f8;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .coupon-container {
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .coupon-header {
+    position: relative;
+  }
+  
+  .confetti-img {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+  }
+  
+  .coupon-header h1 {
+    font-size: 1.2em;
+    margin-top: 30px;
+  }
+  
+  .coupon-body {
+    margin: 20px 0;
+  }
+  
+  .kfc-logo {
+    width: 50px;
+  }
+  
+  
+  
+  .coupon-body p {
+    font-size: 1em;
+    margin: 10px 0;
+  }
+  
+  .coupon-body ul {
+    text-align: left;
+    padding: 0 20px;
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  .coupon-footer h3 {
+    margin: 10px 0;
+    font-size: 1em;
+    color: #333;
+  }
+  
+  .coupon-code {
+    border: 2px dashed #333;
+    padding: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  .coupon-footer p {
+    font-size: 0.8em;
+    color: #777;
+  }
+  

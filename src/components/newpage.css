@@ -1,124 +1,138 @@
 body {
-    margin: 0;
-    font-family: 'Poppins', 'Arial', sans-serif;
-}
-  
-  .NewPage {
-    text-align: center;
-  }
-  
-  .container {
-    padding: 20px;
-    max-width: 400px;
-    margin: auto;
-  }
-  
-  header .logo {
-    width: 150px;
-    margin: 20px auto;
-  }
-  
-  main {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    font-size: 1.5em;
-    margin: 0.5em 0;
-    color: #333;
-  }
-  
-  .instructions {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-    margin: 1em 0;
-    color: #666;
-  }
-  
-  .instructions li {
-    margin: 0.5em 0;
-  }
-  
-  .image-container {
-    margin: 1em 0;
-  }
-  
-  .review-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .review-form {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    font-family: 'Poppins', sans-serif;
-  }
-  
-  .review-form label {
-    text-align: left;
-    font-size: 0.9em;
-    color: #333;
-  }
-  
-  .review-form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 1em;
-  }
-  
-  .review-form button {
-    font-family: 'Poppins', sans-serif;
-    background-color: #114792;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 1em;
-    cursor: pointer;
-    height: 50px;
+  margin: 0;
+  font-family: 'Poppins', 'Arial', sans-serif;
+  /* Adjust the path if needed */
 
-  }
+}
+
+.kk {
+  height: 26px;
+  width: 26px;
+  margin-right: 10px; /* Adds spacing between the image and text */
+}
+
+.NewPage {
+  text-align: center;
   
-  .review-form button:hover {
-    background-color: #114792;
-  }
-  .icon {
-    width: 30px; /* Adjust size as needed */
-    height: 30px; /* Adjust size as needed */
-    margin-right: 8px; /* Space between icon and text */
-    vertical-align: middle;
-    text-transform: capitalize; /* Aligns icon with text */
+}
+
+.container {
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+ 
+}
+
+header .logo {
+  width: 150px;
+  margin: 20px auto;
+  background-image: url('./starr.png'); 
+}
+
+main {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 0.5em 0;
+  color: #333;
+}
+
+.instructions {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin: 1em 0;
+  color: #666;
+}
+
+.instructions li {
+  margin: 0.5em 0;
+}
+
+.image-container {
+  margin: 1em 0;
+}
+
+.review-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.review-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.review-form label {
+  text-align: left;
+  font-size: 0.9em;
+  color: #333;
+}
+
+.review-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+}
+
+.review-form button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #114792;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 1em;
+  cursor: pointer;
+  height: 50px;
+}
+
+.review-form button:hover {
+  background-color: #0e3d7c;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  vertical-align: middle;
+  text-transform: capitalize;
 }
 
 .box {
-    border: 2px solid #000; /* Dark border color */
-    border-radius: 4px; /* Adjust as needed */
-    padding: 10px; /* Optional padding */
-    font-family: 'Poppins', sans-serif; /* Apply Poppins font if desired */
-    
+  border: 2px solid #000;
+  border-radius: 4px;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
 }
+
 .box:focus {
-    outline: none; /* Remove default outline */
-    border-color: #114792; /* Change border color on focus if needed */
+  outline: none;
+  border-color: #114792;
 }
 
 .review-form label.name {
-    text-align: left;
-    font-size: 0.9em;
-    color: #333;
-    margin-bottom: 5px; /* Reduce bottom margin */
+  text-align: left;
+  font-size: 0.9em;
+  color: #333;
+  margin-bottom: 5px;
 }
+
 .review-form input.box {
-    padding: 10px;
-    border: 2px solid #000; /* Dark border color */
-    border-radius: 4px;
-    font-size: 1em;
-    margin-bottom: 15px; /* Add some space below the input box */
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 4px;
+  font-size: 1em;
+  margin-bottom: 15px;
 }
