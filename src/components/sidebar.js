@@ -1,11 +1,12 @@
 import React from 'react';
 import './sidebar.css';
+import disp from './dd.png';
 
 const Sidebar = () => {
     return (
         <div className="sidebar">
             <div className="profile">
-                <div className="avatar"></div>
+                <img src={disp} alt="Karan Nair" className="avatar" />
                 <p className="name">Karan Nair</p>
             </div>
             <nav className="menu">
