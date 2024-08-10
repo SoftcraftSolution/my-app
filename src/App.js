@@ -13,6 +13,9 @@ import Coupon from './components/coupon';
 import ContactForm from './components/Contact';
 import Favorites from './components/Fav';
 import Sidebar from './components/sidebar';
+import RewardHistory from './components/rewardhistory';
+import Landing from './components/gaurav';
+import MapPage from './components/home';
 
 
 // import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
@@ -28,9 +31,12 @@ function App() {
     <Router>
       <Routes>
       <Route path="/Contact" element={<ContactForm/>} />
-      <Route path="/" element={<Favorites/>} />
+      <Route path="/" element={<MapPage/>} />
       <Route path="/sidebar" element={<Sidebar/>} />
       <Route path="/coupon" element={<Coupon/>} />
+      <Route path="/favorite" element={<Favorites/>} />
+      <Route path="/contact" element={<ContactForm/>} />
+      <Route path="/rewardhistory" element={<RewardHistory/>} />
       <Route path="/newpage" element={<NewPage/>} />
         <Route path="/review" element={<ReviewUI/>} />
         <Route path="/review-submitted" element={<ThankYouPage/>} />

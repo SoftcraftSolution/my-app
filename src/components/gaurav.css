@@ -1,95 +1,139 @@
-/* src/components/ReviewForm.css */
-.review-form-container {
-    font-family: 'Poppins', sans-serif;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  .header {
-    margin-bottom: 20px;
-  }
-  
-  .logo {
-    margin-top: 10px;
-    width: 100px;
-    height: 80px;
-    margin-bottom: 10px;
-  }
-  
-  .header h1 {
-    font-size: 1.5em;
-    margin: 10px 0;
-  }
-  
-  .header p {
-    font-size: 1em;
-    color: #666;
-  }
-  
-  .header address {
-    font-style: normal;
-    color: #999;
-    margin: 10px 0;
-  }
-  
-  .rating {
-    margin: 10px 0;
-    font-size: 1.2em;
-  }
-  
-  .instructions {
-    text-align: left;
-    margin: 20px 0;
-    padding-left: 20px;
-  }
-  
-  .instructions li {
-    margin-bottom: 10px;
-  }
-  
-  .form {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  
-  .form label {
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    padding: 26px;
+    background-image: url("./scnStarBg.png"); 
+    background-repeat: no-repeat; 
+    background-position: center; 
+    font-family: 'Poppins', sans-serif;
+    background-attachment: fixed;
+}
+
+.subTitle {
+    color: grey;
+    font-size: 12px;
+    font-weight: 600;
+}
+.rating-section
+{
+  margin-top: 40px;
+}
+
+.logo {
+    height: 14vh;
+    width: 100%;
+    background-image: url("./sc.png");
+    background-size: contain;    
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+#h {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.company-info  {
     text-align: left;
-    font-weight: bold;
-  }
-  
-  .form input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .form button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #4A90E2;
-    color: #fff;
-    font-size: 1em;
+    margin: 20px 0;
+     padding: 0px 30px; 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.step {
+    display: flex;
+    align-items: center;
+     padding: 0px  30px; 
+    font-size: 12px;
+    color: grey;
+     margin: 10px 0; 
+}
+
+.star-rating
+{
+  width: 170px;
+}
+
+.google-sign-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80vw; 
+    height: 30px; 
+    color: black;
+    text-align: center;
+    background-color: white; 
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 2px solid rgb(221, 220, 220); 
+    padding: 10px 20px;
+    border-radius: 40px;
     cursor: pointer;
-  }
-  
-  .form button:hover {
-    background-color: #357ABD;
-  }
-  
-  @media (max-width: 600px) {
-    .review-form-container {
-      padding: 10px;
-    }
-  
-    .form input, .form button {
-      width: 100%;
-    }
-  }
-  
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.google-sign-in img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px; 
+}
+
+.google-sign-in span {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.space {
+    height: 10vh;
+}
+
+.space1 {
+    height: 6vh;
+}
+
+.space2 {
+  height: 10px;
+}
+
+#add {
+    font-size: 12px;
+}
+
+.googleIcon{
+  height: 30px;
+  width: 30px;
+  background-image: url('./googleLOGO.png');
+  background-size: contain;    
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.x{
+  font-size: 14px;
+}
+
+.circular-badge{
+  padding: 3px;
+  border-Radius: 50%;
+  background-color: transparent;
+  color: black;
+  display: flex;
+  justify-content: center; 
+  align-items: center;    
+  height: 14px;           
+  width: 14px;           
+  border: 1px solid black; 
+  font-size: 12px; 
+  margin-right: 12px; 
+
+}

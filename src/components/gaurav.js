@@ -1,34 +1,81 @@
-// src/components/ReviewForm.js
 import React from 'react';
+import StarRatings from 'react-star-ratings';
 import './gaurav.css';
-import icon from './bg3.png';
-const ReviewForm = () => {
+import { useGoogleOneTapLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
+// import CircularBadge from './butets.js';
+
+const Landing = () => {
+ 
+  useGoogleOneTapLogin({
+    onSuccess: credentialResponse => {
+      console.log(credentialResponse);
+    },
+    onError: () => {
+      console.log('Login Failed');
+    },
+  });
+  console.log('Button was clicked!');
   return (
-    <div className="review-form-container">
-      <div className="header">
-        <img src="./logon.png" alt="ScanStar Logo" className="logo" />
-        <h1>SoftCraft Solutions</h1>
-        <p>Tech Company</p>
-        <address>
-          1st floor, SoftCraft Solutions, Leela niwas,<br />
-          401202, near Rajiv Gandhi High school,<br />
-          behind bus depot, Anand Nagar, Vasai West
-        </address>
-        <div className="rating">
-          <span><img src={icon} /></span>
+   
+    <div className="container">
+      <div className='space'></div>
+      
+      <div className='logo'></div>
+      <div className='space1'></div>
+
+      <div className="company-info">
+        <div id='titleSub'>
+          <div id="h">SoftCraft Solutions</div>
+          <div className='subTitle'>Tech Company</div>
         </div>
-        <ol className="instructions">
-          <li>Write Your Review: Share your experience and give us a 5-star rating</li>
-          <li>Claim Your Reward: Receive a special coupon as a thank you for your positive feedback.</li>
-        </ol>
+        <p id='add'>1st floor, SoftCraft Solutions, Leela niwas, 401202, near Rajiv Gandhi High school, behind bus depot, Anand Nagar, Vasai West</p>
+        <div className="star-rating">
+          <StarRatings
+            rating={3} // Example rating
+            starRatedColor="gold"
+            numberOfStars={5}
+            name='rating'
+            starDimension="16px"
+            starSpacing="2px"
+          />
+        </div>
       </div>
-      <form className="form">
-        
+
+      <div className="rating-section">
+
+        <div className="step">
+        <div className="circular-badge">1</div>
        
-        <button type="submit">Continue with Google</button>
-      </form>
+          
+          <div>Enter Your Full Name: Start by entering your full name to continue.</div>
+        </div>
+
+        <div className='space2'></div>
+
+        <div className="step">
+        <div className="circular-badge" >2</div>
+       
+          <div>Rate and Comment: Give a rating of up to 5 stars & add your comment.</div>
+        </div>
+
+        {/ Star Ratings Component /}
+      
+      </div>
+
+      <div className="google-sign-in">
+      <GoogleLogin 
+  onSuccess={credentialResponse => {
+    console.log(credentialResponse);
+  }}
+  onError={() => {
+    console.log('Login Failed');
+  }}
+/>
+      </div>
+      
     </div>
   );
 };
 
-export default ReviewForm;
+export default Landing;

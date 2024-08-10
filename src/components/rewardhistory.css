@@ -1,0 +1,84 @@
+.reward-history {
+    padding: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.menu-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.rewards-list {
+    margin-top: 20px;
+}
+
+.reward-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.reward-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    border-radius: 50%;
+}
+
+.reward-details {
+    flex-grow: 1;
+}
+
+.reward-description {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.reward-date {
+    margin: 5px 0 0;
+    font-size: 12px;
+    color: #999;
+}
+
+.expired .reward-description {
+    color: #aaa;
+}
+
+.expired .reward-logo {
+    filter: grayscale(100%);
+}
+
+.expired ~ .reward-item {
+    border-top: 1px solid #ff4d4d;
+}
+
+.expired:first-of-type::before {
+    content: 'Expired';
+    color: #ff4d4d;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}

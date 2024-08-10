@@ -1,5 +1,6 @@
 import React from 'react';
 import './sidebar.css';
+import RewardHistory from './rewardhistory';
 import disp from './dd.png';
 
 const Sidebar = () => {
@@ -14,15 +15,15 @@ const Sidebar = () => {
                     <span className="icon home"></span>
                     <span className="text">Home</span>
                 </a>
-                <a href="#" className="menu-item">
+                <a href="./rewardhistory" className="menu-item">
                     <span className="icon reward"></span>
                     <span className="text">Reward History</span>
                 </a>
-                <a href="#" className="menu-item">
+                <a href="./favorite" className="menu-item">
                     <span className="icon favorites"></span>
                     <span className="text">Favorites</span>
                 </a>
-                <a href="#" className="menu-item">
+                <a href="./contact" className="menu-item">
                     <span className="icon contact"></span>
                     <span className="text">Contact Us</span>
                 </a>
