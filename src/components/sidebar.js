@@ -1,25 +1,37 @@
 import React from 'react';
 import './sidebar.css';
-import profilePic from './profpic.png'; // Ensure the path is correct
 
 const Sidebar = () => {
-  return (
-    <div className="sidebar-container">
-      <div className="profile-section">
-        <img src={profilePic} alt="Profile" className="profile-pic" />
-        <h3>Karan Nair</h3>
-      </div>
-      <nav className="menu">
-        <ul>
-          <li><a href="#"><i className="icon-home"></i>Home</a></li>
-          <li><a href="#"><i className="icon-reward"></i>Reward History</a></li>
-          <li><a href="#"><i className="icon-favorites"></i>Favorites</a></li>
-          <li><a href="#"><i className="icon-contact"></i>Contact Us</a></li>
-          <li><a href="#"><i className="icon-privacy"></i>Privacy Policy</a></li>
-        </ul>
-      </nav>
-    </div>
-  );
+    return (
+        <div className="sidebar">
+            <div className="profile">
+                <div className="avatar"></div>
+                <p className="name">Karan Nair</p>
+            </div>
+            <nav className="menu">
+                <a href="#" className="menu-item">
+                    <span className="icon home"></span>
+                    <span className="text">Home</span>
+                </a>
+                <a href="#" className="menu-item">
+                    <span className="icon reward"></span>
+                    <span className="text">Reward History</span>
+                </a>
+                <a href="#" className="menu-item">
+                    <span className="icon favorites"></span>
+                    <span className="text">Favorites</span>
+                </a>
+                <a href="#" className="menu-item">
+                    <span className="icon contact"></span>
+                    <span className="text">Contact Us</span>
+                </a>
+                <a href="#" className="menu-item">
+                    <span className="icon privacy"></span>
+                    <span className="text">Privacy Policy</span>
+                </a>
+            </nav>
+        </div>
+    );
 };
 
 export default Sidebar;

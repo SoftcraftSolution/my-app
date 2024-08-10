@@ -1,80 +1,138 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f8f8;
-    height: 100%;
-  }
-  
-  .sidebar-container {
-    
-  }
-  
-  .profile-section {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .profile-pic {
-    width: 60px;
-    height: 60px;
+/* Sidebar Container */
+.sidebar {
+    width: 280px;
+    background-color: #ffffff;
+    padding: 30px 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Profile Section */
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
-    margin-bottom: 10px;
-  }
-  
-  .profile-section h3 {
-    margin: 0;
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  .menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu li {
-    margin-bottom: 10px;
-  }
-  
-  .menu li a {
-    text-decoration: none;
+    background-color: #d8d8d8;
+    margin-bottom: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+.avatar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    background-color: #0984e3;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.name {
+    font-size: 22px;
+    color: #2d3436;
+    font-weight: 700;
+}
+
+/* Menu Section */
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-item {
     display: flex;
     align-items: center;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    color: #333;
-    transition: background-color 0.3s;
-  }
-  
-  .menu li a:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .menu li a i {
-    margin-right: 10px;
-    font-size: 1.2em;
-  }
-  
-  .icon-home::before {
-    content: "\1F3E0"; /* House Emoji */
-  }
-  
-  .icon-reward::before {
-    content: "\1F3C6"; /* Trophy Emoji */
-  }
-  
-  .icon-favorites::before {
-    content: "\2665"; /* Heart Emoji */
-  }
-  
-  .icon-contact::before {
-    content: "\1F4E7"; /* Envelope Emoji */
-  }
-  
-  .icon-privacy::before {
-    content: "\1F512"; /* Lock Emoji */
-  }
-  
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 12px;
+    text-decoration: none;
+    color: #2d3436;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #f8f9fd;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.menu-item:hover {
+    background-color: #e9effd;
+    transform: translateX(10px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    width: 32px;
+    height: 32px;
+    margin-right: 15px;
+    background-size: cover;
+    filter: brightness(0) invert(0.6);
+}
+
+/* Example for different icons */
+.icon.home {
+    background-image: url('./1111.png'); /* Replace with your home icon URL */
+}
+
+.icon.reward {
+    background-image: url('./1112.png'); /* Replace with your reward icon URL */
+}
+
+.icon.favorites {
+    background-image: url('./1113.png'); /* Replace with your favorites icon URL */
+}
+
+.icon.contact {
+    background-image: url('./1114.png'); /* Replace with your contact icon URL */
+}
+
+.icon.privacy {
+    background-image: url('./1115.png'); /* Replace with your privacy icon URL */
+}
+
+.text {
+    flex-grow: 1;
+}
+
+/* Optional: Add a gradient highlight to active item */
+.menu-item.active {
+    background: linear-gradient(45deg, #0984e3, #74b9ff);
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(9, 132, 227, 0.4);
+}
+
+.menu-item.active .icon {
+    filter: brightness(100) invert(1);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 330px;
+        padding: 20px;
+    }
+
+    .menu-item {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
+    }
+
+    .name {
+        font-size: 20px;
+    }
+}
