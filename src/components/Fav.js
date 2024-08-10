@@ -18,26 +18,26 @@ const Favorites = () => {
       id: 1,
       name: 'Dorea Thai Food',
       address: 'Vasai Station Rd, Vishal Nagar, Vasai West, Vasai-Virar, Maharashtra 401202',
-      image: dore, // Path to image file
+      image: dore,
     },
     {
       id: 2,
       name: 'Bali Digital Food',
       address: 'Vasai Station Rd, Vishal Nagar, Vasai West, Vasai-Virar, Maharashtra 401202',
-      image: bal, // Path to image file
+      image: bal,
     },
     {
       id: 3,
       name: 'Dorea Thai Food',
       address: 'Vasai Station Rd, Vishal Nagar, Vasai West, Vasai-Virar, Maharashtra 401202',
-      image: dore2, // Path to image file
+      image: dore2,
     },
   ];
 
   return (
     <div className="favorites-container">
       <div className={`sidebar-container ${sidebarOpen ? 'open' : ''}`}>
-        <Sidebar />
+        <Sidebar sidebarOpen={sidebarOpen} />
       </div>
       <div className="menu-icon" onClick={toggleSidebar}>
         <img src={menuIcon} alt="Menu Icon" />
@@ -48,7 +48,7 @@ const Favorites = () => {
         <div className="favorites-list">
           {favorites.map(favorite => (
             <div className="favorite-item" key={favorite.id}>
-              <img src={favorite.image} alt={favorite.name} />
+              <img src={favorite.image} alt={favorite.name} className="favorite-image" />
               <div className="favorite-details">
                 <h3>{favorite.name}</h3>
                 <p>{favorite.address}</p>

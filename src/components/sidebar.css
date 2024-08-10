@@ -61,8 +61,9 @@
 }
 
 .icon {
-    width: 32px;
-    height: 32px;
+    width: 16px;
+    height: 16px;
+    color: #0984e3;
     margin-right: 15px;
     background-size: cover;
     filter: brightness(0) invert(0.6);
