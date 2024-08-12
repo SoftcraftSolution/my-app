@@ -1,115 +1,134 @@
-body, html {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #f8f8f8;
-    height: 100%;
+/* Container for the sidebar and the contact form content */
+.contact-form-container {
     display: flex;
-    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    position: relative; /* Light background color for the whole page */
+}
+
+
+.sidebar-container {
+    position: absolute;
+    
+    top: 0;
+    height: 100%;
+    z-index: 1000;
+    transition: left 0.3s ease;
+}
+
+.sidebar-container.open {
+    left: 0;
+}
+
+.menu-icon {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    cursor: pointer;
+    width: 30px;  /* Adjust the width of the icon */
+    height: 30px; /* Adjust the height of the icon */
+    padding: 0;   /* Remove padding to avoid unnecessary enlargement */
+    border-radius: 50%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: white; /* Ensure the background is visible */
+    display: flex;
     justify-content: center;
-  }
-  
-  .contact-form-container {
-    width: 90%;
-    max-width: 400px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .form-header {
+    align-items: center;
+}
+
+.menu-icon img {
+    width: 100%; /* Make sure the image fills the container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Make the icon round */
+}
+
+/* Content of the contact form */
+.contact-form-content {
+    margin-left: 0;
+    padding: 40px 20px;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+    background-color: #ffffff; /* White background for the form */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    margin: 40px; /* Add margin to the content for spacing */
+}
+
+.contact-form-content.shifted {
+    margin-left: 280px; /* Shift content when sidebar is open */
+}
+
+/* Header Styling */
+.form-header {
     text-align: center;
     margin-bottom: 20px;
-    position: relative;
-  }
-  
-  .menu-button {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    padding-right: 50px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-  }
-  
-  .form-header h1 {
-    margin: 10px 0;
-    font-size: 1.5em;
+}
+
+.form-header h1 {
+    margin: 0;
+    font-size: 2em;
     color: #333;
-  }
-  
-  .form-header p {
-    margin: 5px 0;
-    font-size: 1em;
+}
+
+.form-header p {
+    margin: 5px 0 0;
+    font-size: 1.1em;
     color: #777;
-  }
-  
-  .contact-form {
+}
+
+/* Form Styling */
+.contact-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  .input-field {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
+    gap: 15px;
+}
+
+.input-field {
+    padding: 10px;
     border: 1px solid #ddd;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
-    box-sizing: border-box;
-  }
-  
-  .textarea-field {
-    height: 100px;
-    resize: none;
-  }
-  
-  .submit-button {
-    width: 100%;
-    padding: 15px;
-    margin: 10px 0;
-    background-color: #007bff;
+    color: #333;
+}
+
+.textarea-field {
+    height: 100px; /* Adjust the height for the textarea */
+    resize: none; /* Prevent resizing */
+}
+
+.submit-button {
+    padding: 10px;
+    background-color: #3498db;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-size: 1em;
     cursor: pointer;
-  }
-  
-  .submit-button:hover {
-    background-color: #0056b3;
-  }
-  
-  @media (max-width: 480px) {
-    .contact-form-container {
-      padding: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-form-content.shifted {
+        margin-left: 0; /* Avoid content shifting on smaller screens */
     }
-  
-    .menu-button {
-      font-size: 20px;
-      top: 5px;
-      left: 5px;
+
+    .sidebar-container {
+        width: 100%; /* Full width for sidebar on mobile */
+        left: -100%;
     }
-  
-    .form-header h1 {
-      font-size: 1.2em;
+
+    .sidebar-container.open {
+        left: 0;
     }
-  
-    .form-header p {
-      font-size: 0.9em;
+
+    .menu-icon {
+        width: 40px; /* Slightly larger icon for smaller screens */
+        height: 40px;
     }
-  
-    .input-field {
-      padding: 10px;
-      font-size: 0.9em;
-    }
-  
-    .submit-button {
-      padding: 12px;
-      font-size: 0.9em;
-    }
-  }
-  
+}
