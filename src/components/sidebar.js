@@ -22,7 +22,7 @@ const Sidebar = () => {
                     <span className="icon favorites"></span>
                     <span className="text">Favorites</span>
                 </a>
-                <a href="#" className="menu-item">
+                <a href='./Contact' className="menu-item">
                     <span className="icon contact"></span>
                     <span className="text">Contact Us</span>
                 </a>

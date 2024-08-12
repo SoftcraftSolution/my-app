@@ -106,3 +106,7 @@
     color: #e74c3c;
     cursor: pointer;
 }
+.favorite-heart.selected span {
+    color: red; /* Change color to indicate selection */
+  }
+  

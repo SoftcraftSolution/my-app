@@ -8,12 +8,7 @@ import menuIcon from './Group 1171275657.png'; // Path to your menu icon
 
 const Favorites = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
-
-  const favorites = [
+  const [favorites, setFavorites] = useState([
     {
       id: 1,
       name: 'Dorea Thai Food',
@@ -32,7 +27,15 @@ const Favorites = () => {
       address: 'Vasai Station Rd, Vishal Nagar, Vasai West, Vasai-Virar, Maharashtra 401202',
       image: dore2,
     },
-  ];
+  ]);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
+  const toggleFavorite = (id) => {
+    setFavorites(favorites.filter(favorite => favorite.id !== id));
+  };
 
   return (
     <div className="favorites-container">
@@ -53,7 +56,10 @@ const Favorites = () => {
                 <h3>{favorite.name}</h3>
                 <p>{favorite.address}</p>
               </div>
-              <div className="favorite-heart">
+              <div
+                className="favorite-heart"
+                onClick={() => toggleFavorite(favorite.id)}
+              >
                 <span>&hearts;</span>
               </div>
             </div>
