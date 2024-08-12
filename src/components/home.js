@@ -1,4 +1,3 @@
-// src/MapPage.js
 import React, { useState } from 'react';
 import { GoogleMap, LoadScript } from '@react-google-maps/api';
 import './home.css';
@@ -8,14 +7,13 @@ const containerStyle = {
   height: '100vh',
 };
 
-// Maharashtra coordinates
 const center = {
-  lat: 19.7515,  // Latitude for Maharashtra, India
-  lng: 75.7139,  // Longitude for Maharashtra, India
+  lat: 19.7515,
+  lng: 75.7139,
 };
 
 const MapPage = () => {
-  const [sheetHeight, setSheetHeight] = useState(150); // Default height in pixels
+  const [sheetHeight, setSheetHeight] = useState(150);
   const [isDragging, setIsDragging] = useState(false);
   const [startY, setStartY] = useState(0);
   const [startHeight, setStartHeight] = useState(0);
@@ -45,9 +43,8 @@ const MapPage = () => {
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={center}
-          zoom={7}  // Adjust the zoom level to show a larger region
+          zoom={7}
         >
-          {/* Child components, like markers, info windows, etc., go here */}
         </GoogleMap>
       </LoadScript>
       <div
@@ -58,8 +55,36 @@ const MapPage = () => {
         onTouchEnd={handleTouchEnd}
       >
         <div className="drag-handle" />
-        <h2>Maharashtra Information</h2>
-        <p>Details about Maharashtra, landmarks, and more can go here.</p>
+        
+        <div className="brands-section">
+          <strong><h3>Top Brands</h3></strong>
+          <div className="brands-container">
+            <img src="/coke.png" alt="Coca Cola" />
+            <img src="/zorko.png" alt="Zomato" />
+            <img src="/mcd.png" alt="McDonald's" />
+            <img src="/domi.png" alt="Domino's" />
+            <img src="/domi.png" alt="Domino's" />
+            <img src="/domi.png" alt="Domino's" />
+            <img src="/domi.png" alt="Domino's" />
+            <img src="/domi.png" alt="Domino's" />  
+          </div>
+
+          <h3>Favorite Brands</h3>
+          <div className="favorite-brands-container">
+            <div className="brand-item">
+              <img src="/dore.png" alt="Dorea Thai Food" />
+              <p>Dorea Thai Food</p>
+            </div>
+            <div className="brand-item">
+              <img src="/dore2.png" alt="Bali Digital Food" />
+              <p>Bali Digital Food</p>
+            </div>
+            <div className="brand-item">
+              <img src="/bali.png" alt="Work Portfolio Makana" />
+              <p>Work Portfolio Makana</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
