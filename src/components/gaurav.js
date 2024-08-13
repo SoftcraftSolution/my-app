@@ -3,18 +3,17 @@ import StarRatings from 'react-star-ratings';
 import './gaurav.css';
 import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
-// import CircularBadge from './butets.js';
 
 const Landing = () => {
  
-  useGoogleOneTapLogin({
-    onSuccess: credentialResponse => {
-      console.log(credentialResponse);
-    },
-    onError: () => {
-      console.log('Login Failed');
-    },
-  });
+  // useGoogleOneTapLogin({
+  //   onSuccess: credentialResponse => {
+  //     console.log(credentialResponse);
+  //   },
+  //   onError: () => {
+  //     console.log('Login Failed');
+  //   },
+  // });
   console.log('Button was clicked!');
   return (
    
@@ -59,7 +58,7 @@ const Landing = () => {
           <div>Rate and Comment: Give a rating of up to 5 stars & add your comment.</div>
         </div>
 
-        {/ Star Ratings Component /}
+     
       
       </div>
 

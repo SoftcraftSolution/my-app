@@ -14,8 +14,9 @@ import ContactForm from './components/Contact';
 import Favorites from './components/Fav';
 import Sidebar from './components/sidebar';
 import RewardHistory from './components/rewardhistory';
-import Landing from './components/gaurav';
+import Landing from './components/gaurav.js';
 import MapPage from './components/home';
+import { Lan } from '@mui/icons-material';
 
 
 // import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
@@ -31,10 +32,11 @@ function App() {
     <Router>
       <Routes>
       <Route path="/Contact" element={<ContactForm/>} />
-      <Route path="/" element={<MapPage/>} />
+      <Route path="/home" element={<MapPage/>} />
+      <Route path="/" element={<Landing/>} />
       <Route path="/sidebar" element={<Sidebar/>} />
       <Route path="/coupon" element={<Coupon/>} />
-      <Route path="/favorite" element={<Favorites/>} />
+      <Route path="/Fav" element={<Favorites/>} />
       <Route path="/contact" element={<ContactForm/>} />
       <Route path="/rewardhistory" element={<RewardHistory/>} />
       <Route path="/newpage" element={<NewPage/>} />

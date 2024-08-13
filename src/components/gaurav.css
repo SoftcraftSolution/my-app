@@ -5,9 +5,10 @@
     flex-direction: column;
     align-items: center;
     height: 100vh;
-    width: 100vw;
+    width: 90vw;
     padding: 26px;
     background-image: url("./scnStarBg.png"); 
+    background-size: cover;  
     background-repeat: no-repeat; 
     background-position: center; 
     font-family: 'Poppins', sans-serif;
@@ -41,7 +42,7 @@
 .company-info  {
     text-align: left;
     margin: 20px 0;
-     padding: 0px 30px; 
+   
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -51,10 +52,10 @@
 .step {
     display: flex;
     align-items: center;
-     padding: 0px  30px; 
+  
     font-size: 12px;
     color: grey;
-     margin: 10px 0; 
+ 
 }
 
 .star-rating
@@ -66,21 +67,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 80vw; 
-    height: 30px; 
+   
     color: black;
     text-align: center;
-    background-color: white; 
+
     position: fixed;
-    bottom: 20px;
+    bottom: 20px; 
     left: 50%;
     transform: translateX(-50%);
-    border: 2px solid rgb(221, 220, 220); 
+    
     padding: 10px 20px;
     border-radius: 40px;
     cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); 
-}
+    }
 
 .google-sign-in img {
     width: 24px;
@@ -129,11 +128,12 @@
   color: black;
   display: flex;
   justify-content: center; 
-  align-items: center;    
+  align-items: center;     
   height: 14px;           
-  width: 14px;           
+  width: 14px;            
   border: 1px solid black; 
   font-size: 12px; 
   margin-right: 12px; 
+
 
 }
