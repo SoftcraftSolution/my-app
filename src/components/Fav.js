@@ -1,40 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Fav.css';
-import dore from './dore.png';
-import bal from './bali.png';
-import dore2 from './dore2.png';
+import dore from './dore.png'; // Default image for businesses
 import Sidebar from './sidebar';
 import menuIcon from './Group 1171275657.png'; // Path to your menu icon
 
 const Favorites = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [favorites, setFavorites] = useState([
-    {
-      id: 1,
-      name: 'Dorea Thai Food',
-      address: 'Vasai Station Rd, Vishal Nagar, Vasai West, Vasai-Virar, Maharashtra 401202',
-      image: dore,
-    },
-    {
-      id: 2,
-      name: 'Bali Digital Food',
-      address: 'Vasai Station Rd, Vishal Nagar, Vasai West, Vasai-Virar, Maharashtra 401202',
-      image: bal,
-    },
-    {
-      id: 3,
-      name: 'Dorea Thai Food',
-      address: 'Vasai Station Rd, Vishal Nagar, Vasai West, Vasai-Virar, Maharashtra 401202',
-      image: dore2,
-    },
-  ]);
+  const [favorites, setFavorites] = useState([]);
+
+  // Hardcoded userId
+  const userId = '66b5e8001e961324d5d704db';
+
+  // Fetch favorite shops from the actual endpoint
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const response = await fetch(`https://ambulance-booking-backend.vercel.app/user/get-favorite-shop?userId=${userId}`);
+        const data = await response.json();
+
+        if (data && data.favoriteShops) {
+          const fetchedFavorites = data.favoriteShops.map(shop => ({
+            id: shop._id,
+            businessId: shop.businessId._id,
+            name: shop.businessName,
+            address: shop.address,
+            image: dore, // Using default image for now
+          }));
+          setFavorites(fetchedFavorites);
+        }
+      } catch (error) {
+        console.error('Error fetching favorites:', error);
+      }
+    };
+
+    fetchFavorites();
+  }, [userId]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
-  const toggleFavorite = (id) => {
-    setFavorites(favorites.filter(favorite => favorite.id !== id));
+  const toggleFavorite = async (id, businessId) => {
+    try {
+      // Make a DELETE request to the backend to remove the favorite shop
+      await fetch(`https://ambulance-booking-backend.vercel.app/user/delete-fav-shop?businessId=${businessId}&userId=${userId}`, {
+        method: 'DELETE',
+      });
+
+      // Update the state to remove the favorite from the list
+      setFavorites(favorites.filter(favorite => favorite.id !== id));
+    } catch (error) {
+      console.error('Error deleting favorite:', error);
+    }
   };
 
   return (
@@ -58,7 +75,7 @@ const Favorites = () => {
               </div>
               <div
                 className="favorite-heart"
-                onClick={() => toggleFavorite(favorite.id)}
+                onClick={() => toggleFavorite(favorite.id, favorite.businessId)}
               >
                 <span>&hearts;</span>
               </div>

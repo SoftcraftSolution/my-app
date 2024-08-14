@@ -1,0 +1,27 @@
+/* MapComponent.css */
+.map-container {
+    width: 100%;
+    max-width: 700px;
+    position: relative;
+    margin-bottom: 20px;
+  }
+  
+  .search-bar {
+    width: calc(100% - 40px);
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    z-index: 2;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .map-image {
+    width: 100%;
+    border-radius: 15px;
+    height: 400px;
+    margin-top: 20px;
+  }
+  

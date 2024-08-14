@@ -1,22 +1,74 @@
 import React from 'react';
 import StarRatings from 'react-star-ratings';
 import './gaurav.css';
-import { useGoogleOneTapLogin } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import {jwtDecode} from 'jwt-decode'; // Import jwt-decode
 
 const Landing = () => {
- 
-  // useGoogleOneTapLogin({
-  //   onSuccess: credentialResponse => {
-  //     console.log(credentialResponse);
-  //   },
-  //   onError: () => {
-  //     console.log('Login Failed');
-  //   },
-  // });
-  console.log('Button was clicked!');
+  const cookieValue = Cookies.get('user_id');
+  console.log(cookieValue);
+  const handleCredentialResponse = async (credentialResponse) => {
+    if (credentialResponse && credentialResponse.credential) {
+      const token = credentialResponse.credential;
+      
+      try {
+        // Decode JWT token
+        const decodedPayload = jwtDecode(token);
+        console.log(decodedPayload);
+
+        if (decodedPayload) {
+          const { name, email, picture } = decodedPayload;
+          const dob = decodedPayload.birthdate || 'DOB not available';
+          const gender = decodedPayload.gender || 'Gender not available';
+
+          // Make an API call to save the data and get the ID using axios
+          try {
+            const response = await axios.post(
+              'https://ambulance-booking-backend.vercel.app/user/scanstar-register',
+              {
+                "name":name,
+                "email":email,
+                "image": picture, // Directly include the image data
+              },
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data', // Use application/json since we're sending raw data
+                },
+              }
+            );
+
+            const userId = response.data.user._id; // Adjust based on actual response
+
+            if (userId) {
+              // Store the fetched ID and other data in cookies
+              Cookies.set('name', name, { expires: 7 });
+              Cookies.set('email', email, { expires: 7 });
+              Cookies.set('dob', dob, { expires: 7 });
+              Cookies.set('gender', gender, { expires: 7 });
+              Cookies.set('profile_image', picture, { expires: 7 });
+              Cookies.set('user_id', userId, { expires: 7 });
+
+              console.log('User data and ID stored in cookies:', userId);
+            } else {
+              console.error('User ID not found in API response');
+            }
+          } catch (error) {
+            console.error('Error posting data to API with axios:', error);
+          }
+        } else {
+          console.log('Failed to decode payload');
+        }
+      } catch (error) {
+        console.error('Failed to decode JWT token:', error);
+      }
+    } else {
+      console.log('No credentials found');
+    }
+  };
+
   return (
-   
     <div className="container">
       <div className='space'></div>
       
@@ -44,35 +96,27 @@ const Landing = () => {
       <div className="rating-section">
 
         <div className="step">
-        <div className="circular-badge">1</div>
-       
-          
+          <div className="circular-badge">1</div>
           <div>Enter Your Full Name: Start by entering your full name to continue.</div>
         </div>
 
         <div className='space2'></div>
 
         <div className="step">
-        <div className="circular-badge" >2</div>
-       
+          <div className="circular-badge">2</div>
           <div>Rate and Comment: Give a rating of up to 5 stars & add your comment.</div>
         </div>
-
-     
       
       </div>
 
       <div className="google-sign-in">
-      <GoogleLogin 
-  onSuccess={credentialResponse => {
-    console.log(credentialResponse);
-  }}
-  onError={() => {
-    console.log('Login Failed');
-  }}
-/>
+        <GoogleLogin 
+          onSuccess={handleCredentialResponse}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+        />
       </div>
-      
     </div>
   );
 };
