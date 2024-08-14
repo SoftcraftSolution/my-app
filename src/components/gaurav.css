@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 90vw;
+    padding: 26px;
+    background-image: url("./scnStarBg.png"); 
+    background-size: cover;  
+    background-repeat: no-repeat; 
+    background-position: center; 
+    font-family: 'Poppins', sans-serif;
+    background-attachment: fixed;
+}
+
+.subTitle {
+    color: grey;
+    font-size: 12px;
+    font-weight: 600;
+}
+.rating-section
+{
+  margin-top: 40px;
+}
+
+.logo {
+    height: 14vh;
+    width: 100%;
+    background-image: url("./sc.png");
+    background-size: contain;    
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+#h {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.company-info  {
+    text-align: left;
+    margin: 20px 0;
+   
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.step {
+    display: flex;
+    align-items: center;
+  
+    font-size: 12px;
+    color: grey;
+ 
+}
+
+.star-rating
+{
+  width: 170px;
+}
+
+.google-sign-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    color: black;
+    text-align: center;
+
+    position: fixed;
+    bottom: 20px; 
+    left: 50%;
+    transform: translateX(-50%);
+    
+    padding: 10px 20px;
+    border-radius: 40px;
+    cursor: pointer;
+    }
+
+.google-sign-in img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px; 
+}
+
+.google-sign-in span {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.space {
+    height: 10vh;
+}
+
+.space1 {
+    height: 6vh;
+}
+
+.space2 {
+  height: 10px;
+}
+
+#add {
+    font-size: 12px;
+}
+
+.googleIcon{
+  height: 30px;
+  width: 30px;
+  background-image: url('./googleLOGO.png');
+  background-size: contain;    
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.x{
+  font-size: 14px;
+}
+
+.circular-badge{
+  padding: 3px;
+  border-Radius: 50%;
+  background-color: transparent;
+  color: black;
+  display: flex;
+  justify-content: center; 
+  align-items: center;     
+  height: 14px;           
+  width: 14px;            
+  border: 1px solid black; 
+  font-size: 12px; 
+  margin-right: 12px; 
+
+
+}

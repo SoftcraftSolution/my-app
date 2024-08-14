@@ -5,6 +5,8 @@ import StoreReview from './components/StoreReview'; // Adjust the import path as
 import ReviewUI from './components/Review';
 import ReviewSubmittedPage from './components/Less';
 import Demo from './components/demo';
+import Landing from './components/gaurav';
+import RewardHistory from './components/rewardhistory';
 import ThankYouPage from './components/Less';
 import NewPages from './components/newpage';
 import ReviewForm from './components/gaurav';
@@ -30,10 +32,13 @@ function App() {
     <Router>
       <Routes>
       <Route path="/Contact" element={<ContactForm/>} />
-      <Route path="/" element={<HomePage/>} />
+      <Route path="/" element={<Landing/>} />
       <Route path="/Fav" element={<Favorites/>} />
       <Route path="/sidebar" element={<Sidebar/>} />
       <Route path="/coupon" element={<Coupon/>} />
+      <Route path="/Fav" element={<Favorites/>} />
+      <Route path="/contact" element={<ContactForm/>} />
+      <Route path="/rewardhistory" element={<RewardHistory/>} />
       <Route path="/newpage" element={<NewPage/>} />
         <Route path="/review" element={<ReviewUI/>} />
         <Route path="/review-submitted" element={<ThankYouPage/>} />
