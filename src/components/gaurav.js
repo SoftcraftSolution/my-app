@@ -1,18 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import StarRatings from 'react-star-ratings';
 import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode'; // Import jwt-decode
+import {jwtDecode} from 'jwt-decode'; // Correctly import jwt-decode
 
 const Landing = () => {
+  const navigate = useNavigate(); // Initialize useNavigate
   const cookieValue = Cookies.get('user_id');
-  console.log(cookieValue);
+
+  // Redirect to home page if user_id cookie is present
+  useEffect(() => {
+    if (cookieValue) {
+      navigate('/home'); // Redirect to the home page
+    }
+  }, [cookieValue, navigate]);
+
   const handleCredentialResponse = async (credentialResponse) => {
     if (credentialResponse && credentialResponse.credential) {
       const token = credentialResponse.credential;
-      
+
       try {
         // Decode JWT token
         const decodedPayload = jwtDecode(token);
@@ -28,13 +37,13 @@ const Landing = () => {
             const response = await axios.post(
               'https://ambulance-booking-backend.vercel.app/user/scanstar-register',
               {
-                "name":name,
-                "email":email,
-                "image": picture, // Directly include the image data
+                name,
+                email,
+                image: picture, // Directly include the image data
               },
               {
                 headers: {
-                  'Content-Type': 'multipart/form-data', // Use application/json since we're sending raw data
+                  'Content-Type': 'application/json', // Correct header for raw data
                 },
               }
             );
@@ -51,6 +60,9 @@ const Landing = () => {
               Cookies.set('user_id', userId, { expires: 7 });
 
               console.log('User data and ID stored in cookies:', userId);
+              
+              // Redirect to home page after storing user data
+              navigate('/home');
             } else {
               console.error('User ID not found in API response');
             }
