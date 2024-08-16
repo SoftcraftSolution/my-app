@@ -4,8 +4,7 @@ import StarRatings from 'react-star-ratings';
 import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
-import axios from 'axios';
-import {jwtDecode} from 'jwt-decode'; // Correctly import jwt-decode
+import { jwtDecode } from 'jwt-decode'; // Correctly import jwt-decode
 
 const Landing = () => {
   const navigate = useNavigate(); // Initialize useNavigate
@@ -32,42 +31,40 @@ const Landing = () => {
           const dob = decodedPayload.birthdate || 'DOB not available';
           const gender = decodedPayload.gender || 'Gender not available';
 
-          // Make an API call to save the data and get the ID using axios
+          // Make an API call to save the data and get the ID using fetch
           try {
-            const response = await axios.post(
-              'https://ambulance-booking-backend.vercel.app/user/scanstar-register',
-              {
-                name,
-                email,
+            const response = await fetch('https://ambulance-booking-backend.vercel.app/user/scanstar-register', {
+              method: 'POST',
+              // mode: 'no-cors',
+             
+              body: {
+                name: name,
+                email: email,
                 image: picture, // Directly include the image data
               },
-              {
-                headers: {
-                  'Content-Type': 'application/json', // Correct header for raw data
-                },
-              }
-            );
+            });
 
-            const userId = response.data.user._id; // Adjust based on actual response
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+
+            const data = await response.json();
+            const userId = data.user._id; // Adjust based on actual response
 
             if (userId) {
               // Store the fetched ID and other data in cookies
-              Cookies.set('name', name, { expires: 7 });
-              Cookies.set('email', email, { expires: 7 });
-              Cookies.set('dob', dob, { expires: 7 });
-              Cookies.set('gender', gender, { expires: 7 });
-              Cookies.set('profile_image', picture, { expires: 7 });
+              
               Cookies.set('user_id', userId, { expires: 7 });
 
               console.log('User data and ID stored in cookies:', userId);
-              
+
               // Redirect to home page after storing user data
               navigate('/home');
             } else {
               console.error('User ID not found in API response');
             }
           } catch (error) {
-            console.error('Error posting data to API with axios:', error);
+            console.error('Error posting data to API with fetch:', error);
           }
         } else {
           console.log('Failed to decode payload');
