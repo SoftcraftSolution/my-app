@@ -19,6 +19,7 @@ import MapComponent from './components/MapCo';
 import LocationDetails from './components/LocationDetails';
 import HomePage from './components/HomePage';
 import MapPage from './components/home';
+import SheetUpdate from './components/homeupdate';
 
 // import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
 
@@ -34,6 +35,7 @@ function App() {
       <Routes>
       <Route path="/Contact" element={<ContactForm/>} />
       <Route path="/" element={<Landing/>} />
+      <Route path="/sheetupd" element={<SheetUpdate/>} />
       <Route path="/home" element={<MapPage/>} />
       <Route path="/Fav" element={<Favorites/>} />
       <Route path="/sidebar" element={<Sidebar/>} />

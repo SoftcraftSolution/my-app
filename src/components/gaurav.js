@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
@@ -7,22 +7,47 @@ import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode'; // Correctly import jwt-decode
 
 const Landing = () => {
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [companyInfo, setCompanyInfo] = useState({
+    name: 'SoftCraft Solutions',
+    address: '1st floor, SoftCraft Solutions, Leela niwas, 401202, near Rajiv Gandhi High school, behind bus depot, Anand Nagar, Vasai West'
+  });
+
+  const navigate = useNavigate();
   const cookieValue = Cookies.get('user_id');
 
-  // Redirect to home page if user_id cookie is present
   useEffect(() => {
     if (cookieValue) {
-      navigate('/home'); // Redirect to the home page
+      navigate('/home');
     }
   }, [cookieValue, navigate]);
+
+  // Fetch company data from the API
+  useEffect(() => {
+    const fetchCompanyData = async () => {
+      try {
+        const response = await axios.get('https://ambulance-booking-backend.vercel.app/user/get-data-by-id?id=669100274fe85a4e2b93dacb');
+        const data = response.data;
+        console.log(response.data);
+         console.log(Object.keys(data));
+
+        // Assuming the API returns the company name and address
+        setCompanyInfo({
+          name: data.data.businessName || 'Company Name Not Available',
+          address: data.data.address || 'Address Not Available'
+        });
+      } catch (error) {
+        console.error('Error fetching company data:', error);
+      }
+    };
+
+    fetchCompanyData();
+  }, []);
 
   const handleCredentialResponse = async (credentialResponse) => {
     if (credentialResponse && credentialResponse.credential) {
       const token = credentialResponse.credential;
 
       try {
-        // Decode JWT token
         const decodedPayload = jwtDecode(token);
         console.log(decodedPayload);
 
@@ -31,34 +56,34 @@ const Landing = () => {
           const dob = decodedPayload.birthdate || 'DOB not available';
           const gender = decodedPayload.gender || 'Gender not available';
 
-          // Make an API call to save the data and get the ID using fetch
+
           try {
-            const response = await fetch('https://ambulance-booking-backend.vercel.app/user/scanstar-register', {
-              method: 'POST',
-              // mode: 'no-cors',
-             
-              body: {
-                name: name,
-                email: email,
-                image: picture, // Directly include the image data
+            const response = await axios.post(
+              'https://ambulance-booking-backend.vercel.app/user/scanstar-register',
+              {
+                name,
+                email,
+                image: picture,
               },
-            });
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+              }
+            );
 
-            if (!response.ok) {
-              throw new Error('Network response was not ok');
-            }
-
-            const data = await response.json();
-            const userId = data.user._id; // Adjust based on actual response
+            const userId = response.data.user._id;
 
             if (userId) {
-              // Store the fetched ID and other data in cookies
-              
+              Cookies.set('name', name, { expires: 7 });
+              Cookies.set('email', email, { expires: 7 });
+              Cookies.set('dob', dob, { expires: 7 });
+              Cookies.set('gender', gender, { expires: 7 });
+              Cookies.set('profile_image', picture, { expires: 7 });
               Cookies.set('user_id', userId, { expires: 7 });
 
               console.log('User data and ID stored in cookies:', userId);
 
-              // Redirect to home page after storing user data
               navigate('/home');
             } else {
               console.error('User ID not found in API response');
@@ -86,10 +111,10 @@ const Landing = () => {
 
       <div className="company-info">
         <div id='titleSub'>
-          <div id="h">SoftCraft Solutions</div>
-          <div className='subTitle'>Tech Company</div>
+          <div id="h">{companyInfo.name}</div>
+          <div className='subTitle'>Cafe</div>
         </div>
-        <p id='add'>1st floor, SoftCraft Solutions, Leela niwas, 401202, near Rajiv Gandhi High school, behind bus depot, Anand Nagar, Vasai West</p>
+        <p id='add'>{companyInfo.address}</p>
         <div className="star-rating">
           <StarRatings
             rating={3} // Example rating
@@ -103,7 +128,6 @@ const Landing = () => {
       </div>
 
       <div className="rating-section">
-
         <div className="step">
           <div className="circular-badge">1</div>
           <div>Enter Your Full Name: Start by entering your full name to continue.</div>
@@ -115,7 +139,6 @@ const Landing = () => {
           <div className="circular-badge">2</div>
           <div>Rate and Comment: Give a rating of up to 5 stars & add your comment.</div>
         </div>
-      
       </div>
 
       <div className="google-sign-in">
