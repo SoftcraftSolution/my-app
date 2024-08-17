@@ -4,6 +4,8 @@ import axios from 'axios';
 import Sidebar from './sidebar';
 import menuIcon from './Group 1171275657.png';
 import './home.css';
+import { TextField, InputAdornment, IconButton, Drawer } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const containerStyle = {
   width: '100vw',
@@ -28,17 +30,15 @@ const MapPage = () => {
   const [markerPosition, setMarkerPosition] = useState(initialCenter);
   const [value, setValue] = useState('');
   const [data, setData] = useState([]);
-
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  
 
   const toggleSidebar = () => {
-      setSidebarOpen(!sidebarOpen);
+    setSidebarOpen(!sidebarOpen);
   };
-
 
   const onChange = async (e) => {
     setValue(e.target.value);
-    console.log("in onChange =>" + `${e.target.value}`);
     try {
       const response = await axios.get(
         `https://ambulance-booking-backend.vercel.app/user/search-address`,
@@ -48,8 +48,6 @@ const MapPage = () => {
           },
         }
       );
-      console.log(response);
-
       const result = response.data.results;
 
       if (Array.isArray(result)) {
@@ -89,37 +87,66 @@ const MapPage = () => {
 
   const handleSuggestionClick = (location) => {
     setData([]);
-    console.log(suggestions);
-
-    // Access lat and lng directly as properties
     const newLocation = {
-      lat: location.geometry.location.lat, // Access directly
-      lng: location.geometry.location.lng  // Access directly
+      lat: location.geometry.location.lat,
+      lng: location.geometry.location.lng
     };
 
     setMapCenter(newLocation);
-    setMarkerPosition(newLocation); // Update the marker position
-    setValue(location.formatted_address); // Update the input value with the selected address
+    setMarkerPosition(newLocation);
+    setValue(location.formatted_address);
   };
 
   return (
-    
     <div className="map-container">
-      <input
-        type="text"
-        className="search-bar"
-        placeholder="Search location..."
-        value={value}
-        onChange={onChange}
-      />
-                  <div className={`sidebar-container ${sidebarOpen ? 'open' : ''}`}>
-                <Sidebar />
-            </div>
-            <div className="menu-icon" onClick={toggleSidebar}>
-                <img src={menuIcon} alt="Menu Icon" />
-            </div>
-            <div className={`favorites-content ${sidebarOpen ? 'shifted' : ''}`}></div>
-            <div className="header"></div>
+      <div className="search-bar-container">
+      <div className='child'>
+      <TextField
+  // variant="outlined"
+  placeholder='Search'
+  value={value}
+  onChange={onChange}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <IconButton onClick={() => toggleSidebar(true)}>
+          <MenuIcon />
+        </IconButton>
+      </InputAdornment>
+    ),
+  }}
+  sx={{
+    width: 340, // Set the width
+    height: 44, // Set the height
+    '& .MuiOutlinedInput-root': {
+      height: '100%', // Make the input area full height
+      '& fieldset': {
+        borderColor: 'grey', // Default border color
+      },
+      '&:hover fieldset': {
+        borderColor: 'grey', // Border color on hover
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: 'grey', // Custom border color when focused
+      },
+    },
+    '& .MuiInputBase-input': {
+      height: '100%', // Ensure the input text is vertically centered
+    },
+  }}
+/>
+
+      {/* Sidebar component */}
+      <Drawer anchor="left" open={sidebarOpen} onClose={() => toggleSidebar(false)}>
+      <Sidebar />
+      </Drawer></div>
+    
+      </div>
+
+      {/* <div className={`sidebar-container ${sidebarOpen ? 'open' : ''}`}>
+        <Sidebar />
+      </div> */}
+
       <div className="dropdown-content">
         {value &&   
           data.slice(0, 5).map((item, index) => (
@@ -134,6 +161,7 @@ const MapPage = () => {
           ))
         }
       </div>
+
       <LoadScript googleMapsApiKey="AIzaSyBd4z2gXxOiMPdtXS31nlQmaYeBGgguAxw">
         <GoogleMap
           mapContainerStyle={containerStyle}
@@ -144,12 +172,10 @@ const MapPage = () => {
             fullscreenControl: false,
           }}
         >
-          <MarkerF
-            position={mapCenter}
-             // Set custom icon
-          />
+          <MarkerF position={mapCenter} />
         </GoogleMap>
       </LoadScript>
+
       <div
         className="bottom-sheet"
         style={{ height: `${sheetHeight}px` }}
