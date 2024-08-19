@@ -1,0 +1,64 @@
+.bottom-sheet {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    /* border: 1px solid red; */
+    overflow: hidden;
+    transition: height 0.3s ease;
+    z-index: 1000;
+    min-height: 30vh;
+}
+
+.drag-handle {
+    width: 40px;
+    height: 4px;
+    background-color: grey;
+    border-radius: 2px;
+    margin: 8px auto;
+}
+
+.brands-section {
+    /* border: 1px solid rgb(55, 0, 255); */
+
+    width: 100vw;
+}
+
+.brands-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    gap: 0px;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; 
+    
+    margin-left: 20px; /* Internet Explorer 10+ */
+}
+.h{
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    padding:20px
+}
+
+
+
+
+ img {
+    width: 100px;
+    height: auto;
+    /* margin-right: 5px; */
+    /* border: 1px solid rgb(0, 0, 0); */
+}
+
+.brand-item{
+    width: 100px;
+    height: auto;
+}
+.space{
+    width: 20px;
+}

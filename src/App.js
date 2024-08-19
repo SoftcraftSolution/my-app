@@ -1,23 +1,15 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useParams,useLocation } from 'react-router-dom';
-import ReviewModal from './components/Review'; // Adjust the import path as needed
-import StoreReview from './components/StoreReview'; // Adjust the import path as needed
+import { BrowserRouter as Router, Routes, Route, useParams,useLocation } from 'react-router-dom';// Adjust the import path as needed
 import ReviewUI from './components/Review';
-import ReviewSubmittedPage from './components/Less';
 import Demo from './components/demo';
 import Landing from './components/gaurav';
 import RewardHistory from './components/rewardhistory';
 import ThankYouPage from './components/Less';
-import NewPages from './components/newpage';
-import ReviewForm from './components/gaurav';
 import NewPage from './components/newpage';
 import Coupon from './components/coupon';
 import ContactForm from './components/Contact';
 import Favorites from './components/Fav';
 import Sidebar from './components/sidebar';
-import MapComponent from './components/MapCo';
-import LocationDetails from './components/LocationDetails';
-import HomePage from './components/HomePage';
 import MapPage from './components/home';
 import SheetUpdate from './components/homeupdate';
 
@@ -28,7 +20,7 @@ import SheetUpdate from './components/homeupdate';
 function App() {
   
 
-  const [showModal, setShowModal] = useState(false);
+
 
   return (
     <Router>
