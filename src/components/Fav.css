@@ -2,12 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 body, html, #root {
     font-family: 'Poppins', sans-serif;
-  }
+    width: 100vw;
+    margin: 0; /* Ensure there's no default margin */
+}
+
 .favorites-container {
     display: flex;
     height: 100vh;
+    border: 1px solid  red;
     overflow: hidden;
+    flex-direction: column;
     position: relative;
+    padding: 20px;
 }
 
 .sidebar-container {
@@ -33,11 +39,10 @@ body, html, #root {
     height: 30px; /* Adjust the height of the icon */
     padding: 0;   /* Remove padding to avoid unnecessary enlargement */
     border-radius: 50%;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    background-color: white; /* Ensure the background is visible */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-image: url('./Group 1171275657.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat; /* Ensure the background image does not repeat */
 }
 
 .menu-icon img {
@@ -46,22 +51,25 @@ body, html, #root {
     border-radius: 50%; /* Make the icon round */
 }
 
-
+/* Adjustments for favorites content */
 .favorites-content {
-    margin-left: 0;
-    padding: 20px;
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    overflow: auto; /* Allow scrolling if content overflows */
+    padding: 10px;
     transition: margin-left 0.3s ease;
 }
 
 .favorites-content.shifted {
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 /* Favorites list styling */
 .favorites-list {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: 20px;
 }
 
@@ -110,7 +118,38 @@ body, html, #root {
     color: #e74c3c;
     cursor: pointer;
 }
+
 .favorite-heart.selected span {
     color: red; /* Change color to indicate selection */
-  }
-  
+}
+
+.subTitle {
+    text-align: center;
+    padding: 10px 20px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* Center .no-favorites */
+.no-favorites {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100%; /* Ensure it takes up full height of the parent */
+    color: #555;
+
+    /* border: 0px solid transparent; */
+}
+.image
+{
+    height: 20%;
+    width:50%;
+    background-image: url("../noData.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+p{
+    text-align: center;
+}

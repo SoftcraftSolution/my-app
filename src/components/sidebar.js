@@ -1,14 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './sidebar.css';
 import RewardHistory from './rewardhistory';
-import disp from './dd.png';
+import disp from './dd.png'; // Default image
+import Cookies from 'js-cookie';
 
 const Sidebar = () => {
+    const [profile, setProfile] = useState({
+        name: 'Loading...', // Default name
+        avatar: disp, // Default image
+    });
+
+    useEffect(() => {
+        // Retrieve profile name and avatar URL from cookies
+        const nameFromCookies = Cookies.get('name');
+        const avatarFromCookies = Cookies.get('profile_image');
+        console.log(avatarFromCookies);
+
+        // Update the state with the cookie values if they exist
+        setProfile({
+            name: nameFromCookies || 'Karan Nair', // Fallback to default name
+            avatar: avatarFromCookies || disp, // Fallback to default image
+        });
+    }, []);
+
     return (
         <div className="sidebar">
             <div className="profile">
-                <img src={disp} alt="Karan Nair" className="avatar" />
-                <p className="name">Karan Nair</p>
+                <img src={profile.avatar} alt={profile.name} className="avatar" />
+                <p className="name">{profile.name}</p>
             </div>
             <nav className="menu">
                 <a href="./home" className="menu-item">
