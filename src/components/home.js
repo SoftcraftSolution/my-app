@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 import axios from 'axios';
 import Sidebar from './sidebar';
-import menuIcon from './Group 1171275657.png';
+import BottomSheet from '../bottmSheet.jsx';
 import './home.css';
 import { TextField, InputAdornment, IconButton, Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -17,21 +17,15 @@ const initialCenter = {
   lng: 75.7139,
 };
 
-const locationIcon = '/placeholder.png'; // Replace with the path to your icon
-
 const MapPage = () => {
   const [sheetHeight, setSheetHeight] = useState(150);
   const [isDragging, setIsDragging] = useState(false);
   const [startY, setStartY] = useState(0);
   const [startHeight, setStartHeight] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [suggestions, setSuggestions] = useState([]);
-  const [mapCenter, setMapCenter] = useState(initialCenter);
-  const [markerPosition, setMarkerPosition] = useState(initialCenter);
   const [value, setValue] = useState('');
   const [data, setData] = useState([]);
+  const [mapCenter, setMapCenter] = useState(initialCenter);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -89,66 +83,64 @@ const MapPage = () => {
     setData([]);
     const newLocation = {
       lat: location.geometry.location.lat,
-      lng: location.geometry.location.lng
+      lng: location.geometry.location.lng,
     };
 
     setMapCenter(newLocation);
-    setMarkerPosition(newLocation);
     setValue(location.formatted_address);
   };
 
   return (
     <div className="map-container">
       <div className="search-bar-container">
-      <div className='child'>
-      <TextField
-  // variant="outlined"
-  placeholder='Search'
-  value={value}
-  onChange={onChange}
-  InputProps={{
-    startAdornment: (
-      <InputAdornment position="start">
-        <IconButton onClick={() => toggleSidebar(true)}>
-          <MenuIcon />
-        </IconButton>
-      </InputAdornment>
-    ),
-  }}
-  sx={{
-    width: 340, // Set the width
-    height: 44, // Set the height
-    '& .MuiOutlinedInput-root': {
-      height: '100%', // Make the input area full height
-      '& fieldset': {
-        borderColor: 'grey', // Default border color
-      },
-      '&:hover fieldset': {
-        borderColor: 'grey', // Border color on hover
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: 'grey', // Custom border color when focused
-      },
-    },
-    '& .MuiInputBase-input': {
-      height: '100%', // Ensure the input text is vertically centered
-    },
-  }}
-/>
+        <div className="child">
+          <TextField
+            placeholder="Search"
+            value={value}
+            onChange={onChange}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <IconButton onClick={() => toggleSidebar(true)}>
+                    <MenuIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            sx={{
+              width: '100%',
+              height: '30',
+              '& .MuiOutlinedInput-root': {
+                height: '100%',
+                '& fieldset': {
+                  borderColor: 'grey',
+                },
+                '&:hover fieldset': {
+                  borderColor: 'grey',
+                },
+                '&.Mui-focused fieldset': {
+                  borderColor: 'grey',
+                },
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+              },
+              '& .MuiInputBase-input': {
+                height: '100%',
+              },
+            }}
+          />
 
-      {/* Sidebar component */}
-      <Drawer anchor="left" open={sidebarOpen} onClose={() => toggleSidebar(false)}>
-      <Sidebar />
-      </Drawer></div>
-    
+          <Drawer
+            anchor="left"
+            open={sidebarOpen}
+            onClose={() => toggleSidebar(false)}
+          >
+            <Sidebar />
+          </Drawer>
+        </div>
       </div>
 
-      {/* <div className={`sidebar-container ${sidebarOpen ? 'open' : ''}`}>
-        <Sidebar />
-      </div> */}
-
       <div className="dropdown-content">
-        {value &&   
+        {value &&
           data.slice(0, 5).map((item, index) => (
             <div
               key={index}
@@ -158,11 +150,10 @@ const MapPage = () => {
               {item.name} - {item.formatted_address}
               <hr />
             </div>
-          ))
-        }
+          ))}
       </div>
 
-      <LoadScript googleMapsApiKey="AIzaSyBd4z2gXxOiMPdtXS31nlQmaYeBGgguAxw">
+      <LoadScript googleMapsApiKey="AIzaSyBpX6Opy9xgc98uyaMioJ8VbzJYHXnqE4Q">
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
@@ -176,55 +167,12 @@ const MapPage = () => {
         </GoogleMap>
       </LoadScript>
 
-      <div
-        className="bottom-sheet"
-        style={{ height: `${sheetHeight}px` }}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-      >
-        <div className="drag-handle" />
-        <div className="brands-section">
-          <strong>
-            <h3>Top Brands</h3>
-          </strong>
-          <div className="brands-container">
-            <img src="/coke.png" alt="Coca Cola" />
-            <img src="/zorko.png" alt="Zomato" />
-            <img src="/mcd.png" alt="McDonald's" />
-            <img src="/mcd.png" alt="McDonald's" />
-            <img src="/mcd.png" alt="McDonald's" />
-          </div>
-
-          <h3>Favorite Brands</h3>
-          <div className="favorite-brands-container">
-            <div className="brand-item">
-              <img src="/dore.png" alt="Dorea Thai Food" />
-              <p>Dorea Thai Food</p>
-            </div>
-            <div className="brand-item">
-              <img src="/dore2.png" alt="Bali Digital Food" />
-              <p>Bali Digital Food</p>
-            </div>
-            <div className="brand-item">
-              <img src="/bali.png" alt="Work Portfolio Makana" />
-              <p>Work Portfolio Makana</p>
-            </div>
-            <div className="brand-item">
-              <img src="/bali.png" alt="Work Portfolio Makana" />
-              <p>Work Portfolio Makana</p>
-            </div>
-            <div className="brand-item">
-              <img src="/bali.png" alt="Work Portfolio Makana" />
-              <p>Work Portfolio Makana</p>
-            </div>
-            <div className="brand-item">
-              <img src="/bali.png" alt="Work Portfolio Makana" />
-              <p>Work Portfolio Makana</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BottomSheet
+        sheetHeight={sheetHeight}
+        handleTouchStart={handleTouchStart}
+        handleTouchMove={handleTouchMove}
+        handleTouchEnd={handleTouchEnd}
+      />
     </div>
   );
 };

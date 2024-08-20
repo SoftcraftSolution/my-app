@@ -4,6 +4,7 @@ import Sidebar from './sidebar';
 import menuIcon from './Group 1171275657.png';
 import './coke.png';
 import './zorko.png';
+import { TextField, InputAdornment, IconButton, Drawer } from '@mui/material';
 
 const RewardHistory = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,18 +23,25 @@ const RewardHistory = () => {
 
     return (
         <div className="reward-history">
-            <div className={`sidebar-container ${sidebarOpen ? 'open' : ''}`}>
-                <Sidebar />
-            </div>
+           
             <div className="menu-icon" onClick={toggleSidebar}>
-                <img src={menuIcon} alt="Menu Icon" />
+                
             </div>
+            <Drawer
+            anchor="left"
+            open={sidebarOpen}
+            onClose={() => toggleSidebar(false)}
+          >
+            <Sidebar />
+          </Drawer>
+            <div className='hd'>
+            <div>Reward History</div></div>
             <div className={`favorites-content ${sidebarOpen ? 'shifted' : ''}`}></div>
-            <div className="header">
+            {/* <div className="header" style={{padding:"0px"}}> */}
           
-                <h1>Reward History</h1>
-                <p>Track and view your reward history for all your earned points coupons</p>
-            </div>
+                
+                <p className='subTitle'>Track and view your reward history for all your earned points coupons</p>
+           
             <div className="rewards-list">
                 {rewards.map((reward) => (
                     <div key={reward.id} className={`reward-item ${reward.expired ? 'expired' : ''}`}>
