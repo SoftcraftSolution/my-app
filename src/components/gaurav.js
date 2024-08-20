@@ -4,8 +4,7 @@ import StarRatings from 'react-star-ratings';
 import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
-import axios from 'axios';
-import {jwtDecode} from 'jwt-decode'; // Correctly import jwt-decode
+import { jwtDecode } from 'jwt-decode'; // Correctly import jwt-decode
 
 const Landing = () => {
   const [companyInfo, setCompanyInfo] = useState({
@@ -57,6 +56,7 @@ const Landing = () => {
           const dob = decodedPayload.birthdate || 'DOB not available';
           const gender = decodedPayload.gender || 'Gender not available';
 
+
           try {
             const response = await axios.post(
               'https://ambulance-booking-backend.vercel.app/user/scanstar-register',
@@ -83,22 +83,13 @@ const Landing = () => {
               Cookies.set('user_id', userId, { expires: 7 });
 
               console.log('User data and ID stored in cookies:', userId);
-              
-              // Check if the user has already reviewed the business
-              const reviewResponse = await axios.get(
-                `https://ambulance-booking-backend.vercel.app/user/check-review?businessId=669100414fe85a4e2b93dadb&userId=${userId}`
-              );
 
-              if (reviewResponse.data.hasReviewed) {
-                navigate('/home');
-              } else {
-                navigate('/review');
-              }
+              navigate('/home');
             } else {
               console.error('User ID not found in API response');
             }
           } catch (error) {
-            console.error('Error posting data to API with axios:', error);
+            console.error('Error posting data to API with fetch:', error);
           }
         } else {
           console.log('Failed to decode payload');
