@@ -6,6 +6,10 @@
 .header {
     text-align: center;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0px;
 }
 
 .menu-btn {
@@ -17,16 +21,37 @@
     font-size: 24px;
 }
 
+
 h1 {
     font-size: 24px;
     font-weight: bold;
     margin: 0;
+    position: absolute;
+    top:0px;
+    
+}
+.hd{
+    /* border:1px solid red; */
+    height:20px;
+    display: flex;
+    align-items: center;
+    padding: 4px 0px;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 p {
-    margin: 5px 0 0;
+    margin: 0px;
     font-size: 14px;
     color: #777;
+    
+}
+.subTitle{
+    text-align: center;
+    padding: 0px 20px;
+    font-weight: 400;
+    font-size: 14px;
 }
 
 .rewards-list {
@@ -71,9 +96,7 @@ p {
     filter: grayscale(100%);
 }
 
-.expired ~ .reward-item {
-    border-top: 1px solid #ff4d4d;
-}
+
 
 .expired:first-of-type::before {
     content: 'Expired';
