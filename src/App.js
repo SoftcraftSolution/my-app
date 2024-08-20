@@ -12,10 +12,7 @@ import Favorites from './components/Fav';
 import Sidebar from './components/sidebar';
 import MapPage from './components/home';
 import SheetUpdate from './components/homeupdate';
-
-// import { BrowserRouter as Router, Routes,useNavigate, Route, useParams,useLocation } from 'react-router-dom';
-
-
+import PrivateRoute from './components/ProtectedRoute'; // Import the PrivateRoute component
 
 function App() {
   
@@ -25,25 +22,24 @@ function App() {
   return (
     <Router>
       <Routes>
-      <Route path="/Contact" element={<ContactForm/>} />
-      <Route path="/" element={<Landing/>} />
-      <Route path="/sheetupd" element={<SheetUpdate/>} />
-      <Route path="/home" element={<MapPage/>} />
-      <Route path="/Fav" element={<Favorites/>} />
-      <Route path="/sidebar" element={<Sidebar/>} />
-      <Route path="/coupon" element={<Coupon/>} />
-      <Route path="/Fav" element={<Favorites/>} />
-      <Route path="/contact" element={<ContactForm/>} />
-      <Route path="/rewardhistory" element={<RewardHistory/>} />
-      <Route path="/newpage" element={<NewPage/>} />
-        <Route path="/review" element={<ReviewUI/>} />
-        <Route path="/review-submitted" element={<ThankYouPage/>} />
-        <Route path="/not-found" element={<Demo/>} />
-        
+        <Route path="/" element={<Landing />} />
+        <Route path="/contact" element={<ContactForm />} />
+        <Route path="/rewardhistory" element={<RewardHistory />} />
+        <Route path="/newpage" element={<NewPage />} />
+        <Route path="/review" element={<ReviewUI />} />
+        <Route path="/review-submitted" element={<ThankYouPage />} />
+        <Route path="/not-found" element={<Demo />} />
+        <Route path="/sheetupd" element={<SheetUpdate />} />
+        <Route path="/coupon" element={<Coupon />} />
+        <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/Fav" element={<Favorites />} />
 
-        {/* Add more routes as needed */}
+        {/* Protected Route */}
+        <Route path="/home" element={<PrivateRoute element={MapPage} />} />
+
+        {/* Redirect unknown routes to error page */}
+        <Route path="*" element={<Navigate to="/not-found" />} />
       </Routes>
-
     </Router>
   );
 }
