@@ -3,6 +3,7 @@ import './Fav.css';
 import dore from './dore.png'; // Default image for businesses
 import Sidebar from './sidebar';
 import { Drawer } from '@mui/material';
+import Cookies from 'js-cookie';
 
 const Favorites = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -10,7 +11,7 @@ const Favorites = () => {
   const [error, setError] = useState(false); // New state for handling errors
 
   // Hardcoded userId
-  const userId = '66b5e8001e961324d5d704db';
+  const userId = Cookies.get('user_id');
 
   // Fetch favorite shops from the actual endpoint
   useEffect(() => {

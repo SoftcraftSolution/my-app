@@ -8,8 +8,8 @@ body, html, #root {
 
 .favorites-container {
     display: flex;
-    height: 100vh;
-    border: 1px solid  red;
+    height: 90vh;
+    /* border: 1px solid  red; */
     overflow: hidden;
     flex-direction: column;
     position: relative;
@@ -153,3 +153,4 @@ body, html, #root {
 p{
     text-align: center;
 }
+
