@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
+import axios from 'axios';
 import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode'; // Correctly import jwt-decode
+import {jwtDecode} from 'jwt-decode'; // Correctly import jwt-decode
 
 const Landing = () => {
   const [companyInfo, setCompanyInfo] = useState({
@@ -12,7 +13,9 @@ const Landing = () => {
     address: '1st floor, SoftCraft Solutions, Leela niwas, 401202, near Rajiv Gandhi High school, behind bus depot, Anand Nagar, Vasai West'
   });
 
+  const [loading, setLoading] = useState(true); // Loading state
   const navigate = useNavigate();
+  const location = useLocation();
   const cookieValue = Cookies.get('user_id');
 
   useEffect(() => {
@@ -21,27 +24,40 @@ const Landing = () => {
     }
   }, [cookieValue, navigate]);
 
-  // Fetch company data from the API
   useEffect(() => {
     const fetchCompanyData = async () => {
-      try {
-        const response = await axios.get('https://ambulance-booking-backend.vercel.app/user/get-data-by-id?id=669100434fe85a4e2b93dadf');
-        const data = response.data;
-        console.log(response.data);
-        console.log(Object.keys(data));
+      const params = new URLSearchParams(location.search);
+      const companyId = params.get('id');
 
-        // Assuming the API returns the company name and address
-        setCompanyInfo({
-          name: data.data.businessName || 'Company Name Not Available',
-          address: data.data.address || 'Address Not Available'
-        });
+      if (!companyId) {
+        // Redirect to error page if no ID is found
+        navigate('/error');
+        return;
+      }
+
+      try {
+        const response = await axios.get(`https://ambulance-booking-backend.vercel.app/user/get-data-by-id?id=${companyId}`);
+        const data = response.data;
+
+        if (data && data.data) {
+          setCompanyInfo({
+            name: data.data.businessName || 'Company Name Not Available',
+            address: data.data.address || 'Address Not Available'
+          });
+        } else {
+          console.error('No company data returned');
+          navigate('/error');
+        }
       } catch (error) {
         console.error('Error fetching company data:', error);
+        navigate('/error');
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchCompanyData();
-  }, []);
+  }, [location.search, navigate]);
 
   const handleCredentialResponse = async (credentialResponse) => {
     if (credentialResponse && credentialResponse.credential) {
@@ -55,7 +71,6 @@ const Landing = () => {
           const { name, email, picture } = decodedPayload;
           const dob = decodedPayload.birthdate || 'DOB not available';
           const gender = decodedPayload.gender || 'Gender not available';
-
 
           try {
             const response = await axios.post(
@@ -101,6 +116,10 @@ const Landing = () => {
       console.log('No credentials found');
     }
   };
+
+  if (loading) {
+    return <div>Loading...</div>; // Show loading message or spinner
+  }
 
   return (
     <div className="container">
