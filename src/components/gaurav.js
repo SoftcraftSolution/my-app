@@ -26,10 +26,10 @@ const Landing = () => {
   useEffect(() => {
     const fetchCompanyData = async () => {
       try {
-        const response = await axios.get('https://ambulance-booking-backend.vercel.app/user/get-data-by-id?id=669100274fe85a4e2b93dacb');
+        const response = await axios.get('https://ambulance-booking-backend.vercel.app/user/get-data-by-id?id=669100434fe85a4e2b93dadf');
         const data = response.data;
         console.log(response.data);
-         console.log(Object.keys(data));
+        console.log(Object.keys(data));
 
         // Assuming the API returns the company name and address
         setCompanyInfo({
@@ -83,7 +83,17 @@ const Landing = () => {
               Cookies.set('user_id', userId, { expires: 7 });
 
               console.log('User data and ID stored in cookies:', userId);
-              navigate('/home');
+              
+              // Check if the user has already reviewed the business
+              const reviewResponse = await axios.get(
+                `https://ambulance-booking-backend.vercel.app/user/check-review?businessId=669100414fe85a4e2b93dadb&userId=${userId}`
+              );
+
+              if (reviewResponse.data.hasReviewed) {
+                navigate('/home');
+              } else {
+                navigate('/review');
+              }
             } else {
               console.error('User ID not found in API response');
             }
