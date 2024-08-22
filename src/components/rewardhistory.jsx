@@ -35,7 +35,7 @@ const RewardHistory = () => {
             <Sidebar />
           </Drawer>
             <div className='hd'>
-            <div>Reward History</div></div>
+            <div>Rewards</div></div>
             <div className={`favorites-content ${sidebarOpen ? 'shifted' : ''}`}></div>
             {/* <div className="header" style={{padding:"0px"}}> */}
           
