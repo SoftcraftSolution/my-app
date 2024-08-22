@@ -47,8 +47,8 @@ const RewardHistory = () => {
                     <div key={reward.id} className={`reward-item ${reward.expired ? 'expired' : ''}`}>
                         <img src={reward.logo} alt="Logo" className="reward-logo" />
                         <div className="reward-details">
-                            <p className="reward-description">{reward.description}</p>
-                            <p className="reward-date">{reward.date}</p>
+                            <div className="reward-description">{reward.description}</div>
+                            <div className="reward-date">{reward.date}</div>
                         </div>
                     </div>
                 ))}

@@ -12,7 +12,8 @@ import Favorites from './components/Fav';
 import Sidebar from './components/sidebar';
 import MapPage from './components/home';
 import SheetUpdate from './components/homeupdate';
-import PrivateRoute from './components/ProtectedRoute'; // Import the PrivateRoute component
+import PrivateRoute from './components/ProtectedRoute'; 
+import { Navigate } from 'react-router-dom';// Import the PrivateRoute component
 
 function App() {
   return (
