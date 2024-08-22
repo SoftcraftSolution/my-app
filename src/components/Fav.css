@@ -5,6 +5,12 @@ body, html, #root {
     width: 100vw;
     margin: 0; /* Ensure there's no default margin */
 }
+@media (max-width: 768px) {
+    .image {
+        height: 30vh; /* Smaller height for smaller screens */
+        width: 100vw;  /* Full width for smaller screens */
+    }
+}
 
 .favorites-container {
     display: flex;
@@ -125,7 +131,7 @@ body, html, #root {
 
 .subTitle {
     text-align: center;
-    padding: 10px 20px;
+    padding: 10px 0px;
     font-weight: 400;
     font-size: 14px;
 }
@@ -142,15 +148,22 @@ body, html, #root {
 
     /* border: 0px solid transparent; */
 }
-.image
-{
-    height: 20%;
-    width:50%;
+.image {
+    height: 50%; /* Adjust the height of the container as needed */
+    width: 100%;  /* Adjust the width of the container as needed */
     background-image: url("../noData.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 80%; /* Adjust the percentage to make the image smaller */
+    background-position: center; /* Center the image within the container */
 }
-p{
-    text-align: center;
+
+p {
+    text-align: center; /* Center the text horizontally within the block */
+    position: relative;
+    top: -20px; /* Adjust vertical position as needed */
+    width: 80%; /* Adjust the width of the block */
+    max-width: 600px; /* Optionally set a maximum width */
+    margin: 0 auto; /* Center the block horizontally within its container */
+    box-sizing: border-box; /* Ensure padding and border are included in the width calculation */
 }
 

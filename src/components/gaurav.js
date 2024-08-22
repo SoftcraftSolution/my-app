@@ -6,7 +6,7 @@ import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode'; 
-import axios from 'axios';// Correctly import jwt-decode
+// Correctly import jwt-decode
 
 
 const Landing = () => {
