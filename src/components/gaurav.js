@@ -119,7 +119,7 @@ const Landing = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>; // Show loading message or spinner
+    return <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}>Loading...</div>; // Show loading message or spinner
   }
 
   return (

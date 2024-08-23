@@ -1,15 +1,44 @@
 import React, { useState } from 'react';
 import './Contact.css'; // Import the CSS file
-import menuIcon from './Group 1171275657.png'; // Adjust path if necessary
 import Sidebar from './sidebar';
+import Cookies from 'js-cookie';
+import { Drawer, CircularProgress } from '@mui/material';
 
 const ContactForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [message, setMessage] = useState('');
-    const userId = '66b5e8001e961324d5d704db'; // Hardcoded userId
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+    const [loading, setLoading] = useState(false); // Add loading state
+    const userId = Cookies.get('user_id'); // Hardcoded userId
+
+    const toggleSidebar = () => {
+        setSidebarOpen(!sidebarOpen);
+    };
+
+    const validateForm = () => {
+        // Validate phone number length
+        if (phoneNumber.length !== 10) {
+            alert('Phone number must be exactly 10 digits long.');
+            return false;
+        }
+
+        // Validate message length
+        if (message.length > 50) {
+            alert('Message cannot exceed 50 characters.');
+            return false;
+        }
+
+        return true;
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (!validateForm()) {
+            return; // Stop submission if validation fails
+        }
+
+        setLoading(true); // Set loading to true when API call starts
 
         // Create the payload
         const feedbackData = {
@@ -38,33 +67,44 @@ const ContactForm = () => {
         } catch (error) {
             console.error('Error submitting feedback:', error);
             alert('Error submitting feedback. Please try again.');
+        } finally {
+            setLoading(false); // Set loading to false after API call completes
         }
     };
 
     return (
         <div className="contact-form-container">
-            <header className="header">
-                {/* Add any header content if necessary */}
-            </header>
+            <Drawer
+                anchor="left"
+                open={sidebarOpen}
+                onClose={() => toggleSidebar(false)}
+            >
+                <Sidebar />
+            </Drawer>
+            <div className="hd">
+                <div>Any Suggestion</div>
+            </div>
+            <div className="menu-icon" onClick={toggleSidebar}></div>
+            <p className="subtitle">We value your Opinions</p>
             <form className="form" onSubmit={handleSubmit}>
-                <img src={menuIcon} alt="Menu" className="menu-icon" />
-                <h1 className="title">Any Suggestion</h1>
-                <p className="subtitle">We value your Opinions</p>
-                
                 <input 
                     type="tel" 
                     placeholder="Phone Number" 
                     className="input-field"
                     value={phoneNumber}
                     onChange={(e) => setPhoneNumber(e.target.value)} 
+                    required
                 />
                 <textarea 
                     placeholder="Message" 
                     className="textarea-field"
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
+                    required
                 ></textarea>
-                <button type="submit" className="submit-button">Submit</button>
+                <button type="submit" className="submit-button" disabled={loading}>
+                    {loading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
+                </button>
             </form>
         </div>
     );

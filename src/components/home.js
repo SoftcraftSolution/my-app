@@ -153,7 +153,7 @@ const MapPage = () => {
           ))}
       </div>
 
-      <LoadScript googleMapsApiKey="AIzaSyBpX6Opy9xgc98uyaMioJ8VbzJYHXnqE4Q">
+      <LoadScript googleMapsApiKey="AIzaSyBd4z2gXxOiMPdtXS31nlQmaYeBGgguAxw">
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
