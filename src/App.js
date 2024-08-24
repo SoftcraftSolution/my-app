@@ -12,6 +12,7 @@ import Favorites from './components/Fav';
 import Sidebar from './components/sidebar';
 import MapPage from './components/home';
 import SheetUpdate from './components/homeupdate';
+import PrivacyPolicy from './components/privacy';
 import PrivateRoute from './components/ProtectedRoute'; 
 // Import the PrivateRoute component
 
@@ -20,6 +21,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/privacy" element={<PrivacyPolicy/>} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/rewardhistory" element={<RewardHistory />} />
         <Route path="/newpage" element={<NewPage />} />

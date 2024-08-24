@@ -130,7 +130,7 @@ body, html, #root {
 }
 
 .subTitle {
-    text-align: left;
+    text-align: center;
     padding: 15px 0px;
     font-weight: 400;
     font-size: 14px;
@@ -158,13 +158,14 @@ body, html, #root {
 }
 
 p {
-    text-align: left; /* Center the text horizontally within the block */
+    text-align: center; /* Center the text horizontally within the block */
     position: relative;
     top: -20px; /* Adjust vertical position as needed */
     width: 80%; /* Adjust the width of the block */
     max-width: 600px; /* Optionally set a maximum width */
     margin: 10px auto;
     left: -38px; /* Center the block horizontally within its container */
-    box-sizing: border-box; /* Ensure padding and border are included in the width calculation */
+    box-sizing: border-box;
+    left: 7px; 
 }
 
