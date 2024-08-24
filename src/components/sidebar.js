@@ -23,10 +23,22 @@ const Sidebar = () => {
         });
     }, []);
 
+    const handleImageError = () => {
+        setProfile(prevProfile => ({
+            ...prevProfile,
+            avatar: disp, // Revert to default image on error
+        }));
+    };
+
     return (
         <div className="sidebar">
             <div className="profile">
-                <img src={profile.avatar} alt={profile.name} className="avatar" />
+                <img
+                    src={profile.avatar}
+                    alt={profile.name}
+                    className="avatar"
+                    onError={handleImageError} // Handle image load error
+                />
                 <p className="name">{profile.name}</p>
             </div>
             <nav className="menu">
