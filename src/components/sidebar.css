@@ -31,6 +31,7 @@
     font-size: 22px;
     color: #2d3436;
     font-weight: 700;
+     top: revert-layer; 
 }
 
 /* Menu Section */
@@ -130,5 +131,7 @@
 
     .name {
         font-size: 20px;
+        text-align: center;
+        left: 8px;
     }
 }

@@ -48,7 +48,7 @@ const Sidebar = () => {
                 </a>
                 <a href="./rewardhistory" className="menu-item">
                     <span className="icon reward"></span>
-                    <span className="text">Reward History</span>
+                    <span className="text">Rewards</span>
                 </a>
                 <a href="./Fav" className="menu-item">
                     <span className="icon favorites"></span>
@@ -58,7 +58,7 @@ const Sidebar = () => {
                     <span className="icon contact"></span>
                     <span className="text">Contact Us</span>
                 </a>
-                <a href="#" className="menu-item">
+                <a href="./privacy" className="menu-item">
                     <span className="icon privacy"></span>
                     <span className="text">Privacy Policy</span>
                 </a>

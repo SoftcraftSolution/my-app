@@ -1,12 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
+import axios from 'axios';
 import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
-import { jwtDecode } from 'jwt-decode'; 
-import axios from 'axios';// Correctly import jwt-decode
+import {jwtDecode} from 'jwt-decode'; // Corrected import for jwt-decode
 
+// Define the function to check user review status
+const checkUserReviewStatus = async (businessId, userId, navigate) => {
+  if (!businessId) {
+    console.error('Business ID not found in URL');
+    navigate('/error');
+    return;
+  }
+
+  try {
+    const reviewResponse = await axios.get(`https://ambulance-booking-backend.vercel.app/user/check-review?businessId=${businessId}&userId=${userId}`);
+    const hasReviewed = reviewResponse.data?.hasReviewed;
+
+    if (hasReviewed) {
+      navigate('/home');
+    } else {
+      navigate('/review');
+    }
+  } catch (reviewError) {
+    console.error('Error checking review status:', reviewError);
+    navigate('/error');
+  }
+};
 
 const Landing = () => {
   const [companyInfo, setCompanyInfo] = useState({
@@ -14,14 +36,16 @@ const Landing = () => {
     address: '1st floor, SoftCraft Solutions, Leela niwas, 401202, near Rajiv Gandhi High school, behind bus depot, Anand Nagar, Vasai West'
   });
 
-  const [loading, setLoading] = useState(true); // Loading state
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
   const cookieValue = Cookies.get('user_id');
 
   useEffect(() => {
     if (cookieValue) {
-      navigate('/home');
+      const params = new URLSearchParams(location.search);
+      const businessId = params.get('id');
+      checkUserReviewStatus(businessId, cookieValue, navigate);
     }
   }, [cookieValue, navigate]);
 
@@ -31,7 +55,6 @@ const Landing = () => {
       const companyId = params.get('id');
 
       if (!companyId) {
-        // Redirect to error page if no ID is found
         navigate('/error');
         return;
       }
@@ -66,7 +89,6 @@ const Landing = () => {
 
       try {
         const decodedPayload = jwtDecode(token);
-        console.log(decodedPayload);
 
         if (decodedPayload) {
           const { name, email, picture } = decodedPayload;
@@ -91,6 +113,7 @@ const Landing = () => {
             const userId = response.data.user._id;
 
             if (userId) {
+              // Set cookies for user info
               Cookies.set('name', name, { expires: 7 });
               Cookies.set('email', email, { expires: 7 });
               Cookies.set('dob', dob, { expires: 7 });
@@ -98,14 +121,17 @@ const Landing = () => {
               Cookies.set('profile_image', picture, { expires: 7 });
               Cookies.set('user_id', userId, { expires: 7 });
 
-              console.log('User data and ID stored in cookies:', userId);
+              // Check if the user has reviewed the business
+              const params = new URLSearchParams(location.search);
+              const businessId = params.get('id');
 
-              navigate('/home');
+              checkUserReviewStatus(businessId, userId, navigate);
+
             } else {
               console.error('User ID not found in API response');
             }
           } catch (error) {
-            console.error('Error posting data to API with fetch:', error);
+            console.error('Error posting data to API:', error);
           }
         } else {
           console.log('Failed to decode payload');
@@ -119,13 +145,14 @@ const Landing = () => {
   };
 
   if (loading) {
-    return <div style={{display:"flex",flexDirection:"column",justifyContent:"center"}}>Loading...</div>; // Show loading message or spinner
+
+    return <div>Loading...</div>;
+
   }
 
   return (
     <div className="container">
       <div className='space'></div>
-      
       <div className='logo'></div>
       <div className='space1'></div>
 

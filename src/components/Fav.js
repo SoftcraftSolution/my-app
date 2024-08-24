@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 const Favorites = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [favorites, setFavorites] = useState([]);
-  const [error, setError] = useState(false); // New state for handling errors
+  const [error, setError] = useState(false); 
 
   // Hardcoded userId
   const userId = Cookies.get('user_id');

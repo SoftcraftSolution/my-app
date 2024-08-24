@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, useParams,useLocation } from 'react-router-dom';// Adjust the import path as needed
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'; // Import Navigate
 import ReviewUI from './components/Review';
 import Demo from './components/demo';
 import Landing from './components/gaurav';
@@ -12,18 +12,16 @@ import Favorites from './components/Fav';
 import Sidebar from './components/sidebar';
 import MapPage from './components/home';
 import SheetUpdate from './components/homeupdate';
+import PrivacyPolicy from './components/privacy';
 import PrivateRoute from './components/ProtectedRoute'; 
-import { Navigate } from 'react-router-dom';// Import the PrivateRoute component
+// Import the PrivateRoute component
 
 function App() {
-  
-
-
-
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/privacy" element={<PrivacyPolicy/>} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/rewardhistory" element={<RewardHistory />} />
         <Route path="/newpage" element={<NewPage />} />
