@@ -1,168 +1,89 @@
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 0; /* Remove padding */
-  box-sizing: border-box;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px;
-  border-radius: 0; /* Remove border radius */
-  width: 100%;
-  height: 100vh; /* Take full viewport height */
+/* StyledContainer */
+.styled-container {
   max-width: 100%;
-  max-height: 100%;
-  position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  overflow-y: auto;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-h2.gg {
-  text-align: center;
-  font-size: 16px;
-  margin: 10px 0;
-}
-
-.rating {
-  display: flex;
   justify-content: center;
-  margin-bottom: 10px;
-}
-
-.star {
-  font-size: 36px;
-  cursor: pointer;
-  color: lightgray;
-}
-
-.star.filled {
-  color: gold;
-}
-
-textarea {
-  flex-grow: 1;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: none;
-}
-
-.actions1 {
-  display: flex;
-  justify-content: center;
-  margin: 10px 0;
-}
-
-.actions {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
-}
-
-.add-photo-button {
-  display: inline-block;
-  padding: 10px 20px;
-  width: 100%;
-  max-width: 280px;
-  color: blue;
-  background: transparent;
+  padding: 16px;
   border: 1px solid #ccc;
-  border-radius: 20px;
-  cursor: pointer;
+  border-radius: 0px;
   text-align: center;
-  position: relative;
 }
 
-img.gg {
-  height: 18px;
-  width: 18px;
+/* AddPhotosButton */
+.add-photos-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 16px auto;
+  padding: 8px 16px;
+  border-radius: 30px;
+  width: 75vw;
+  gap: 8px;
+  text-transform: capitalize;
+}
+
+/* PostReviewButton */
+.post-review-button {
+  font-weight: 400;
+  width: 95vw;
+  background-color: #1A73E8;
+  border-radius: 20px;
+  margin-top: auto;
+  margin-bottom: 55px;
+  text-transform: capitalize;
+}
+
+/* ProfileAvatar */
+.profile-avatar {
+  background-color: #1A73E8;
+  width: 32px;
+  height: 32px;
   margin-right: 8px;
 }
 
-.add-photo-button input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.submit-button {
-  padding: 10px 20px;
-  background: blue;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  flex-grow: 1;
-  margin-left: 10px;
-}
-
-.cancel-button {
-  padding: 10px 20px;
-  background: transparent;
-  color: blue;
-  border: 1px solid blue;
-  border-radius: 4px;
-  cursor: pointer;
-  flex-grow: 1;
-}
-
-.uploaded-photos {
+/* ImagePreviewContainer */
+.image-preview-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
   margin-top: 10px;
 }
 
-.uploaded-photos img {
-  width: 60px;
-  height: 60px;
+/* ImagePreview */
+.image-preview {
+  position: relative;
+  max-width: 100px;
+  max-height: 100px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image-preview img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  margin: 5px;
-  border-radius: 4px;
 }
 
-@media (max-width: 767px) {
-  .submit-button {
-    margin-left: 0;
-  }
-
-  .cancel-button {
-    display: none;
-  }
-
-  .rating {
-    font-size: 30px;
-  }
+/* CancelButton */
+.cancel-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  padding: 4px;
 }
 
-@media (min-width: 768px) {
-  .modal-content {
-    height: 100vh;
-  }
+/* General Styles */
+.hc {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  justify-items: center;
+  align-items: center;
+  padding: 0px;
 }

@@ -106,6 +106,9 @@
 
 #add {
     font-size: 12px;
+    text-align: left;
+    color: grey;
+    padding: 10px 0px;
 }
 
 .googleIcon{

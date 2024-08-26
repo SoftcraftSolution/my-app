@@ -5,6 +5,7 @@ import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import ClearIcon from '@mui/icons-material/Clear';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const StyledContainer = styled(Container)({
   maxWidth: '100%',
@@ -175,7 +176,7 @@ const ReviewUI = () => {
     }
   };
 
-  const name = sessionStorage.getItem('name');
+  const name = Cookies.get('name');
 
   return (
     <StyledContainer>

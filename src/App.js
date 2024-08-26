@@ -37,7 +37,7 @@ function App() {
         <Route path="/home" element={<PrivateRoute element={MapPage} />} />
 
         {/* Redirect unknown routes to error page */}
-        <Route path="*" element={<Navigate to="/not-found" />} />
+        {/* <Route path="*" element={<Navigate to="/not-found" />} /> */}
       </Routes>
     </Router>
   );

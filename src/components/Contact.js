@@ -81,11 +81,11 @@ const ContactForm = () => {
             >
                 <Sidebar />
             </Drawer>
+            <div className="menu-icon" onClick={toggleSidebar}></div>
             <div className="hd">
                 <div>Any Suggestion</div>
             </div>
-            <div className="menu-icon" onClick={toggleSidebar}></div>
-            <p className="subtitle">We value your Opinions</p>
+             <p className="subtitle">We value your Opinions</p>
             <form className="form" onSubmit={handleSubmit}>
                 <input 
                     type="tel" 
@@ -102,9 +102,10 @@ const ContactForm = () => {
                     onChange={(e) => setMessage(e.target.value)}
                     required
                 ></textarea>
+                <div className='button-parent'>
                 <button type="submit" className="submit-button" disabled={loading}>
                     {loading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
-                </button>
+                </button></div>
             </form>
         </div>
     );

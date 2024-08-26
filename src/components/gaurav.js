@@ -42,6 +42,7 @@ const Landing = () => {
   const cookieValue = Cookies.get('user_id');
 
   useEffect(() => {
+    console.log("useeffect1");
     if (cookieValue) {
       const params = new URLSearchParams(location.search);
       const businessId = params.get('id');
@@ -50,13 +51,20 @@ const Landing = () => {
   }, [cookieValue, navigate]);
 
   useEffect(() => {
+    console.log("useeffect2");
     const fetchCompanyData = async () => {
       const params = new URLSearchParams(location.search);
       const companyId = params.get('id');
 
       if (!companyId) {
-        navigate('/error');
-        return;
+        if(cookieValue)
+        {
+          navigate('/home');
+          return;
+        }
+        
+        
+       
       }
 
       try {
@@ -70,11 +78,11 @@ const Landing = () => {
           });
         } else {
           console.error('No company data returned');
-          navigate('/error');
+          navigate('/not-found');
         }
       } catch (error) {
         console.error('Error fetching company data:', error);
-        navigate('/error');
+        navigate('/not-found');
       } finally {
         setLoading(false);
       }
@@ -159,9 +167,8 @@ const Landing = () => {
       <div className="company-info">
         <div id='titleSub'>
           <div id="h">{companyInfo.name}</div>
-          <div className='subTitle'>Cafe</div>
         </div>
-        <p id='add'>{companyInfo.address}</p>
+        <div id='add'>{companyInfo.address}</div>
         <div className="star-rating">
           <StarRatings
             rating={3} // Example rating

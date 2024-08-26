@@ -1,25 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import './sidebar.css';
-import RewardHistory from './rewardhistory';
-import disp from './dd.png'; // Default image
 import Cookies from 'js-cookie';
+import disp from './dd.png'; // Default image
 
 const Sidebar = () => {
     const [profile, setProfile] = useState({
         name: 'Loading...', // Default name
-        avatar: disp, // Default image
+        avatar: disp,
+        email:"" // Default image
     });
 
     useEffect(() => {
-        // Retrieve profile name and avatar URL from cookies
+        // Retrieve profile name, avatar URL, and email from cookies
         const nameFromCookies = Cookies.get('name');
         const avatarFromCookies = Cookies.get('profile_image');
-        console.log(avatarFromCookies);
+        const emailFromCookies = Cookies.get('email');
+        
+        // Extract the username from the email
+       
 
         // Update the state with the cookie values if they exist
         setProfile({
-            name: nameFromCookies || 'Karan Nair', // Fallback to default name
-            avatar: avatarFromCookies || disp, // Fallback to default image
+            name: `${nameFromCookies}`, // Append "gmail" to the username
+            avatar: avatarFromCookies || disp,
+            email:emailFromCookies || "xyz@gmail.com" // Fallback to default image
         });
     }, []);
 
@@ -40,6 +44,7 @@ const Sidebar = () => {
                     onError={handleImageError} // Handle image load error
                 />
                 <p className="name">{profile.name}</p>
+                <p className='email'>{profile.email}</p>
             </div>
             <nav className="menu">
                 <a href="./home" className="menu-item">
