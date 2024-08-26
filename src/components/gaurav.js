@@ -5,7 +5,7 @@ import axios from 'axios';
 import './gaurav.css';
 import { GoogleLogin } from '@react-oauth/google';
 import Cookies from 'js-cookie';
-import {jwtDecode} from 'jwt-decode'; // Corrected import for jwt-decode
+import { jwtDecode } from 'jwt-decode';
 
 // Define the function to check user review status
 const checkUserReviewStatus = async (businessId, userId, navigate) => {
@@ -17,7 +17,7 @@ const checkUserReviewStatus = async (businessId, userId, navigate) => {
 
   try {
     const reviewResponse = await axios.get(`https://ambulance-booking-backend.vercel.app/user/check-review?businessId=${businessId}&userId=${userId}`);
-    const hasReviewed = reviewResponse.data?.hasReviewed;
+    const hasReviewed = reviewResponse.data.reviewed;
 
     if (hasReviewed) {
       navigate('/home');
@@ -42,40 +42,42 @@ const Landing = () => {
   const cookieValue = Cookies.get('user_id');
 
   useEffect(() => {
-    console.log("useeffect1");
     if (cookieValue) {
       const params = new URLSearchParams(location.search);
       const businessId = params.get('id');
+      Cookies.set('businessId', businessId, { expires: 7 });
       checkUserReviewStatus(businessId, cookieValue, navigate);
     }
   }, [cookieValue, navigate]);
 
   useEffect(() => {
-    console.log("useeffect2");
     const fetchCompanyData = async () => {
       const params = new URLSearchParams(location.search);
       const companyId = params.get('id');
 
       if (!companyId) {
-        if(cookieValue)
-        {
+        if (cookieValue) {
           navigate('/home');
           return;
         }
-        
-        
-       
+        return;
       }
 
       try {
         const response = await axios.get(`https://ambulance-booking-backend.vercel.app/user/get-data-by-id?id=${companyId}`);
         const data = response.data;
+        console.log(data);
 
         if (data && data.data) {
           setCompanyInfo({
             name: data.data.businessName || 'Company Name Not Available',
             address: data.data.address || 'Address Not Available'
           });
+
+          // Save placeId in cookies
+          if (data.data.placeId) {
+            Cookies.set('placeId', data.data.placeId, { expires: 7 });
+          }
         } else {
           console.error('No company data returned');
           navigate('/not-found');
@@ -134,7 +136,6 @@ const Landing = () => {
               const businessId = params.get('id');
 
               checkUserReviewStatus(businessId, userId, navigate);
-
             } else {
               console.error('User ID not found in API response');
             }
@@ -153,9 +154,7 @@ const Landing = () => {
   };
 
   if (loading) {
-
     return <div>Loading...</div>;
-
   }
 
   return (

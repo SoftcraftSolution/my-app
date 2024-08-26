@@ -1,12 +1,15 @@
 // src/pages/ThankYouPage.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Less.css';
 import Confetti from 'react-confetti';
 
 const ThankYouPage = () => {
+  const navigate = useNavigate();
   const handleHomeClick = () => {
+    
     // Navigate to home or any other page
-    window.location.href = `/?id=${sessionStorage.getItem("id")}`; // Replace with your desired route
+    navigate('/home'); // Replace with your desired route
   };
 
   return (
@@ -14,8 +17,8 @@ const ThankYouPage = () => {
         <Confetti />
       <div className="thank-you-content">
 
-        <h1>Thank You!</h1>
-        <p>Your submission has been received successfully.</p>
+        <div className='hh'>Thank You!</div>
+        <div  className='sub'>Your submission has been received successfully.</div>
         <button className="home-button" onClick={handleHomeClick}>
           Return to Home
         </button>

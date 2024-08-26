@@ -1,0 +1,41 @@
+// src/components/CircularAvatar.js
+
+import React, { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import './CircularAvatar.css'; // Add your styles here
+
+const CircularAvatar = ({ imageUrl, businessId, businessName }) => {
+    const navigate = useNavigate();
+
+    // Generate a consistent background color based on the business name
+    const backgroundColor = useMemo(() => {
+        const hash = Array.from(businessName).reduce((acc, char) => char.charCodeAt(0) + ((acc << 5) - acc), 0);
+        return `#${((hash & 0x00FFFFFF) | 0x1000000).toString(16).substring(1)}`;
+    }, [businessName]);
+
+    const handleClick = () => {
+        navigate(`/offers/${businessId}`);
+    };
+
+    return (
+        <div className="circular-avatar-container" onClick={handleClick}>
+            <div className="circular-avatar" style={{ backgroundColor }}>
+                {imageUrl ? (
+                    <img src={imageUrl} alt={businessName} />
+                ) : (
+                    <span className="avatar-text">{businessName.charAt(0)}</span>
+                )}
+            </div>
+            <div className="business-name">{businessName}</div>
+        </div>
+    );
+};
+
+CircularAvatar.propTypes = {
+    imageUrl: PropTypes.string,
+    businessId: PropTypes.string.isRequired,
+    businessName: PropTypes.string.isRequired,
+};
+
+export default CircularAvatar;

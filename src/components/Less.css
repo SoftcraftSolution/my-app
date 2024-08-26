@@ -13,11 +13,25 @@ body, html, #root {
   position: relative;
   overflow: hidden;
 }
-
+.hh{
+  font-size: 30px;
+  font-weight: 600;
+}
+.sub{
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(128, 128, 128, 0.713);
+  text-align: center;
+}
 .thank-you-content {
   text-align: center;
-  position: relative; 
-  z-index: 1; 
+  flex-grow: 1;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
 .thank-you-page h1 {
@@ -32,6 +46,7 @@ body, html, #root {
 }
 
 .home-button {
+  
   padding: 10px 20px;
   font-size: 1.2em;
   color: white;
@@ -40,6 +55,7 @@ body, html, #root {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
 .home-button:hover {
