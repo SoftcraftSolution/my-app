@@ -39,10 +39,15 @@
     margin-left: 20px; /* Internet Explorer 10+ */
 }
 .h{
-    width: 100%;
+    /* width: 100%; */
     font-size: 16px;
     font-weight: 700;
-    padding:20px
+    padding: 20px;
+   
+}
+.h-1{
+    font-size: 16px;
+    font-weight: 700;
 }
  img {
     width: 100px;
@@ -55,4 +60,16 @@
 }
 .space{
     width: 20px;
+}
+.header-fav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    padding:20px
+    
+
+}
+.see-all-fav-link{
+    color: blue;
 }

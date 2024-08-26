@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import './bottomSheet.css';
+import { useNavigate, useLocation } from 'react-router-dom';
+
 
 const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTouchEnd }) => {
+  const navigate = useNavigate();
+  const handleOnSeeAll=()=>{
+    console.log("cliked");
+    navigate('/Fav');
+  }
   return (
     <div
       className="bottom-sheet"
@@ -23,8 +30,10 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
           <img src="/mcd.png" alt="McDonald's" />
           <div className='space'></div>
         </div>
-
-        <div className="h">Favorite Brands</div>
+        <div className='header-fav'>
+        <div className="h-1">Favorite Brands</div>
+        <div className='see-all-fav-link' onClick={handleOnSeeAll}>See all</div>
+        </div>
         <div className="brands-container">
           <div className="brand-item">
             <img src="/dore.png" alt="Dorea Thai Food" />
