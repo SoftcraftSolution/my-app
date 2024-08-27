@@ -88,12 +88,10 @@ const ReviewUI = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false); // State for error message
   const navigate = useNavigate(); // Access the navigate function from react-router-dom
 
-  // Retrieve pageURL from sessionStorage
-  const [pageurl, setPageurl] = useState('');
-  const url = sessionStorage.getItem('placeId');
+  // Retrieve placeId from cookies
+  const [placeId, setPlaceId] = useState('');
   useEffect(() => {
-   
-    setPageurl(url || ''); // Fallback to empty string if not found
+    setPlaceId(Cookies.get('placeId') || ''); // Fallback to empty string if not found
   }, []);
 
   const handleRatingChange = (event, newValue) => {
@@ -132,60 +130,34 @@ const ReviewUI = () => {
     }
 
     if (rating > 3) {
-      if (url) {
-        console.log(url);
-        window.location.href = `https://search.google.com/local/writereview?placeid=${url}`;
+      if (placeId) {
+        try {
+          navigate('/home');
+
+          setTimeout(() => {
+            window.location.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
+          }, 0); 
+
+        } catch (error) {
+          console.error("Error redirecting:", error);
+        }
         return;
       } else {
-        console.error("pageurl is null or undefined");
+        console.error("placeId is null or undefined");
       }
     }
-    const name=sessionStorage.getItem("name");
-    const formData = new FormData();
-    formData.append('rating', rating);
-    formData.append('comment', comment);
-    formData.append('name', name);
-    images.forEach((image, index) => {
-      formData.append(`image_${index}`, image);
-    });
-    formData.append('qrCodeId', sessionStorage.getItem('id'));
-
-    try {
-      const response = await axios.post('https://ambulance-booking-backend.vercel.app/user/review', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      console.log('after hit the api');
-      console.log(response.data);
-
-      if (response.data.message !== 'Review created successfully') {
-        throw new Error('Failed to post review');
-      }
-
-      setRating(0);
-      setComment('');
-      setImages([]);
-      setImagePreviews([]);
-      setShowSuccessMessage(true);
-
-      navigate('/review-submitted');
-    } catch (error) {
-      console.error('Error posting review:', error);
-    }
-  };
-
-  const name = Cookies.get('name');
+  }
 
   return (
     <StyledContainer>
       <Box display="flex" alignItems="flex-start" justifyContent="flex-start" textAlign="left" my={1}>
         <ProfileAvatar>
-          {name ? name[0].toUpperCase() : 'U'}
+          {Cookies.get('name') ? Cookies.get('name')[0].toUpperCase() : 'U'}
         </ProfileAvatar>
         <Box>
-          <Typography variant="body2" fontWeight="bold" marginRight={13} fontFamily="sans-serif" fontSize={21}>{name}</Typography>
+          <Typography variant="body2" fontWeight="bold" marginRight={13} fontFamily="sans-serif" fontSize={21}>
+            {Cookies.get('name')}
+          </Typography>
           <Typography variant="caption" fontSize={13}>Posting publicly across Google</Typography>
         </Box>
       </Box>
