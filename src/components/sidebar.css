@@ -1,10 +1,10 @@
 /* Sidebar Container */
 .sidebar {
-    width: 280px;
+    width: 330px;
     height: 98%;
     background-color: #ffffff;
     padding: 30px 20px;
-    border-radius: 20px;
+
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
 }
@@ -52,7 +52,7 @@
     font-weight: 500;
     background-color: #f8f9fd;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(49, 49, 49, 0.279);
     position: relative;
 }
 
