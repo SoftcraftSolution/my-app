@@ -1,49 +1,60 @@
+.favorite-card__button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: absolute;
+  top: 10px; /* Position at the top */
+  right: 10px;  /* Position at the right */
+  padding: 5px; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25px;  /* Adjust the size of the circle */
+  height: 25px; /* Adjust the size of the circle */
+  background-color: white; /* White background for the circle */
+  border-radius: 50%; /* Make the button circular */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add some shadow for a 3D effect */
+  margin-top: 4px;
+}
+
 .favorite-card {
-    border: 1px solid #ccc;
-    /* padding: 10px; */
-    cursor: pointer; 
-    height: 200px;
-    width: 220px;
-    border-radius: 10%;
-    border: 1px solid red;
-  }
+  cursor: pointer; 
+  height: 120px; /* Adjusted height */
+  width: 120px;  /* Adjusted width */
+  border-radius: 10%;
   
-  .favorite-card__image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-  }
-  
-  .favorite-card__default-avatar {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 8%;
-  }
-  
-  .favorite-card__name {
-    margin: 10px 0;
-  }
-  
-  .favorite-card__button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    position: relative;
-    bottom:0px;
-    right: 0px;
-    padding: 5px; 
-  }
-  
-  .favorite-card__heart {
-    font-size: 24px;
-    color: red;
-  }
-  
-  .favorite-card__heart--filled {
-    color: pink;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  position: relative; /* To position the button absolutely */
+}
+
+.favorite-card__image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8%;
+}
+
+.favorite-card__default-avatar {
+  width: 120px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 8%;
+  background-color: #f0f0f0;
+  position: relative; /* To position the button absolutely */
+}
+
+.favorite-card__heart {
+  font-size: 16px; /* Adjust the size of the heart */
+  color: red;
+}
+.favorite-card__heart--filled {
+  color: pink;
+}
