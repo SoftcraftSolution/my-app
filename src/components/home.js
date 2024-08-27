@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 import axios from 'axios';
 import Sidebar from './sidebar';
@@ -6,6 +6,7 @@ import BottomSheet from '../bottmSheet.jsx';
 import './home.css';
 import { TextField, InputAdornment, IconButton, Drawer } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import markerIcon from './scanstarMarker.png';
 
 const containerStyle = {
   width: '100vw',
@@ -13,8 +14,8 @@ const containerStyle = {
 };
 
 const initialCenter = {
-  lat: 19.7515,
-  lng: 75.7139,
+  lat: 19.3835171,
+  lng: 72.8302664,
 };
 
 const MapPage = () => {
@@ -26,10 +27,24 @@ const MapPage = () => {
   const [data, setData] = useState([]);
   const [mapCenter, setMapCenter] = useState(initialCenter);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [shops, setShops] = useState([]); // State to store shop locations
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+
+  const fetchShops = async () => {
+    try {
+      const response = await axios.get('https://ambulance-booking-backend.vercel.app/user/get-all-scanstar-shop');
+      setShops(response.data.businesses);
+    } catch (error) {
+      console.error('Error fetching shop data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchShops(); // Fetch shops when the component mounts
+  }, []);
 
   const onChange = async (e) => {
     setValue(e.target.value);
@@ -89,7 +104,10 @@ const MapPage = () => {
     setMapCenter(newLocation);
     setValue(location.formatted_address);
   };
-
+  const handleOnClickMarker=(data)=>{
+console.log(data);
+  }
+  console.log(shops);
   return (
     <div className="map-container">
       <div className="search-bar-container">
@@ -152,18 +170,35 @@ const MapPage = () => {
             </div>
           ))}
       </div>
-
+     
       <LoadScript googleMapsApiKey="AIzaSyB5GV0AxvGQOTRaomj95JE_8k5yejLMVYo">
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}
-          zoom={20}
+          zoom={10}
           options={{
             mapTypeControl: false,
             fullscreenControl: false,
           }}
         >
-          <MarkerF position={mapCenter} />
+          {/* Render markers for each shop */}
+          {shops.map((shop, index) => (
+            
+            <MarkerF
+              key={index}
+              position={{ lat: shop.lat, lng: shop.lng }}
+              title={shop.businessName}
+              icon={{
+                url: markerIcon, // Replace with your image URL
+                scaledSize: new window.google.maps.Size(100, 80),
+               
+                 // Adjust the size as needed
+              }}
+              onClick={()=>handleOnClickMarker(shop.businessName)}
+              
+            />
+            
+          ))}
         </GoogleMap>
       </LoadScript>
 
