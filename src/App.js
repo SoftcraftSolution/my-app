@@ -14,6 +14,7 @@ import MapPage from './components/home';
 import SheetUpdate from './components/homeupdate';
 import PrivacyPolicy from './components/privacy';
 import PrivateRoute from './components/ProtectedRoute'; 
+import OffersPage from './components/Details';
 // Import the PrivateRoute component
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Landing />} />
+        <Route path="/offerspage" element={<OffersPage />} />
         <Route path="/privacy" element={<PrivacyPolicy/>} />
         <Route path="/contact" element={<ContactForm />} />
         <Route path="/rewardhistory" element={<RewardHistory />} />

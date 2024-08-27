@@ -1,28 +1,29 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
 import './Contact.css'; // Import the CSS file
 import Sidebar from './sidebar';
 import Cookies from 'js-cookie';
-import { Drawer, CircularProgress } from '@mui/material';
+import { Drawer, CircularProgress, Dialog, DialogContent, DialogTitle, Button } from '@mui/material';
 
 const ContactForm = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [message, setMessage] = useState('');
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [loading, setLoading] = useState(false); // Add loading state
+    const [loading, setLoading] = useState(false);
+    const [successPopup, setSuccessPopup] = useState(false);
     const userId = Cookies.get('user_id'); // Hardcoded userId
+    const navigate = useNavigate(); // Initialize useNavigate
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
 
     const validateForm = () => {
-        // Validate phone number length
         if (phoneNumber.length !== 10) {
             alert('Phone number must be exactly 10 digits long.');
             return false;
         }
 
-        // Validate message length
         if (message.length > 50) {
             alert('Message cannot exceed 50 characters.');
             return false;
@@ -35,12 +36,11 @@ const ContactForm = () => {
         e.preventDefault();
 
         if (!validateForm()) {
-            return; // Stop submission if validation fails
+            return;
         }
 
-        setLoading(true); // Set loading to true when API call starts
+        setLoading(true);
 
-        // Create the payload
         const feedbackData = {
             phoneNumber,
             message,
@@ -57,10 +57,9 @@ const ContactForm = () => {
             });
 
             if (response.ok) {
-                alert('Feedback submitted successfully!');
-                // Clear the form fields
                 setPhoneNumber('');
                 setMessage('');
+                setSuccessPopup(true);
             } else {
                 alert('Failed to submit feedback.');
             }
@@ -68,8 +67,17 @@ const ContactForm = () => {
             console.error('Error submitting feedback:', error);
             alert('Error submitting feedback. Please try again.');
         } finally {
-            setLoading(false); // Set loading to false after API call completes
+            setLoading(false);
         }
+    };
+
+    const closePopup = () => {
+        setSuccessPopup(false);
+    };
+
+    const handleBackToHome = () => {
+        closePopup();
+        navigate('/home'); // Redirect to /home
     };
 
     return (
@@ -85,7 +93,7 @@ const ContactForm = () => {
             <div className="hd">
                 <div>Any Suggestion</div>
             </div>
-             <p className="subtitle">We value your Opinions</p>
+            <p className="subtitle">We value your Opinions</p>
             <form className="form" onSubmit={handleSubmit}>
                 <input 
                     type="tel" 
@@ -103,10 +111,30 @@ const ContactForm = () => {
                     required
                 ></textarea>
                 <div className='button-parent'>
-                <button type="submit" className="submit-button" disabled={loading}>
-                    {loading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
-                </button></div>
+                    <button type="submit" className="submit-button" disabled={loading}>
+                        {loading ? <CircularProgress size={24} color="inherit" /> : 'Submit'}
+                    </button>
+                </div>
             </form>
+            
+            {/* Success Popup */}
+            <Dialog open={successPopup} onClose={closePopup}>
+                <DialogTitle></DialogTitle>
+                <DialogContent>
+                    <div style={{ textAlign: 'center', marginTop: '30px' }}>
+                        <img src="./checked.png" alt="Success" style={{ width: '30%' }} />
+                        <p style={{fontSize:'25px', fontWeight:'200'}}>Sucessfull</p>
+                        <Button 
+                            variant="contained" 
+                            color="primary" 
+                            onClick={handleBackToHome} 
+                            style={{ marginTop: '20px' }}
+                        >
+                            Back to Home
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
         </div>
     );
 };
