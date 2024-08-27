@@ -104,19 +104,31 @@ body, html, #root {
 }
 
 .favorite-details {
-    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .favorite-details h3 {
-    margin: 0;
+    margin: 1;
     font-size: 18px;
     color: #333;
+    justify-content: center;
+    margin-bottom:25px ;
+    margin-left: 30px;
 }
 
 .favorite-details p {
     margin: 5px 0 0;
     font-size: 14px;
     color: #777;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limit to 2 lines */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2; /* Adjust this based on your font size */
+    max-height: 2.4em; /* Height for 2 lines */
 }
 
 .favorite-heart {
@@ -169,3 +181,29 @@ p {
     left: 7px; 
 }
 
+.favorite-address {
+    font-size: 14px;
+    color: #777;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding-right: 40px; /* Ensure there's space for the toggle arrow */
+}
+.favorite-address.collapsed {
+    max-height: 3.6em; /* Height for 2 lines */
+}
+
+.favorite-address.expanded {
+    max-height: 500px; /* Large enough height to show full content */
+    padding-right: 40px; /* Keep space for the arrow */
+}
+
+.expand-toggle {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    cursor: pointer;
+    font-size: 16px;
+    color: #007bff;
+    background: none;
+    border: none;
+}

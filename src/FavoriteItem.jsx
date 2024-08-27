@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './FavoriteItem.css'; // Import the CSS file
 
-function FavoriteCard({ image, name, isFavorite: initialIsFavorite }) {
+function FavoriteCard({ image, name, isFavorite: initialIsFavorite, onFavoriteToggle }) {
   const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
   const [avatarColor, setAvatarColor] = useState(getRandomColor()); // Store the color in state
 
   const avatarText = name ? name[0].toUpperCase() : '';
 
-  useEffect(() => {
-    // Handle initial favorite state if needed
-  }, []);
-
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
+    onFavoriteToggle(!isFavorite); // Call the callback with the new favorite status
   };
 
   return (
