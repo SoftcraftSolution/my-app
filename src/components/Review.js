@@ -146,7 +146,46 @@ const ReviewUI = () => {
         console.error("placeId is null or undefined");
       }
     }
-  }
+   
+    const formData = new FormData();
+    formData.append('rating', rating);
+    formData.append('comment', comment);
+    
+  
+    formData.append('qrCodeId', Cookies.get('businessId'));
+    formData.append('userId', Cookies.get('user_id'));
+
+
+    try {
+      const response = await axios.post('https://ambulance-booking-backend.vercel.app/user/review', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('after hit the api');
+      console.log(response.data);
+
+      if (response.data.message !== 'Review created successfully') {
+        throw new Error('Failed to post review');
+        console.error("placeId is null or undefined");
+      }
+
+      setRating(0);
+      setComment('');
+      setImages([]);
+      setImagePreviews([]);
+      setShowSuccessMessage(true);
+
+      navigate('/review-submitted');
+    } catch (error) {
+      console.error('Error posting review:', error);
+    }
+  };
+
+  const name = Cookies.get('name');
+  
+
 
   return (
     <StyledContainer>
