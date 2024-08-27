@@ -2,83 +2,103 @@
 body, html, #root {
     font-family: 'Poppins', sans-serif;
   }
-body {
+  .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f8f8f8;
-    
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    font-family: sans-serif;
   }
   
-  .coupon-container {
-    background: #fff;
-    border: 2px solid #ddd;
+  .coupon-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    padding: 30px;
+    align-items: center;
     border-radius: 10px;
-    padding: 20px;
-    width: 300px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    max-width: 90%;
   }
   
   .coupon-header {
-    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
   }
   
-  .confetti-img {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 40px;
+  .logo1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: red;
   }
   
-  .coupon-header h1 {
-    font-size: 1.2em;
-    margin-top: 30px;
+  .discount {
+    font-size: 26px;
+    font-weight: bold;
+    color: #000000;
+    padding: 20px;
   }
   
   .coupon-body {
-    margin: 20px 0;
-  }
-  
-  .kfc-logo {
-    width: 50px;
-  }
-  
-  .coupon-body h2 {
-    color: #e4002b;
-    margin: 10px 0;
-  }
-  
-  .coupon-body p {
-    font-size: 1em;
-    margin: 10px 0;
-  }
-  
-  .coupon-body ul {
-    text-align: left;
-    padding: 0 20px;
-    font-size: 0.9em;
-    color: #555;
-  }
-  
-  .coupon-footer h3 {
-    margin: 10px 0;
-    font-size: 1em;
-    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.6;
   }
   
   .coupon-code {
-    border: 2px dashed #333;
-    padding: 10px;
-    font-size: 1.2em;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    font-size: 22px;
     font-weight: bold;
-    margin: 10px 0;
+    padding: 10px 0;
+    width: 70%;
+    height: 80px;
+    
+    border: 2px dashed rgb(65, 65, 65);
+    border-radius: 10px;
+  }
+  #titleCoupon{
+    font-size: 18px;
+    font-weight: 500;
+    color: grey;
+
+
+  }
+  .coupon-code span {
+    margin-left: 10px;
   }
   
-  .coupon-footer p {
-    font-size: 0.8em;
-    color: #777;
+  .coupon-footer {
+    text-align: center;
+    font-size: 14px;
+    color: #6c757d;
+    margin-top: 16px;
   }
-  
+#imgHead-header{
+  color: rgb(80, 79, 79);
+  font-size: 24px;
+  font-weight: 500;
+}
+  li{
+    color: rgb(60, 60, 60);
+    margin-bottom: 10px;
+  }
+
+  .imgHead{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+  .imgHead-img{
+    height: 60px;
+    width: 60px;
+   
+  }
