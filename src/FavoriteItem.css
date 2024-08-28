@@ -1,3 +1,15 @@
+.rootParent{
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-width: 120px; 
+  /* height: 150px; */
+  /* border: 1px solid red; */
+  text-overflow: ellipsis;
+
+}
+
+
 .favorite-card__button {
   border: none;
   background: none;
@@ -9,17 +21,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 25px;  /* Adjust the size of the circle */
-  height: 25px; /* Adjust the size of the circle */
-  background-color: white; /* White background for the circle */
+  width: 30px;  /* Adjust the size of the circle */
+  height: 30px; /* Adjust the size of the circle */
+  background-color: rgba(255, 255, 255, 0.768); /* White background for the circle */
   border-radius: 50%; /* Make the button circular */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: add some shadow for a 3D effect */
-  margin-top: 4px;
+  margin-top: 10px;
 }
 
 .favorite-card {
   cursor: pointer; 
-  height: 120px; /* Adjusted height */
+  height: 140px; /* Adjusted height */
   width: 120px;  /* Adjusted width */
   border-radius: 10%;
   
@@ -47,14 +59,15 @@
   font-size: 24px;
   font-weight: bold;
   border-radius: 8%;
-  background-color: #f0f0f0;
+  background-color: #ffffff;
+  color: rgb(255, 255, 255);
   position: relative; /* To position the button absolutely */
 }
 
 .favorite-card__heart {
   font-size: 16px; /* Adjust the size of the heart */
-  color: red;
+  color: rgb(17, 255, 0);
 }
 .favorite-card__heart--filled {
-  color: pink;
+  color: rgb(255, 21, 56);
 }

@@ -21,7 +21,9 @@ const ReviewUI = () => {
 
   useEffect(() => {
     setPlaceId(Cookies.get('placeId') || '');
+
   }, []);
+
 
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);

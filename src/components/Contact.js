@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import React, { useState,useEffect } from 'react';
+import { useNavigate, } from 'react-router-dom'; // Import useNavigate for redirection
 import './Contact.css'; // Import the CSS file
 import Sidebar from './sidebar';
 import Cookies from 'js-cookie';
@@ -12,7 +12,8 @@ const ContactForm = () => {
     const [loading, setLoading] = useState(false);
     const [successPopup, setSuccessPopup] = useState(false);
     const userId = Cookies.get('user_id'); // Hardcoded userId
-    const navigate = useNavigate(); // Initialize useNavigate
+    const navigate = useNavigate(); 
+  
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
