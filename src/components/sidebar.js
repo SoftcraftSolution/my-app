@@ -40,7 +40,7 @@ const Sidebar = () => {
                 <img
                     src={profile.avatar}
                     alt={profile.name}
-                    className="avatar"
+                    id="avatar12"
                     onError={handleImageError} // Handle image load error
                 />
                 <p className="name">{profile.name}</p>

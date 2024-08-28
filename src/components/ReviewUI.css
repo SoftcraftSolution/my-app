@@ -1,0 +1,133 @@
+/* Container */
+#styled-container11 {
+    max-width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    padding: 46px 26px 26px 26px;
+    /* border: 1px solid #000000; */
+    border-radius: 0px;
+    text-align: center;
+    
+  }
+  
+  /* Add Photos Button */
+  #add-photos-button12 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px auto;
+    padding: 8px 16px;
+    border-radius: 30px;
+    /* border: 1px solid red; */
+    width: 75vw;
+    gap: 8px;
+    text-transform: capitalize;
+  }
+  #pare12{
+    display: flex;
+    align-items: center;
+    width: 90vw;
+    /* border: 1px solid red; */
+  }
+  
+  /* Post Review Button */
+  #post-review-button12 {
+    font-weight: 500;
+    width: 100%;
+    height: 40px;
+    color: white;
+    background-color: #1A73E8;
+    border-radius: 20px;
+    margin-top: auto;
+    margin-bottom: 0px;
+    text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: capitalize;
+  }
+  
+  /* Profile Avatar */
+  #profile-avatar1 {
+    background-color: #1A73E8;
+    width: 48px;
+    height: 48px;
+    margin-right: 8px;
+  }
+  
+  /* Image Preview Container */
+  .image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  /* Image Preview */
+  .image-preview {
+    position: relative;
+    max-width: 100px;
+    max-height: 100px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  
+  .image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  /* Cancel Button */
+  .cancel-button {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    padding: 4px;
+  }
+  
+  /* Typography */
+  .typography-error {
+    color: red;
+    margin-top: 8px;
+  }
+  
+  .typography-success {
+    margin-top: 16px;
+    color: #4caf50;
+  }
+  .top-header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+  }
+  .top-header-1
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    font-weight: 600;
+  }
+  #star12{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* border: 1px  solid red; */
+    width: 100%;
+    padding:  20px 0px;
+  }
+  #paPost12{
+    display: flex;
+    flex-grow: 1;
+    width: 100%;
+    /* border: 1px solid red; */
+  }

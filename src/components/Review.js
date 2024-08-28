@@ -1,103 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Rating, TextField, Container, Avatar, IconButton } from '@mui/material';
-import { styled } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+import './ReviewUI.css'; // Import the CSS file
+
+// Import icons
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import ClearIcon from '@mui/icons-material/Clear';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
-
-const StyledContainer = styled(Container)({
-  maxWidth: '100%',
-  minHeight: '100vh',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'center',
-  alignItems: 'center',
-  padding: '16px',
-  border: '1px solid #ccc',
-  borderRadius: '0px',
-  textAlign: 'center',
-});
-
-const AddPhotosButton = styled(Button)({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  margin: '16px auto',
-  padding: '8px 16px',
-  borderRadius: '30px',
-  width: '75vw',
-  gap: '8px',
-  textTransform: 'capitalize',
-});
-
-const PostReviewButton = styled(Button)({
-  fontWeight: 400,
-  width: '95vw',
-  backgroundColor: '#1A73E8',
-  borderRadius: '20px',
-  marginTop: 'auto',
-  marginBottom: '55px',
-  textTransform: 'capitalize',
-});
-
-const ProfileAvatar = styled(Avatar)({
-  backgroundColor: '#1A73E8',
-  width: '32px',
-  height: '32px',
-  marginRight: '8px',
-});
-
-const ImagePreviewContainer = styled(Box)({
-  display: 'flex',
-  flexWrap: 'wrap',
-  justifyContent: 'center',
-  gap: '10px',
-  marginTop: '10px',
-});
-
-const ImagePreview = styled(Box)({
-  position: 'relative',
-  maxWidth: '100px',
-  maxHeight: '100px',
-  overflow: 'hidden',
-  borderRadius: '8px',
-  '& img': {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-});
-
-const CancelButton = styled(IconButton)({
-  position: 'absolute',
-  top: '4px',
-  right: '4px',
-  backgroundColor: 'rgba(255, 255, 255, 0.8)',
-  borderRadius: '50%',
-  padding: '4px',
-});
 
 const ReviewUI = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
-  const [images, setImages] = useState([]); // State for selected images
-  const [imagePreviews, setImagePreviews] = useState([]); // State for image previews
+  const [images, setImages] = useState([]);
+  const [imagePreviews, setImagePreviews] = useState([]);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  const [showErrorMessage, setShowErrorMessage] = useState(false); // State for error message
-  const navigate = useNavigate(); // Access the navigate function from react-router-dom
-
-  // Retrieve placeId from cookies
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const navigate = useNavigate();
   const [placeId, setPlaceId] = useState('');
+
   useEffect(() => {
-    setPlaceId(Cookies.get('placeId') || ''); // Fallback to empty string if not found
+    setPlaceId(Cookies.get('placeId') || '');
+
   }, []);
+
 
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
     if (newValue > 0) {
-      setShowErrorMessage(false); // Hide error message if a rating is selected
+      setShowErrorMessage(false);
     }
   };
 
@@ -106,11 +37,11 @@ const ReviewUI = () => {
   };
 
   const handleImageChange = (event) => {
-    const selectedImages = Array.from(event.target.files); // Convert FileList to array
-    setImages([...images, ...selectedImages]); // Add newly selected images to state
+    const selectedImages = Array.from(event.target.files);
+    setImages([...images, ...selectedImages]);
 
     const selectedPreviews = selectedImages.map((image) => URL.createObjectURL(image));
-    setImagePreviews([...imagePreviews, ...selectedPreviews]); // Add image previews to state
+    setImagePreviews([...imagePreviews, ...selectedPreviews]);
   };
 
   const handleCancelImage = (index) => {
@@ -125,7 +56,7 @@ const ReviewUI = () => {
 
   const handleSubmit = async () => {
     if (rating === 0) {
-      setShowErrorMessage(true); // Show error message if no rating is selected
+      setShowErrorMessage(true);
       return;
     }
 
@@ -136,8 +67,7 @@ const ReviewUI = () => {
 
           setTimeout(() => {
             window.location.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
-          }, 0); 
-
+          }, 0);
         } catch (error) {
           console.error("Error redirecting:", error);
         }
@@ -146,45 +76,77 @@ const ReviewUI = () => {
         console.error("placeId is null or undefined");
       }
     }
-  }
+   
+    const formData = new FormData();
+    formData.append('rating', rating);
+    formData.append('comment', comment);
+    formData.append('qrCodeId', Cookies.get('businessId'));
+    formData.append('userId', Cookies.get('user_id'));
+
+    try {
+      const response = await axios.post('https://ambulance-booking-backend.vercel.app/user/review', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      if (response.data.message !== 'Review created successfully') {
+        throw new Error('Failed to post review');
+      }
+
+      setRating(0);
+      setComment('');
+      setImages([]);
+      setImagePreviews([]);
+      setShowSuccessMessage(true);
+
+      navigate('/review-submitted');
+    } catch (error) {
+      console.error('Error posting review:', error);
+    }
+  };
+
+  const name = Cookies.get('name');
 
   return (
-    <StyledContainer>
-      <Box display="flex" alignItems="flex-start" justifyContent="flex-start" textAlign="left" my={1}>
-        <ProfileAvatar>
+    <Container id="styled-container11">
+      <div className='top-header'>
+        <Avatar id="profile-avatar1">
           {Cookies.get('name') ? Cookies.get('name')[0].toUpperCase() : 'U'}
-        </ProfileAvatar>
-        <Box>
-          <Typography variant="body2" fontWeight="bold" marginRight={13} fontFamily="sans-serif" fontSize={21}>
+        </Avatar>
+        <div>
+          <div className='top-header-1'>
             {Cookies.get('name')}
-          </Typography>
-          <Typography variant="caption" fontSize={13}>Posting publicly across Google</Typography>
-        </Box>
-      </Box>
-
-      <Box mt={2}>
+            
+          </div>
+          <div style={{color:"grey"}}>Posting publicly across Google</div>
+          </div>
+      </div>
+      
+        
+      <div id="star12">
         <Rating
           name="rating"
           value={rating}
           onChange={handleRatingChange}
-          iconSize={35}
+          iconSize={38}
           sx={{
-            '& .MuiRating-iconFilled': { fontSize: '35px' },
-            '& .MuiRating-iconHover': { fontSize: '35px' },
-            '& .MuiRating-iconEmpty': { fontSize: '35px' },
+            '& .MuiRating-iconFilled': { fontSize: '38px' },
+            '& .MuiRating-iconHover': { fontSize: '38px' },
+            '& .MuiRating-iconEmpty': { fontSize: '38px' },
             '& .MuiRating-icon': {
-              fontSize: '35px',
+              fontSize: '38px',
               margin: '0 7px',
             },
           }}
         />
         {showErrorMessage && (
-          <Typography sx={{ color: 'red', marginTop: '8px' }}>Please provide a star rating.</Typography>
+          <Typography className="typography-error">Please provide a star rating.</Typography>
         )}
-      </Box>
+      </div>
       <TextField
         id="comment"
-        label="Write a review"
+        placeholder="Share details of your own experience at this place."
         multiline
         rows={4}
         fullWidth
@@ -193,32 +155,35 @@ const ReviewUI = () => {
         onChange={handleCommentChange}
         sx={{ my: 2 }}
       />
+
       <input accept="image/*" style={{ display: 'none' }} id="contained-button-file" type="file" onChange={handleImageChange} />
       <label htmlFor="contained-button-file">
-        <AddPhotosButton variant="outlined" component="span" startIcon={<AddAPhotoIcon />}>
+        <div id="pare12"><Button id="add-photos-button12" variant="outlined" component="span" startIcon={<AddAPhotoIcon />}>
           Add Photos
-        </AddPhotosButton>
+        </Button></div>
       </label>
 
-      <ImagePreviewContainer>
+      <Box className="image-preview-container">
         {imagePreviews.map((preview, index) => (
-          <ImagePreview key={index}>
+          <Box key={index} className="image-preview">
             <img src={preview} alt="Preview" />
-            <CancelButton onClick={() => handleCancelImage(index)}>
+            <IconButton className="cancel-button" onClick={() => handleCancelImage(index)}>
               <ClearIcon />
-            </CancelButton>
-          </ImagePreview>
+            </IconButton>
+          </Box>
         ))}
-      </ImagePreviewContainer>
+      </Box>
+      <div id="paPost12">
 
-      <PostReviewButton variant="contained" color="primary" onClick={handleSubmit}>
+
+      <div id="post-review-button12" variant="contained" color="primary" onClick={handleSubmit}>
         Post
-      </PostReviewButton>
-
+      </div>
+      </div>
       {rating < 3 && showSuccessMessage && (
-        <Typography sx={{ marginTop: '16px', color: '#4caf50' }}>Your review has been successfully submitted!</Typography>
+        <Typography className="typography-success">Your review has been successfully submitted!</Typography>
       )}
-    </StyledContainer>
+    </Container>
   );
 };
 
