@@ -124,7 +124,7 @@ const ContactForm = () => {
                 <DialogContent>
                     <div style={{ textAlign: 'center', marginTop: '30px' }}>
                         <img src="./checked.png" alt="Success" style={{ width: '30%' }} />
-                        <p style={{fontSize:'25px', fontWeight:'200'}}>Sucessfull</p>
+                        <p style={{fontSize:'25px', fontWeight:'200', top:'-5px'}}>Sucessfull</p>
                         <Button 
                             variant="contained" 
                             color="primary" 

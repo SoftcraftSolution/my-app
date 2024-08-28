@@ -77,7 +77,7 @@ const OffersPage = () => {
 
       <div className="restaurant-info">
         <img src="./burgerki.png" alt="Burger King" className="restaurant-logo" />
-        <h2>{businessDetail.name}</h2>
+        <h2 className='bus'>{businessDetail.name}</h2>
         <p className="address">
           {getLastTwoLines(businessDetail.address)}
         </p>
