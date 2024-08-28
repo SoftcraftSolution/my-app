@@ -18,12 +18,29 @@ const ReviewUI = () => {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const navigate = useNavigate();
   const [placeId, setPlaceId] = useState('');
-
+  
   useEffect(() => {
     setPlaceId(Cookies.get('placeId') || '');
-
+    checkR();
   }, []);
-
+  const checkR=async()=>{
+    try {
+      const businessId=Cookies.get("businessId");
+      const userId=Cookies.get("user_id");
+      const reviewResponse = await axios.get(`https://ambulance-booking-backend.vercel.app/user/check-review?businessId=${businessId}&userId=${userId}`);
+      const hasReviewed = reviewResponse.data.reviewed;
+  
+      if (hasReviewed) {
+        navigate('/home');
+      } else {
+        navigate('/review');
+      }
+    } catch (reviewError) {
+      console.error('Error checking review status:', reviewError);
+      navigate('/home');
+    }
+  }
+   
 
   const handleRatingChange = (event, newValue) => {
     setRating(newValue);
