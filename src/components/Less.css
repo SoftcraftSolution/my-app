@@ -26,7 +26,7 @@ body, html, #root {
 .thank-you-content {
   text-align: center;
   flex-grow: 1;
-  border: 1px solid red;
+ 
   display: flex;
   flex-direction: column;
   padding: 20px;

@@ -158,7 +158,7 @@ const Landing = () => {
   }
 
   return (
-    <div className="container">
+    <div className="pontainer">
       <div className='space'></div>
       <div className='logo'></div>
       <div className='space1'></div>

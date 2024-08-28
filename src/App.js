@@ -15,6 +15,7 @@ import SheetUpdate from './components/homeupdate';
 import PrivacyPolicy from './components/privacy';
 import PrivateRoute from './components/ProtectedRoute'; 
 import OffersPage from './components/Details';
+
 // Import the PrivateRoute component
 
 function App() {
@@ -34,6 +35,8 @@ function App() {
         <Route path="/coupon" element={<Coupon />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/Fav" element={<Favorites />} />
+        
+        
 
         {/* Protected Route */}
         <Route path="/home" element={<PrivateRoute element={MapPage} />} />
