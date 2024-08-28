@@ -73,6 +73,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
                             imageUrl={business.imageUrl || ''}
                             businessId={business._id}
                             businessName={business.businessName}
+                            businessDetail={business}
                         />
                     ))}
                 </div>
