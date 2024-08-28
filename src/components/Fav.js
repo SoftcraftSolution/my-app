@@ -36,7 +36,7 @@ const Favorites = () => {
               businessId: business._id,
               name: business.businessName,
               address: business.address, // Store full address for expansion
-              image: dore, // Using default image for now
+              // Using default image for now
             }))
           );
           setFavorites(fetchedFavorites);
@@ -67,7 +67,15 @@ const Favorites = () => {
   const toggleAddress = (id) => {
     setExpandedItemId(expandedItemId === id ? null : id);
   };
-
+  const getDefaultAvatar = (name) => {
+    const firstLetter = name ? name.charAt(0).toUpperCase() : '?';
+    return (
+      <div id="default-avatar12">
+        {firstLetter}
+      </div>
+    );
+  };
+ 
   return (
     <div className="favorites-container">
       <Drawer
@@ -91,10 +99,17 @@ const Favorites = () => {
             </div>
           ) : (
             favorites.map(favorite => (
+              
               <div className="favorite-item" key={favorite.id}>
-                <img src={favorite.image} alt={favorite.name} className="favorite-image" />
-                <div className="favorite-details">
-                  <h3>{favorite.name}</h3>
+                {favorite.image ? (
+          <img src={favorite.image} alt={favorite.name} className="favorite-image" />
+        ) : 
+        (
+          getDefaultAvatar(favorite.name)
+        )
+        }
+        <div className="favorite-details">
+                  <div style={{fontSize:"18px", fontWeight:"500", color:"black" }}>{favorite.name}</div>
                   <p className={`favorite-address ${expandedItemId === favorite.id ? 'expanded' : 'collapsed'}`}>
                     {favorite.address}
                   </p>

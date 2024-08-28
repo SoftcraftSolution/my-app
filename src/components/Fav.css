@@ -82,12 +82,14 @@ body, html, #root {
 .favorite-item {
     display: flex;
     align-items: center;
-    background-color: white;
+    /* background-color: white; */
     border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); */
     overflow: hidden;
     width: 95%; /* Full width */
-    padding: 10px;
+    height: 100px;
+    margin-top: 10px;
+    /* border:1px solid red; */
     transition: transform 0.2s ease;
 }
 
@@ -99,6 +101,7 @@ body, html, #root {
     width: 72px;
     height: 72px;
     border-radius: 10px;
+    /* border: 1px solid red; */
     object-fit: cover;
     margin-right: 15px;
 }
@@ -118,18 +121,32 @@ body, html, #root {
     margin-left: 30px;
 }
 
-.favorite-details p {
+.favorite-details  {
     margin: 5px 0 0;
     font-size: 14px;
+    width: 70%;
+    height: 90px;
     color: #777;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limit to 2 lines */
-    -webkit-box-orient: vertical;
+ 
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.2; /* Adjust this based on your font size */
-    max-height: 2.4em; /* Height for 2 lines */
+    line-height: 1.2;
+    /* border: 1px  solid red;  */
+    padding: 10px 10px;/* Adjust this based on your font size */
+    
 }
+#default-avatar12 {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #cccccc; /* Default background color */
+    color: #ffffff; /* Text color */
+    border-radius: 5%;
+    font-size: 40px;
+    font-weight: bold;
+  }
 
 .favorite-heart {
     font-size: 24px;
@@ -169,24 +186,15 @@ body, html, #root {
     background-position: center; /* Center the image within the container */
 }
 
-p {
-    text-align: center; /* Center the text horizontally within the block */
-    position: relative;
-    top: -20px; /* Adjust vertical position as needed */
-    width: 80%; /* Adjust the width of the block */
-    max-width: 600px; /* Optionally set a maximum width */
-    margin: 10px auto;
-    left: -38px; /* Center the block horizontally within its container */
-    box-sizing: border-box;
-    left: 7px; 
-}
+
 
 .favorite-address {
     font-size: 14px;
     color: #777;
     overflow: hidden;
     transition: max-height 0.3s ease, padding 0.3s ease;
-    padding-right: 40px; /* Ensure there's space for the toggle arrow */
+    padding-right: 40px;
+    padding-top: 10px; /* Ensure there's space for the toggle arrow */
 }
 .favorite-address.collapsed {
     max-height: 3.6em; /* Height for 2 lines */
