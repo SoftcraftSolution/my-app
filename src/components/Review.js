@@ -54,6 +54,19 @@ const ReviewUI = () => {
     setImagePreviews(updatedPreviews);
   };
 
+  const callAssignCouponAPI = async (userId, businessId) => {
+    try {
+      const response = await axios.get(`http://ambulance-booking-backend.vercel.app/user/assign-coupan?userId=${userId}&businessId=${businessId}`);
+      const response1 = await axios.post(`https://ambulance-booking-backend.vercel.app/user/add-in-reviewlist?businessId=${businessId}&userId=${userId}`);
+      console.log("API call successful:", response.data.coupon);
+      navigate("/coupon", { state: { couponData: response.data.coupon } });
+      return response.data.coupon; // Return the API response if needed
+    } catch (error) {
+      console.error("Error calling assign coupon API:", error);
+      throw error; // Re-throw the error to handle it outside if necessary
+    }
+  };
+
   const handleSubmit = async () => {
     if (rating === 0) {
       setShowErrorMessage(true);
@@ -63,11 +76,15 @@ const ReviewUI = () => {
     if (rating > 3) {
       if (placeId) {
         try {
+          // window.location.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
+          const userId=Cookies.get("user_id");
+          const businessId=Cookies.get("businessId");
+          
           navigate('/home');
-
-          setTimeout(() => {
-            window.location.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
-          }, 0);
+          await callAssignCouponAPI(userId,businessId);
+          window.location.href = `https://search.google.com/local/writereview?placeid=${placeId}`;
+           
+         
         } catch (error) {
           console.error("Error redirecting:", error);
         }
