@@ -104,7 +104,7 @@ const Landing = () => {
           const { name, email, picture } = decodedPayload;
           const dob = decodedPayload.birthdate || 'DOB not available';
           const gender = decodedPayload.gender || 'Gender not available';
-
+          console.log(decodedPayload);
           try {
             const response = await axios.post(
               'https://ambulance-booking-backend.vercel.app/user/scanstar-register',
