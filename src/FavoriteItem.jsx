@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import './FavoriteItem.css'; // Import the CSS file
+import { FaHeart } from 'react-icons/fa'; 
 
-function FavoriteCard({ image, name, isFavorite: initialIsFavorite, onFavoriteToggle }) {
-  const [isFavorite, setIsFavorite] = useState(initialIsFavorite);
+function FavoriteCard({ image, name, isFavorite, onFavoriteToggle }) {
+  
   const [avatarColor, setAvatarColor] = useState(getRandomColor()); // Store the color in state
 
   const avatarText = name ? name[0].toUpperCase() : '';
 
-  const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
-    onFavoriteToggle(!isFavorite); // Call the callback with the new favorite status
-  };
-
+ 
+console.log("isFav=>"+isFavorite);
   return (
     <div className='rootParent'>
     <div className="favorite-card">
@@ -24,10 +22,10 @@ function FavoriteCard({ image, name, isFavorite: initialIsFavorite, onFavoriteTo
       )}
      
       <button className="favorite-card__button" onClick={()=>onFavoriteToggle(isFavorite)}>
-        {isFavorite ? (
-          <span className="favorite-card__heart favorite-card__heart--filled">&#10084;</span>
+        {(!isFavorite )? (
+          <span className="favorite-card__heart favorite-card__heart--filled"><FaHeart style={{color:'red',padding:"4px"}}/></span>
         ) : (
-          <span className="favorite-card__heart">&#10084;</span>
+          <span className="favorite-card__heart"><FaHeart style={{color:'white',alignItems:"center"}}/></span>
         )}
       </button>
     </div>

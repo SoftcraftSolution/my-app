@@ -15,9 +15,9 @@
 }
 
 .drag-handle {
-    width: 40px;
+    width: 16%;
     height: 4px;
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0.746);
     border-radius: 2px;
     margin: 8px auto;
 }
@@ -42,14 +42,15 @@
 }
 
 .h {
+
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     padding: 20px;
 }
 
 .h-1 {
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 img {

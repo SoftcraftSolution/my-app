@@ -7,12 +7,12 @@
     cursor: pointer;
     text-align: center;
     /* border: 1px solid red; */
-    max-width: 120px;
+    max-width: 100px;
 }
 
 .circular-avatar {
-    width: 100px; /* Adjust size as needed */
-    height: 100px; /* Adjust size as needed */
+    width: 80px; /* Adjust size as needed */
+    height: 80px; /* Adjust size as needed */
     border-radius: 50%;
     overflow: hidden;
     display: flex;

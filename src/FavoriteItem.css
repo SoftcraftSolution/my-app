@@ -65,9 +65,15 @@
 }
 
 .favorite-card__heart {
-  font-size: 16px; /* Adjust the size of the heart */
-  color: rgb(17, 255, 0);
+  font-size: 18px; /* Adjust the size of the heart */
+  color: rgb(128, 128, 128);
+  /* border: 1px solid red; */
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .favorite-card__heart--filled {
   color: rgb(255, 21, 56);
 }
