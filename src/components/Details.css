@@ -2,6 +2,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
+  overflow-x:hidden ;
 }
 
 .offers-page {
@@ -26,7 +27,7 @@ body {
 .favorite-button {
   position: absolute;
   top: 0;
-  right: 20px;
+  right: 35px;
   background: none;
   border: none;
   cursor: pointer;
@@ -69,6 +70,7 @@ body {
 
 .offer-card {
   display: flex;
+  flex-direction: column;
   align-items: center;
   margin-bottom: -20px;
   padding: 8px;
@@ -87,7 +89,7 @@ body {
 .offer-details h4 {
   margin: 0;
   font-size: 25px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   margin-left: 10px;
 }
 
@@ -107,4 +109,8 @@ margin-bottom: 5px;
 
 .bus{
   margin-top: 60px;
+}
+.back-button-image {
+  width: 25px;
+  height: 30px; 
 }

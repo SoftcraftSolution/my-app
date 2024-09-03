@@ -1,71 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart as solidHeart, faHeart as regularHeart } from '@fortawesome/free-solid-svg-icons';
-import axios from 'axios'; // Import Axios
+import { faHeart as solidHeart } from '@fortawesome/free-solid-svg-icons'; // Solid heart icon
+import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons'; // Regular heart icon
+import axios from 'axios';
+import Cookies from 'js-cookie'; // Importing js-cookie to manage cookies
 import './Details.css';
 
 const OffersPage = () => {
   const { state } = useLocation();
   const businessDetail = state?.businessDetail || {};
   const navigate = useNavigate();
-  const [isFavorite, setIsFavorite] = useState(false); // State to track if the item is favorited
-  const [offers, setOffers] = useState([]); // State to store offers
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [offers, setOffers] = useState([]);
 
   useEffect(() => {
     const fetchOffers = async () => {
-      const businessId = '669100274fe85a4e2b93dacb'; // Business ID for the offers
+      const businessId = state?.businessDetail._id || '669100274fe85a4e2b93dacb'; // Default business ID for fetching offers
 
       try {
         const response = await axios.get('http://ambulance-booking-backend.vercel.app/user/get-business-offer', {
           params: { businessId }
         });
-        setOffers(response.data.offers); // Update state with the fetched offers
+        setOffers(response.data.offers);
       } catch (error) {
         console.error('Error fetching offers', error);
       }
     };
 
     fetchOffers();
-  }, []);
+  }, [state?.businessDetail._id]);
 
   const handleBackButtonClick = () => {
     navigate('/home');
   };
 
   const toggleFavorite = async () => {
-    const businessId = '669100274fe85a4e2b93dacb'; 
-    const userId = '66c726535915ec6f827dc398'; 
+    const businessId = state?.businessDetail._id || ''; 
+    const userId = Cookies.get('user_id'); // Fetching user ID from cookies
+    console.log('Business ID:', businessId);
+    console.log('User ID:', userId);
+
+    // Toggle the favorite status immediately
+    setIsFavorite(!isFavorite);
 
     try {
       if (isFavorite) {
-        // Remove from favorites
         await axios.delete('https://ambulance-booking-backend.vercel.app/user/delete-fav-shop', {
           params: { businessIds: businessId, userId: userId }
         });
       } else {
-        // Add to favorites
-        await axios.post('https://ambulance-booking-backend.vercel.app/user/add-favorites', null, {
-          params: { businessIds: businessId, userId: userId }
-        });
+        const response = await axios.post(`https://ambulance-booking-backend.vercel.app/user/add-favorites?businessIds=${businessId}&userId=${userId}`);
+        console.log('Response from server:', response.data); // Debugging: Log the server's response
       }
-      setIsFavorite(!isFavorite); // Toggle the favorite state
     } catch (error) {
-      console.error('Error updating favorite status', error);
+      console.error('Error updating favorite status', error.response ? error.response.data : error.message);
+      // Revert the UI change if the API call fails
+      setIsFavorite(isFavorite);
     }
   };
 
-  // Function to get the last two lines of the address
   const getLastTwoLines = (address) => {
-    const lines = address.split('\n').filter(line => line.trim() !== '');
-    return lines.slice(-2).join('\n');
+    const lines = address?.split('\n').filter(line => line.trim() !== '');
+    return lines?.slice(-2).join('\n');
   };
 
   return (
     <div className="offers-page">
       <header className="header">
         <button className="back-button" onClick={handleBackButtonClick}>
-          ←
+          <img src="./backbutton.png" alt="Back" className="back-button-image" />
         </button>
         <button className="favorite-button" onClick={toggleFavorite}>
           <FontAwesomeIcon 
