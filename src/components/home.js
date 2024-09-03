@@ -112,40 +112,40 @@ console.log(data);
     <div className="map-container">
       <div className="search-bar-container">
         <div className="child">
-          <TextField
-            placeholder="Search"
-            value={value}
-            onChange={onChange}
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <IconButton onClick={() => toggleSidebar(true)}>
-                    <MenuIcon />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              width: '100%',
-              height: '30',
-              '& .MuiOutlinedInput-root': {
-                height: '100%',
-                '& fieldset': {
-                  borderColor: 'grey',
-                },
-                '&:hover fieldset': {
-                  borderColor: 'grey',
-                },
-                '&.Mui-focused fieldset': {
-                  borderColor: 'grey',
-                },
-                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-              },
-              '& .MuiInputBase-input': {
-                height: '100%',
-              },
-            }}
-          />
+        <div style={{
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: '10px',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+    overflow: 'hidden',
+    width: '100%',
+    height: '30px',
+    padding:"10px 0px",
+    backgroundColor:"white"
+  }}>
+    <InputAdornment position="start" style={{ marginLeft: '8px',}}>
+      <IconButton onClick={() => toggleSidebar(true)} style={{color:'black'}} >
+        <MenuIcon />
+      </IconButton>
+    </InputAdornment>
+    <input
+      placeholder="Search by Location"
+      value={value}
+      onChange={onChange}
+      style={{
+        border: 'none',
+        outline: 'none',
+        height: '100%',
+        width: 'calc(100% - 40px)', // Adjust to account for the icon width and padding
+        padding: '0 8px', // Adjust padding if needed
+        boxSizing: 'border-box',
+        backgroundColor:'transparent',
+        fontSize:'16px',
+        color:"black",
+        fontWeight:'500'
+      }}
+    />
+  </div>
 
           <Drawer
             anchor="left"
