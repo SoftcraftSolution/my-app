@@ -1,13 +1,4 @@
-.rootParent{
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  max-width: 120px; 
-  /* height: 150px; */
-  /* border: 1px solid red; */
-  text-overflow: ellipsis;
 
-}
 
 
 .favorite-card__button {

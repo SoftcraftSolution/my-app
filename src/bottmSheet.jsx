@@ -48,7 +48,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
     };
 
     const handleFavoriteToggle = async (businessId, isFavorite) => {
-        console.log(isFavorite);
+        // console.log(isFavorite);
         try {
             if (!isFavorite) {
                 await axios.post(`https://ambulance-booking-backend.vercel.app/user/add-favorites?businessIds=${businessId}&userId=${userId}`);
@@ -102,7 +102,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
   <div className="brands-container">
     {
     favoriteBusinesses.length > 0
-      ? favoriteBusinesses.slice(0, 3).map((business) => (
+      ? favoriteBusinesses.map((business) => (
           <FavoriteCard
             key={business._id}
             image={business.imageUrl || ''}
@@ -111,7 +111,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
             onFavoriteToggle={() => handleFavoriteToggle(business._id,true)}
           />
         ))
-      : businesses.slice(0, 3).map((business) => (
+      : businesses.map((business) => (
           <FavoriteCard
             key={business._id}
             image={business.imageUrl || ''}
