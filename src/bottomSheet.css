@@ -23,8 +23,6 @@
 }
 
 .brands-section {
-    /* border: 1px solid rgb(55, 0, 255); */
-
     width: 100vw;
 }
 
@@ -34,47 +32,55 @@
     overflow-x: auto;
     gap: 10px;
     padding: 0 20px;
-    scrollbar-width: none; 
-    -ms-overflow-style: none; 
-    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scroll-behavior: smooth; /* Smooth scrolling */
 }
 
 .brands-container::-webkit-scrollbar {
-    display: none; 
+    display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
 }
-.bottom-h{
-    /* width: 100%; */
+
+.h {
+
     font-size: 16px;
     font-weight: 600;
     padding: 20px;
-   
-}
-.h-1{
-    font-size: 16px;
-    font-weight: 600;
-}
- img {
-    width: 100px;
-    height: auto;
-    /* padding-bottom: 35px; */
 }
 
-.brand-item{
+.bottom-h {
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 20px;
+}
+
+img {
     width: 100px;
     height: auto;
 }
-.space{
+
+.brand-item {
+    width: 100px;
+    height: auto;
+}
+
+.space {
     width: 20px;
 }
-.header-fav{
+
+.header-fav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-direction: row;
-    padding:20px
-    
-
+    padding: 0 20px 20px;
 }
-.see-all-fav-link{
+
+.see-all-fav-link {
     color: blue;
+    cursor: pointer;
+    transition: color 0.2s ease-in-out;
+}
+
+.see-all-fav-link:hover {
+    color: darkblue;
 }
