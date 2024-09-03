@@ -22,6 +22,7 @@ const RewardHistory = () => {
     const fetchRewards = async () => {
         try {
             const userId = Cookies.get("user_id");
+            console.log(`https://ambulance-booking-backend.vercel.app/user/get-rewards?userId=${userId}`);
             const response = await axios.get(`https://ambulance-booking-backend.vercel.app/user/get-rewards?userId=${userId}`);
             const { coupons } = response.data;
             setRewards(coupons);

@@ -27,7 +27,7 @@ const CircularAvatar = ({ imageUrl, businessId, businessName, businessDetail }) 
                     <span className="avatar-text">{businessName.charAt(0)}</span>
                 )}
             </div>
-            <div className="business-name">{businessName}</div>
+        
         </div>
     );
 };

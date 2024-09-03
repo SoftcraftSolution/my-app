@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,} from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from './sidebar';
 import BottomSheet from '../bottmSheet.jsx';
@@ -32,6 +33,7 @@ const MapPage = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+  
 
   const fetchShops = async () => {
     try {
@@ -104,7 +106,10 @@ const MapPage = () => {
     setMapCenter(newLocation);
     setValue(location.formatted_address);
   };
+  const navigate = useNavigate();
   const handleOnClickMarker=(data)=>{
+    
+    navigate('/offerspage',{ state: { businessDetail: data } });
 console.log(data);
   }
   console.log(shops);
@@ -194,7 +199,7 @@ console.log(data);
                
                  // Adjust the size as needed
               }}
-              onClick={()=>handleOnClickMarker(shop.businessName)}
+              onClick={()=>handleOnClickMarker(shop)}
               
             />
             
