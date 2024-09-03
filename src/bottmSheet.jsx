@@ -47,16 +47,18 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
         navigate('/Fav');
     };
 
-    const handleFavoriteToggle = async (businessId) => {
-        console.log("in handleFavoriteToggle");
+    const handleFavoriteToggle = async (businessId, isFavorite) => {
+        console.log(isFavorite);
         try {
-            // Perform the delete request
-            await axios.delete(
-                `https://ambulance-booking-backend.vercel.app/user/delete-fav-shop?businessIds=${businessId}&userId=${userId}`
-            );
-    
-            // Refetch the favorite businesses to update the state
-            await fetchFavoriteBusinesses();
+            if (!isFavorite) {
+                await axios.post(`https://ambulance-booking-backend.vercel.app/user/add-favorites?businessIds=${businessId}&userId=${userId}`);
+                setFavoriteBusinesses(prevFavorites => [...prevFavorites, businessId]);
+            } else {
+                await axios.delete(`https://ambulance-booking-backend.vercel.app/user/delete-fav-shop?businessIds=${businessId}&userId=${userId}`);
+                setFavoriteBusinesses(prevFavorites => prevFavorites.filter(id => id !== businessId));
+
+                   }
+                   await fetchFavoriteBusinesses();
         } catch (error) {
             console.error('Error updating favorite status:', error);
         }
@@ -72,7 +74,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
         >
             <div className="drag-handle" />
             <div className="brands-section" style={{ padding: `0px` }}>
-                <div className="h">Top Brands</div>
+                <div className="bottom-h">Top Brands</div>
                 <div className="brands-container">
                     {businesses.map((business) => (
                         <CircularAvatar
@@ -85,28 +87,43 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
                     ))}
                 </div>
                 
-                    <>
-                    {favoriteBusinesses.length>0?(<div className='header-fav'>
-                            <div className="h-1">Favorite Brands</div>
-                            <div className='see-all-fav-link' onClick={handleOnSeeAll}>See all</div>
-                        </div>):null}
-                        <div className="brands-container">
-                            {favoriteBusinesses.slice(0, 3).map((business) => {
-                                // console.log("inloop");
-                                // console.log(business);
-                                // const business = businesses.find(b => b._id === businessId);
-                                return (
-                                    <FavoriteCard
-                                        key={business._id}
-                                        image={business.imageUrl || ''}
-                                        name={business.businessName}
-                                        isFavorite={true}
-                                        onFavoriteToggle={() => handleFavoriteToggle(business._id)}
-                                    />
-                                )
-                            })}
-                        </div>
-                    </>
+                <>
+  {favoriteBusinesses.length > 0 ? (
+    <div className='header-fav'>
+      <div className="h-1">Favorite Brands</div>
+      <div className='see-all-fav-link' onClick={handleOnSeeAll}>See all</div>
+    </div>
+  ) : (
+    <div className='header-fav'>
+      <div className="h-1">Add to Favorites</div>
+    </div>
+  )}
+
+  <div className="brands-container">
+    {
+    favoriteBusinesses.length > 0
+      ? favoriteBusinesses.slice(0, 3).map((business) => (
+          <FavoriteCard
+            key={business._id}
+            image={business.imageUrl || ''}
+            name={business.businessName}
+            isFavorite={true}
+            onFavoriteToggle={() => handleFavoriteToggle(business._id,true)}
+          />
+        ))
+      : businesses.slice(0, 3).map((business) => (
+          <FavoriteCard
+            key={business._id}
+            image={business.imageUrl || ''}
+            name={business.businessName}
+            isFavorite={false} // Not a favorite initially
+            onFavoriteToggle={() => handleFavoriteToggle(business._id,false)} // Add to favorites
+          />
+        ))
+    }
+  </div>
+</>
+
              
             </div>
         </div>

@@ -4,20 +4,20 @@
     left: 0;
     right: 0;
     background-color: white;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.2);
     border-top-left-radius: 16px;
     border-top-right-radius: 16px;
-    /* border: 1px solid red; */
     overflow: hidden;
-    transition: height 0.3s ease;
+    transition: height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), 
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     z-index: 1000;
     min-height: 30vh;
 }
 
 .drag-handle {
-    width: 40px;
+    width: 16%;
     height: 4px;
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0.746);
     border-radius: 2px;
     margin: 8px auto;
 }
@@ -31,23 +31,27 @@
 .brands-container {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: hidden;
-    gap: 0px;
-    scrollbar-width: none; /* Firefox */
+    overflow-x: auto;
+    gap: 10px;
+    padding: 0 20px;
+    scrollbar-width: none; 
     -ms-overflow-style: none; 
-    
-    margin-left: 20px; /* Internet Explorer 10+ */
+    scroll-behavior: smooth;
 }
-.h{
+
+.brands-container::-webkit-scrollbar {
+    display: none; 
+}
+.bottom-h{
     /* width: 100%; */
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     padding: 20px;
    
 }
 .h-1{
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
 }
  img {
     width: 100px;
