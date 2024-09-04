@@ -9,13 +9,16 @@ function FavoriteCard({ image, name, isFavorite, onFavoriteToggle }) {
   const avatarText = name ? name[0].toUpperCase() : '';
 
  
-console.log("isFav=>"+isFavorite);
+console.log("image=>"+image);
   return (
     <div className='rootParent'>
     <div className="favorite-card">
       {image ? (
-        <img src={image} alt={name} className="favorite-card__image" />
-      ) : (
+                    <div style={{backgroundImage:`url(${image})`,height:'100%',width:'100%',
+                    backgroundPosition: 'center center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover',borderRadius:"8%"}} alt={name} />
+                ) : (
         <div className="favorite-card__default-avatar" style={{ backgroundColor: avatarColor }}>
           {avatarText}
         </div>

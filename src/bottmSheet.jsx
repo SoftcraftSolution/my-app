@@ -79,7 +79,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
                     {businesses.map((business) => (
                         <CircularAvatar
                             key={business._id}
-                            imageUrl={business.imageUrl || ''}
+                            imageUrl={business.image || ''}
                             businessId={business._id}
                             businessName={business.businessName}
                             businessDetail={business}
@@ -105,7 +105,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
       ? favoriteBusinesses.map((business) => (
           <FavoriteCard
             key={business._id}
-            image={business.imageUrl || ''}
+            image={business.image || ''}
             name={business.businessName}
             isFavorite={true}
             onFavoriteToggle={() => handleFavoriteToggle(business._id,true)}
@@ -114,7 +114,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
       : businesses.map((business) => (
           <FavoriteCard
             key={business._id}
-            image={business.imageUrl || ''}
+            image={business.image || ''}
             name={business.businessName}
             isFavorite={false} // Not a favorite initially
             onFavoriteToggle={() => handleFavoriteToggle(business._id,false)} // Add to favorites

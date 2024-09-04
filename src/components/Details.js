@@ -6,6 +6,8 @@ import { faHeart as regularHeart } from '@fortawesome/free-regular-svg-icons'; /
 import axios from 'axios';
 import Cookies from 'js-cookie'; // Importing js-cookie to manage cookies
 import './Details.css';
+import CircularAvatar from './circulerAvatar';
+import { FaArrowLeft } from 'react-icons/fa';
 
 const OffersPage = () => {
   const { state } = useLocation();
@@ -67,42 +69,97 @@ const OffersPage = () => {
 
   return (
     <div className="offers-page">
-      <header className="header">
-        <button className="back-button" onClick={handleBackButtonClick}>
-          <img src="./backbutton.png" alt="Back" className="back-button-image" />
-        </button>
-        <button className="favorite-button" onClick={toggleFavorite}>
+      <div className="detail-head">
+        <div className="back-button" onClick={handleBackButtonClick}>
+        <FaArrowLeft style={{ padding:"10px" ,fontSize:'18px'}} /> 
+        </div>
+        <div className="favorite-button" onClick={toggleFavorite}>
           <FontAwesomeIcon 
             icon={isFavorite ? solidHeart : regularHeart} 
             style={{ color: isFavorite ? 'red' : 'grey' }} 
           />
-        </button>
-      </header>
+        </div>
+      </div>
 
       <div className="restaurant-info">
-        <img src="./burgerki.png" alt="Burger King" className="restaurant-logo" />
-        <h2 className='bus'>{businessDetail.name}</h2>
+        <CircularAvatar key={businessDetail._id}
+        size={100}
+                            imageUrl={businessDetail.image || ''}
+                            businessId={businessDetail._id}
+                            businessName={businessDetail.businessName}
+                            businessDetail={businessDetail}/>
+        <h2 style={{marginTop:'0px',fontSize:"20px",fontWeight:"600",lineClamp:'1'}}>{businessDetail.name}</h2>
         <p className="address">
           {getLastTwoLines(businessDetail.address)}
         </p>
       </div>
 
       <div className="offers-section">
-        <h3>Available Offers</h3>
-        {offers.length > 0 ? (
-          offers.map((offer, index) => (
-            <div key={index} className="offer-card">
-              <img src={`./offer${index + 1}.png`} alt={`Offer ${index + 1}`} className="offer-image" />
-              <div className="offer-details">
-                <h4>{offer}</h4>
-                <p style={{color:"grey"}}>Get {offer} on next buy</p>
-              </div>
+  <div className="detail-offer-header">Available Offers</div>
+  {offers.length > 0 ? (
+    offers.map((offer, index) => {
+      // Define the image path
+      const imagePath = `./offer${index + 1}.png`;
+
+      // Function to check if image exists
+      const imageExists = (imagePath) => {
+        try {
+          require(`${imagePath}`);
+          return true;
+        } catch (err) {
+          return false;
+        }
+      };
+
+      // Function to extract percentage from the offer text
+      const getOfferPercentage = (text) => {
+        const match = text.match(/(\d+)%/); // Regex to find digits followed by a %
+        return match ? match[0] : "N/A";    // Return the percentage or "N/A" if not found
+      };
+
+      // Generate a random background color
+      const randomBackgroundColor = () => {
+        const colors = ['#FFB6C1', '#B0E0E6', '#FFE4B5', '#D3FFCE', '#FFC0CB']; // Example colors
+        return colors[Math.floor(Math.random() * colors.length)];
+      };
+
+      return (
+        <div key={index} className="offer-card">
+          {imageExists(imagePath) ? (
+            <img src={imagePath} alt={`Offer ${index + 1}`} className="offer-image" />
+          ) : (
+            <div
+              className="offer-placeholder"
+              style={{
+                backgroundColor: randomBackgroundColor(),
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100px', // Example height, adjust as needed
+                width: '105px', 
+                borderRadius:"20px"
+                ,textAlign:"center",
+                 // Example width, adjust as needed
+              }}
+            >
+              <span style={{ color: '#fff', fontSize: '20px', fontWeight: 'bold' }}>
+                {getOfferPercentage(offer)} OFF
+              </span>
             </div>
-          ))
-        ) : (
-          <p>No offers available</p>
-        )}
-      </div>
+          )}
+          <div className="offer-details">
+            <div>{offer}</div>
+            <p style={{ color: 'grey' }}>Get {offer} on next buy</p>
+          </div>
+        </div>
+      );
+    })
+  ) : (
+    <p className="detail-no-offer">No offers available</p>
+  )}
+</div>
+
+
     </div>
   );
 };
