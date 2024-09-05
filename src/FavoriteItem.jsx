@@ -14,10 +14,10 @@ console.log("image=>"+image);
     <div className='rootParent'>
     <div className="favorite-card">
       {image ? (
-                    <div style={{backgroundImage:`url(${image})`,height:'100%',width:'100%',
+                    <div style={{backgroundImage:`url(${image})`,height:'100%',width:'120px',
                     backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',borderRadius:"8%"}} alt={name} />
+                    backgroundSize: 'cover',borderRadius:"8%"}}  alt={name} />
                 ) : (
         <div className="favorite-card__default-avatar" style={{ backgroundColor: avatarColor }}>
           {avatarText}
