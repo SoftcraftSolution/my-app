@@ -12,8 +12,9 @@ import { FaArrowLeft } from 'react-icons/fa';
 const OffersPage = () => {
   const { state } = useLocation();
   const businessDetail = state?.businessDetail || {};
+  
   const navigate = useNavigate();
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(state?.isFav);
   const [offers, setOffers] = useState([]);
 
   useEffect(() => {
@@ -70,9 +71,9 @@ const OffersPage = () => {
   return (
     <div className="offers-page">
       <div className="detail-head">
-        <div className="back-button" onClick={handleBackButtonClick}>
+      <a href="./home" className="back-button">
         <FaArrowLeft style={{ padding:"10px" ,fontSize:'18px'}} /> 
-        </div>
+        </a>
         <div className="favorite-button" onClick={toggleFavorite}>
           <FontAwesomeIcon 
             icon={isFavorite ? solidHeart : regularHeart} 

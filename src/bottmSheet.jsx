@@ -10,7 +10,13 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
     const [businesses, setBusinesses] = useState([]);
     const [favoriteBusinesses, setFavoriteBusinesses] = useState([]);
     const navigate = useNavigate();
-    const userId = Cookies.get('user_id'); // Get the userId from cookies
+    const userId = Cookies.get('user_id');// Get the userId from cookies
+
+    function isBusinessInFav(businesses, businessId) {
+      // Use the `some` method to check if any business in the list has the matching `_id`.
+      return businesses.some(business => business._id === businessId);
+    }
+    
     const fetchBusinesses = async () => {
         try {
             const response = await axios.get('https://ambulance-booking-backend.vercel.app/user/get-all-scanstar-shop');
@@ -28,7 +34,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
             `https://ambulance-booking-backend.vercel.app/user/get-favorite-shop?userId=${userId}`
           );
       
-          const favoriteBusinesses = response.data.body.flatMap(fav => fav.businessIds);
+          const favoriteBusinesses = response.data.body.flatMap(fav => fav.businessIds).slice(0,5);
           setFavoriteBusinesses(favoriteBusinesses);
       
           console.log("Favorite Businesses:", favoriteBusinesses);
@@ -76,13 +82,14 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
             <div className="brands-section" style={{ padding: `0px` }}>
                 <div className="bottom-h">Top Brands</div>
                 <div className="brands-container">
-                    {businesses.map((business) => (
+                    {businesses.slice(0,10).map((business) => (
                         <CircularAvatar
                             key={business._id}
                             imageUrl={business.image || ''}
                             businessId={business._id}
                             businessName={business.businessName}
                             businessDetail={business}
+                            isFav={isBusinessInFav(favoriteBusinesses,business._id)}
                         />
                     ))}
                 </div>
@@ -102,7 +109,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
   <div className="brands-container">
     {
     favoriteBusinesses.length > 0
-      ? favoriteBusinesses.map((business) => (
+      ? favoriteBusinesses.slice(0,5).map((business) => (
           <FavoriteCard
             key={business._id}
             image={business.image || ''}
@@ -111,7 +118,7 @@ const BottomSheet = ({ sheetHeight, handleTouchStart, handleTouchMove, handleTou
             onFavoriteToggle={() => handleFavoriteToggle(business._id,true)}
           />
         ))
-      : businesses.map((business) => (
+      : businesses.slice(0,5).map((business) => (
           <FavoriteCard
             key={business._id}
             image={business.image || ''}

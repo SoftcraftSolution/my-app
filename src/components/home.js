@@ -1,4 +1,4 @@
-import React, { useState, useEffect,} from 'react';
+import React, { useState, useEffect} from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
@@ -33,7 +33,7 @@ const MapPage = () => {
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
   };
-  
+  const location=useLocation();
 
   const fetchShops = async () => {
     try {
@@ -161,7 +161,7 @@ console.log(data);
           </Drawer>
         </div>
       </div>
-
+{/* this is the location search suggestions  */}
       <div className="dropdown-content">
         {value &&
           data.slice(0, 5).map((item, index) => (
@@ -176,7 +176,7 @@ console.log(data);
           ))}
       </div>
      
-      <LoadScript googleMapsApiKey="AIzaSyB5GV0AxvGQOTRaomj95JE_8k5yejLMVYo">
+      <LoadScript googleMapsApiKey="AIzaSyB5GV0AxvGQOTRaomj95JE_8k5yejLMVYo" key={location.key}>
         <GoogleMap
           mapContainerStyle={containerStyle}
           center={mapCenter}

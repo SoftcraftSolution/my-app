@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './CircularAvatar.css'; // Add your styles here
 
-const CircularAvatar = ({ imageUrl, businessId, businessName, businessDetail ,size}) => {
+const CircularAvatar = ({ imageUrl, businessId, businessName, businessDetail ,size,isFav}) => {
     const navigate = useNavigate();
 
     // Generate a consistent background color based on the business name
@@ -15,7 +15,7 @@ const CircularAvatar = ({ imageUrl, businessId, businessName, businessDetail ,si
     }, [businessName]);
 
     const handleClick = () => {
-        navigate(`/offerspage`,{ state: { businessDetail: businessDetail } });
+        navigate(`/offerspage`,{ state: { businessDetail: businessDetail ,isFav:isFav} });
     };
 
     return (
