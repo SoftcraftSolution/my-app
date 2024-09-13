@@ -72,7 +72,7 @@ const OffersPage = () => {
     <div className="offers-page">
       <div className="detail-head">
       <a href="./home" className="back-button">
-        <FaArrowLeft style={{ padding:"10px" ,fontSize:'18px'}} /> 
+        <FaArrowLeft style={{ padding:"10px" ,fontSize:'18px',color:'black'}} /> 
         </a>
         <div className="favorite-button" onClick={toggleFavorite}>
           <FontAwesomeIcon 
@@ -89,7 +89,7 @@ const OffersPage = () => {
                             businessId={businessDetail._id}
                             businessName={businessDetail.businessName}
                             businessDetail={businessDetail}/>
-        <h2 style={{marginTop:'0px',fontSize:"20px",fontWeight:"600",lineClamp:'1'}}>{businessDetail.name}</h2>
+        <h2 style={{marginTop:'0px',fontSize:"20px",fontWeight:"500",lineClamp:'1'}}>{businessDetail.name}</h2>
         <p className="address">
           {getLastTwoLines(businessDetail.address)}
         </p>
@@ -98,7 +98,8 @@ const OffersPage = () => {
       <div className="offers-section">
   <div className="detail-offer-header">Available Offers</div>
   {offers.length > 0 ? (
-    offers.map((offer, index) => {
+    offers.map((offer, index) => 
+      {
       // Define the image path
       const imagePath = `./offer${index + 1}.png`;
 
@@ -133,13 +134,14 @@ const OffersPage = () => {
               className="offer-placeholder"
               style={{
                 backgroundColor: randomBackgroundColor(),
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100px', // Example height, adjust as needed
-                width: '105px', 
+                // display: 'flex',
+                // justifyContent: 'center',
+                // alignItems: 'center',
+                height: '105px', // Example height, adjust as needed
+                width: '100px', 
                 borderRadius:"20px"
                 ,textAlign:"center",
+                
                  // Example width, adjust as needed
               }}
             >

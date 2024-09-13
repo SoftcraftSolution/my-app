@@ -4,8 +4,10 @@
 
 .offers-page {
   padding: 16px;
- 
-  background-color: aliceblue;
+ display: flex;
+ flex-direction: column;
+ height: 100%;
+  background-color: rgb(255, 255, 255);
 }
 
 .detail-head {
@@ -74,9 +76,13 @@
 
 
 
-.offers-section h3 {
+.offers-section  {
   margin-bottom: 16px;
   font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  
 }
 
 .offer-card {
@@ -110,7 +116,7 @@
   font-weight: 600; /* Bold weight */
   margin-bottom: 0px;
   white-space: nowrap;
-  width: 100%;
+  width: 70%;
   text-overflow: ellipsis;
 }
 
@@ -127,7 +133,7 @@ margin-bottom: 5px;
   height: 30px; 
 }
 .detail-no-offer{
-  height: 300px;
+flex-grow: 1;
   width: 100%;
   display: flex;
   align-items: center;
